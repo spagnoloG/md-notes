@@ -13,7 +13,7 @@ modified: '2021-12-09T21:20:59.016Z'
 - `ip a` -- display all interfaces
 
 
-### Netstat command
+### Netstat command // by default use ss
 
 
 - `netstat -r` -- show routes
@@ -34,3 +34,10 @@ Queries SSL/TLS services (such as HTTPS) and reports the protocol versions, ciph
 
 ### Whois
 Find information about domain name `whois spanskiduh.xyz`
+
+## Gobuster
+Scan for subdomains
+
+```bash
+gobuster vhost -w /opt/useful/SecLists/Discovery/DNS/subdomains-top1million5000.txt -u http://thetoppers.htb
+```

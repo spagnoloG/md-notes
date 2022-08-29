@@ -47,3 +47,6 @@ issue command `checksec`
 - `vis` ~ show heap visually
 - `heap` ~ display chunks
 - `bins` ~ diplay TCACHE, FASTBIN, UNSORTED BIN pointers
+
+### If binary is stripped
+`info file` -> break at entry point
