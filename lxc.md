@@ -10,28 +10,27 @@ Follow [this](https://www.digitalocean.com/community/tutorials/how-to-install-an
 ### Launch and list containers:
 
 ```bash
-	lxc launch ubuntu:22.04 testserver
+	lxc launch ubuntu:22.04 <container-name>
 	lxc list
 ```
-to stop a container
+to stop a container:
 ```bash
-	lxc stop
+	lxc stop <container-name>
 ```
+to delete a container:
 
 ### Setup static ip for container:
 
 ```bash
-	 lxc config device override testserver eth0
-	 lxc config device set testserver eth0 ipv4.address <container-ip> 
+	 lxc config device override <container-name> eth0
+	 lxc config device set <container-name> eth0 ipv4.address <container-ip> 
 ```
 
 ### Start a shell inside a container:
 ```
-	lxc shell testserver
+	lxc shell <container-name> 
 ```
 
 
 ### Exposing container to the public:
-To bos naredu ti doma s svojim serverjem heehe (mas navodila step4 na zgornjem linku)
-
-
+Todo, for now follow linked tutorial.
