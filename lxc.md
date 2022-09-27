@@ -37,3 +37,24 @@ to delete a container:
 
 ### Exposing container to the public:
 Todo, for now follow linked tutorial. Host it on your own.
+
+### Running Docker inside lxc:
+Firstly you need to create storage device:
+
+```bash
+	lxc sorage create <volume-name> btrfs
+	lxc launch images:ubuntu/22.04 <container-name>	
+```
+Then add this storage device to container:
+```bash
+	lxc config device add <container-name> docker disk pool=<volume-name> source=<container-name> path=/var/lib/docker
+```
+Then set privileges for docker to have ability to call syscalls.
+```bash
+	lxc config set <container-name> security.nesting=true security.syscalls.intercept.mknod=true security.syscalls.intercept.setxattr=true
+	lxc restart <container-name>
+```
+
+
+
+
