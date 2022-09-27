@@ -55,6 +55,8 @@ Then set privileges for docker to have ability to call syscalls.
 	lxc restart <container-name>
 ```
 
+or read [this](https://ubuntu.com/tutorials/how-to-run-docker-inside-lxd-containers#2-create-lxd-container) tutorial.
+
 
 
 
