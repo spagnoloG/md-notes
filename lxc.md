@@ -18,6 +18,9 @@ to stop a container:
 	lxc stop <container-name>
 ```
 to delete a container:
+```bash
+	lxc delete <container-name>
+```
 
 ### Setup static ip for container:
 
@@ -33,4 +36,4 @@ to delete a container:
 
 
 ### Exposing container to the public:
-Todo, for now follow linked tutorial.
+Todo, for now follow linked tutorial. Host it on your own.
