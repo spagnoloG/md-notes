@@ -34,6 +34,14 @@ to delete a container:
 	lxc shell <container-name> 
 ```
 
+### List available images:
+```
+lxc image alias list images:
+lxc image alias list images: | grep -i arch
+lxc image alias list images: | grep -i debian
+lxc image alias list images: | grep -i fedora
+```
+
 
 ### Exposing container to the public:
 Todo, for now follow linked tutorial. Host it on your own.
