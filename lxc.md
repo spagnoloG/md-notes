@@ -66,5 +66,13 @@ Then set privileges for docker to have ability to call syscalls.
 or read [this](https://ubuntu.com/tutorials/how-to-run-docker-inside-lxd-containers#2-create-lxd-container) tutorial.
 
 
+## Troubleshooting
 
+### No ipv4 in container??
+
+```bash
+# for ipt in iptables iptables-legacy ip6tables ip6tables-legacy; do $ipt --flush; $ipt --flush -t nat; $ipt --delete-chain; $ipt --delete-chain -t nat; $ipt -P FORWARD ACCEPT; $ipt -P INPUT ACCEPT; $ipt -P OUTPUT ACCEPT; done
+# systemctl reload snap.lxd.daemon 
+```
+read [this](https://discuss.linuxcontainers.org/t/containers-do-not-have-outgoing-internet-access/10844/4) article.
 
