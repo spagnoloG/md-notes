@@ -15,3 +15,10 @@ modified: '2021-12-14T21:13:05.655Z'
 `git checkout HEAD -- TIS/tis.tex`
 - Add all files in the repo
 `git add -A`
+
+### Accidentaly deleted a folder in a git repo?
+
+```bash
+git reset -- path/to/folder
+git checkout -- path/to/folder
+```

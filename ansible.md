@@ -24,7 +24,7 @@ then issue this command: `ln -s /usr/bin/python3 /usr/bin/python`.
 
 `ansible-galaxy collection install azure.azcollection`
 
-`pip3 install "ansible[azure]"` (in venv preferably)
+`pip3 install "ansible[azure]"` (in venv preferably) // don't do that, rather that (`https://github.com/ansible/ansible/blob/stable-2.8/packaging/requirements/requirements-azure.txt`)
 
 Then go to Azure website and generate a new resource group.
 Try to generate az command for that
