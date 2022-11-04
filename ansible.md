@@ -51,6 +51,57 @@ secret= (az ad sp password)
 tenant= (tennantId in both)
 ```
 
+Or just use my bash script to set `env` variables:
+
+```bash
+#!/bin/sh
+
+# Set those variables
+RESOURCE_GROUP_NAME="ansible_terraform_rg"
+RESOURCE_GROUP_LOCATION="francecentral"
+ROLE_NAME="test"
+
+main() {
+  
+  printf "Creating %s resource group\n" $RESOURCE_GROUP_NAME
+
+  C1=$(az group create --name $RESOURCE_GROUP_NAME --location  $RESOURCE_GROUP_LOCATION)
+  SCOPE=$(echo $C1 | jq '.id'| sed 's/"//g')
+  echo $C1 | jq
+
+  printf "Creating %s countributor in %s resource group\n" $ROLE_NAME $RESOURCE_GROUP_NAME
+
+  C2=$(az ad sp create-for-rbac --name $ROLE_NAME  \
+                          --role Contributor \
+                          --scopes $SCOPE )
+
+
+echo $C2 | jq
+  
+  AZURE_CLIENT_ID=$(echo $C2 | jq '.appId' | sed 's/"//g')
+  AZURE_TENANT_ID=$(echo $C2 | jq '.tenant' | sed 's/"//g')
+  AZURE_CLIENT_SECRET=$(echo $C2 | jq '.password' | sed 's/^\"//;s/\"$//')
+  AZURE_SUBSCRIPTION_ID=$(echo $SCOPE | awk -F/ '{ print $3 }')
+
+  # Ansible
+  export AZURE_CLIENT_ID
+  export AZURE_TENANT_ID
+  export AZURE_CLIENT_SECRET
+  export AZURE_SUBSCRIPTION_ID
+  
+  # Terraform
+  export TF_VAR_subscription_id=$AZURE_SUBSCRIPTION_ID
+  export TF_VAR_client_id=$AZURE_CLIENT_ID
+  export TF_VAR_client_secret=$AZURE_CLIENT_SECRET
+  export TF_VAR_tenant_id=$AZURE_TENANT_ID
+
+
+  printf 'Environmental variables set! \n'
+}
+
+main
+```
+
 ## Clear all pip packages
 
 `pip freeze | xargs pip uninstall -y`
