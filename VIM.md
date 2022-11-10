@@ -45,3 +45,6 @@ Comment Multiple Lines
 - `:sav file.txt` ~ save new file
 - `:new file.txt` ~ create new file and open horizontally
 - `:vsp file.txt` ~ create new file and open vertically
+
+### Nvim tree mappings
+` :help nvim-tree-default-mappings`
