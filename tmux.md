@@ -24,3 +24,6 @@ modified: '2021-12-05T22:46:14.308Z'
 - `ctrl+b space` - toggle pane layouts
 - `ctrl+b !` - convert pane into a window
 - `ctrl+b x` - kill current pane
+
+## Rename pane :)
+`ctrl+b ,`

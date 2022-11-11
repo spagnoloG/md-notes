@@ -22,3 +22,14 @@ modified: '2021-12-14T21:13:05.655Z'
 git reset -- path/to/folder
 git checkout -- path/to/folder
 ```
+
+### List all branches
+* local: `git branch`
+* remote: `git branch -r`
+* remote & local: `git branch -a`
+
+You can also add `-v` flag to increase verbosity to get more details about listed branches.
+
+### Switch to remote branch that is not on local computer
+
+`git switch <branch_name>`
