@@ -28,3 +28,12 @@ It is *always* smart to disable root login!
 
 ### SCP
 - `scp <filename> <user@server_ip:/destination_folder>` - copy file to server
+
+
+### How to joke around with medic
+
+```bash
+oli@bert:~$ ssh tim
+oli@tim:~$ export DISPLAY=:0
+oli@tim:~$ firefox
+```
