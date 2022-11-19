@@ -42,7 +42,6 @@ lxc image alias list images: | grep -i debian
 lxc image alias list images: | grep -i fedora
 ```
 
-
 ### Exposing container to the public:
 Todo, for now follow linked tutorial. Host it on your own.
 
@@ -71,8 +70,8 @@ or read [this](https://ubuntu.com/tutorials/how-to-run-docker-inside-lxd-contain
 ### No ipv4 in container??
 
 ```bash
-# for ipt in iptables iptables-legacy ip6tables ip6tables-legacy; do $ipt --flush; $ipt --flush -t nat; $ipt --delete-chain; $ipt --delete-chain -t nat; $ipt -P FORWARD ACCEPT; $ipt -P INPUT ACCEPT; $ipt -P OUTPUT ACCEPT; done
-# systemctl reload snap.lxd.daemon 
+for ipt in iptables iptables-legacy ip6tables ip6tables-legacy; do $ipt --flush; $ipt --flush -t nat; $ipt --delete-chain; $ipt --delete-chain -t nat; $ipt -P FORWARD ACCEPT; $ipt -P INPUT ACCEPT; $ipt -P OUTPUT ACCEPT; done
+systemctl restart --now snap.lxd.daemon 
 ```
 read [this](https://discuss.linuxcontainers.org/t/containers-do-not-have-outgoing-internet-access/10844/4) article.
 
