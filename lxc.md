@@ -62,6 +62,11 @@ Then set privileges for docker to have ability to call syscalls.
 	lxc restart <container-name>
 ```
 
+### Flags that lxc init takes, eg. CPU conf, RAM conf, Display conf
+```bash
+lxc launch images:ubuntu/22.04/desktop ubuntu --vm -c limits.cpu=4 -c limits.memory=4GiB --console=vga
+```
+
 or read [this](https://ubuntu.com/tutorials/how-to-run-docker-inside-lxd-containers#2-create-lxd-container) tutorial.
 
 
