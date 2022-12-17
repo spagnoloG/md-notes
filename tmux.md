@@ -25,5 +25,38 @@ modified: '2021-12-05T22:46:14.308Z'
 - `ctrl+b !` - convert pane into a window
 - `ctrl+b x` - kill current pane
 
+
+### Tms written in rust (https://github.com/jrmoulton/tmux-sessionizer)
+Very useful for fuzzy finding git projects in your filesystem.
+
+```bash
+ tms config --paths /home/<user>/Documents/
+````
+
+then just run tms and fuzzy find your project. The tms will
+then create a new session for you and also activate venv if you have 
+it configured. Which is awesome.
+
 ## Rename pane :)
 `ctrl+b ,`
+
+
+## Multiple ssh servers ?
+no problem
+
+```bash
+#!/bin/bash
+
+ssh_list=( user1@server1 user2@server2 ... )
+
+split_list=()
+for ssh_entry in "${ssh_list[@]:1}"; do
+    split_list+=( split-pane ssh "$ssh_entry" ';' )
+done
+
+tmux new-session ssh "${ssh_list[0]}" ';' \
+    "${split_list[@]}" \
+    select-layout tiled ';' \
+    set-option -w synchronize-panes
+```
+[source](https://unix.stackexchange.com/a/533673)
