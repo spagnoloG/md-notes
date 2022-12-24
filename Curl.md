@@ -1,15 +1,9 @@
----
-tags: [linux]
-title: Curl
-created: '2021-12-05T22:26:06.249Z'
-modified: '2021-12-05T23:01:15.615Z'
----
-
 # Curl
 
-### Download any file
+## Download any file
 - `curl -o <file.extension> <url>` -download with new filename
 - `curl -O <url>` - download with original filename
+- `curl -X POST/GET/DELETE <url>` - different requests methods
 
 useful flags:
 - `-L` - use redirection

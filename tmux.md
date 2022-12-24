@@ -1,10 +1,3 @@
----
-tags: [linux]
-title: Tmux
-created: '2021-12-05T22:45:44.151Z'
-modified: '2021-12-05T22:46:14.308Z'
----
-
 # Tmux
 
 ### Window operations

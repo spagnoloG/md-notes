@@ -21,3 +21,9 @@
     -drive if=pflash,format=raw,file=QEMU_EFI.img \
     -drive if=pflash,file=varstore.img \
     -drive if=virtio,file=arm.img\`
+
+
+
+### VIRT MANAGER
+
+https://www.xmodulo.com/convert-ova-to-qcow2-linux.html

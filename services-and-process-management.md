@@ -1,10 +1,3 @@
----
-tags: [linux]
-title: Services and process management
-created: '2021-11-24T23:37:56.443Z'
-modified: '2021-12-09T21:40:19.872Z'
----
-
 # Services and process management
 
 ### PS command

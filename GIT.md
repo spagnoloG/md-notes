@@ -1,9 +1,3 @@
----
-title: GIT
-created: '2021-12-14T21:11:06.500Z'
-modified: '2021-12-14T21:13:05.655Z'
----
-
 # GIT
 
 - If you want to revert changes made to your working copy, do this:
