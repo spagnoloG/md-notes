@@ -1,4 +1,4 @@
-# Adress space
+# Address space
 
 ## AS in C
 ```

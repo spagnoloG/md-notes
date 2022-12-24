@@ -1,5 +1,6 @@
-# Check deatiled power usage on linux (common distros have it preinstalled)
+# Check deatiled power usage on linux 
 
+## Upower (common distros have it preinstalled)
 ```bash
  upower --monitor-detail
 ```

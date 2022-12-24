@@ -1,10 +1,3 @@
----
-tags: [linux]
-title: Networking
-created: '2021-11-08T22:28:05.169Z'
-modified: '2021-12-09T21:20:59.016Z'
----
-
 # Networking
 
 ### IP command

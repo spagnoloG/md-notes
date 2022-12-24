@@ -1,11 +1,4 @@
----
-tags: [linux]
-title: ufw
-created: '2021-12-05T23:08:44.052Z'
-modified: '2021-12-09T20:29:32.892Z'
----
-
-# ufw
+# UFW
 
 ### Connections
 - `sudo ufw status numbered verbose` - check ufw status

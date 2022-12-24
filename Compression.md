@@ -6,6 +6,7 @@ modified: '2021-12-31T10:35:51.469Z'
 ---
 
 # Compression
+
 ### Tar archives
 
 - `tar -cf file.tar dir/` -archive using tar, extract `tar -xvf file.tar`
@@ -24,3 +25,6 @@ modified: '2021-12-31T10:35:51.469Z'
 ### 7zip archives
 - `7z x <file.7z>` - unzip
 
+## If you are super lazy
+
+- `binwalk -e -M <file.zip>` - tries different extraction methods and recursively uznips

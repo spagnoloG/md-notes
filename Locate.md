@@ -1,11 +1,5 @@
----
-tags: [linux]
-title: Locate
-created: '2021-10-25T21:52:02.050Z'
-modified: '2021-12-09T21:08:10.036Z'
----
-
 # Locate
+
 ### Examples of locate command
 use whatis/man locate for more info
 

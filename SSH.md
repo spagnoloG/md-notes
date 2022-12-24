@@ -1,18 +1,8 @@
----
-tags: [linux]
-title: SSH
-created: '2021-11-25T00:11:55.575Z'
-modified: '2021-12-09T21:54:30.814Z'
----
-
 # SSH
 
 ### basic
 - `/etc/ssh/ssh_config` - config location (client)
 - `/etc/ssh/sshd_config` - config location (server)
-
-It is *always* smart to disable root login!
---> uncomment `PermitRootLogin no`
 
 ### Enable encryption
 
@@ -24,11 +14,31 @@ It is *always* smart to disable root login!
 
 ### FAIL2BAN
 - use it to secure ssh
-- install a basic ubuntu vm and watch from 4:20 in video he he u get it, but it is actually there
 
 ### SCP
-- `scp <filename> <user@server_ip:/destination_folder>` - copy file to server
+- `scp <filename> <user@server_ip:/destination_folder>` - copy file to server, same goes for rsync
 
+### SSH CONFIG FILE
+
+example for github:
+```bash
+Host github.com
+  User git
+  Hostname github.com
+  PreferredAuthentications publickey
+  IdentityFile ~/.ssh/id_ed25519
+```
+
+exmaple for any server:
+```bash
+Host vpn.de 
+  HostName vpn.de 
+  IdentityFile ~/.ssh/keys/vpn_de
+  Port 22
+  User root
+```
+
+*note*:  You should put your server's ip in `/etc/hosts/` for easier migrations.
 
 ### How to joke around with medic
 

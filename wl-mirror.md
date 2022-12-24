@@ -1,4 +1,4 @@
-# WL-mirror
+# WL-mirror (wayland exclusive for managing displays)
 
 ## To list all outputs
 

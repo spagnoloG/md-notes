@@ -1,4 +1,4 @@
-# Sorting algorithms
+# Sorting algorithms (SL)
 
 ### FCFS
 Basically a fifo
