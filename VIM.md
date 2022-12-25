@@ -1,10 +1,3 @@
----
-tags: [linux]
-title: VIM
-created: '2022-01-24T16:09:57.858Z'
-modified: '2022-01-24T16:10:20.634Z'
----
-
 # VIM
 Comment Multiple Lines
 - `:15,25s/^/#` ~  comment from line 15 to 25.

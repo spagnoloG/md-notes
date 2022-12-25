@@ -1,11 +1,3 @@
----
-favorited: true
-tags: [linux]
-title: System information
-created: '2021-10-27T22:55:40.432Z'
-modified: '2021-12-26T15:51:15.496Z'
----
-
 # System information
 ### Basic user enumeration
 
