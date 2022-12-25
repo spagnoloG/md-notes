@@ -271,6 +271,7 @@ pub fn run() {
   assert_eq!(2, s.len());
   assert_eq!(10, s.capacity());
 }
+```
 
 ### Structs
 
