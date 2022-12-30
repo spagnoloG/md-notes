@@ -12,6 +12,19 @@
 --> uncomment `PasswordAuthentication no` (on server)
 **Warning** store private key on a secure location, if you lose it, you will lose connection to a server!
 
+### SSH ECDSA (smaller keys)
+
+#### Generate keypair
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/keys/id_ed2552_devel_server
+```
+### Copy to remote
+
+```bash
+ssh-copy-id devel@devel.hsrv -i ~/.ssh/keys/id_ed25519_devel_server
+```
+
 ### FAIL2BAN
 - use it to secure ssh
 
