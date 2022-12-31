@@ -164,9 +164,12 @@ int sem_destroy(sem_t * semaphore_p);   // destroy the semaphore
 
 ### Conditional variables
 A conditional variable has the following operations:
-*`pthread_cond_wait`: This function causes the calling thread to block until the specified condition is met. The thread must hold the mutex lock when calling this function, and it will be released while the thread is blocked. When the function returns, the mutex lock is reacquired by the thread.
-*`pthread_cond_signal`: This function unblocks one thread that is blocked on the specified condition variable. If no threads are blocked on the condition variable, the function has no effect.
-*`pthread_cond_broadcast`: This function unblocks all threads that are blocked on the specified condition variable. If no threads are blocked on the condition variable, the function has no effect.
+
+- `pthread_cond_wait`: This function causes the calling thread to block until the specified condition is met. The thread must hold the mutex lock when calling this function, and it will be released while the thread is blocked. When the function returns, the mutex lock is reacquired by the thread.
+
+- `pthread_cond_signal`: This function unblocks one thread that is blocked on the specified condition variable. If no threads are blocked on the condition variable, the function has no effect.
+
+- `pthread_cond_broadcast`: This function unblocks all threads that are blocked on the specified condition variable. If no threads are blocked on the condition variable, the function has no effect.
 
 example:
 ```c
@@ -331,3 +334,197 @@ solution: use thread pool
     - Every thread uses resources if needed
     - Pipeline speed is determined by the slowest stage 
     - Each stage can spawn multiple threads if needed
+
+## OpenMP
+
+### Compiling
+
+```bash
+gcc -fopenmp -DOMP_NUM_THREADS=<nthreads> main.c -o main
+```
+
+### Pragmas
+
+#### `#pragma omp parallel`
+A block of code, which all threads should execute
+
+#### `#pragma omp sections` & `#pragma omp section`
+Split code into sections.
+
+Example:
+```c
+#pragma omp parallel
+#pragma omp sections
+{
+    #pragma omp section
+    v = func1();
+    # pragma omp section 
+    w = func2()
+}
+// by default, barrier is used here
+// if you do not need a barrirer:
+// #pragma omp sections nowait
+```
+
+#### `#pragma omp parallel for`
+For loop should be in a [canonical](https://www.openmp.org/spec-html/5.0/openmpsu40.html) form.
+Basically should not include any function calls. 
+
+##### `schedule` addon
+
+- `schedlue(static, [,N])`
+    - every thread gets N iters in series
+    - default
+
+- `schedule(dynamic[,N])`
+    - every thread does N iters in series
+    - sum of all N < problem
+    - so when one thread computes N iters, if there are still things to proces, it processes it
+
+- `schedule(guided[,N])`
+    - Same as dynamic but blocks are getting smaller and smaller
+
+### Variables
+Default:
+    - Most of the variables are shared
+    - Threads share global variables
+    - Variables that are in parallel blocks, are not shared
+    - Variables of the forked programs that are called from parrallel sections, are local for every thread
+
+#### OpenMp variable addons
+
+- `shared(vars)`
+    - Explicitly set global variables to be shared inside a block
+    - default, not needed
+- `private(vars)`
+    - Not initialized, so you must set it a value
+    - It is per thread private, and does not affect the variable defined in program or any other thread
+- `firstprivate(vars)`
+    - Copies local variable value and does not need to be initialized
+    - It is per thread private, and does not affect the variable defined in program or any other thread
+- `lastprivate(vars)`
+    - Stores the result to the local variable on finish of the block
+- `threadprivate(vars)`
+    - Makes vars local per thread
+    - They are not freed after block execution
+    - That means if we call that block again, the value of the variable will remain from previous call
+- `reduction(op:var)`
+    - Every thread gets a local copy of variable var
+    - Local copies are initialized specified by op
+    - When they are done, they are grouped together into one group var
+
+```c
+#pragma omp parallell for reduction(+:counter)
+for(i = 0; i < N; i++)
+    counter++;
+```
+
+| op   | initial value |
+|------|---------------|
+| +    | 0             |
+| *    | 1             |
+| &    | 1             |
+| \|   | 0             |
+| ^    | 0             |
+| &&   | 1             |
+| \|\| | 0             |
+
+
+### Synchronization between threads
+
+- `critical(name)`
+    -  basically locked section like in pthreads
+    - If critical section is not enough for you, you can also use `omp_lock_t` for more flexibilty. But watchout becouse the thread that locks the lock must be the one that also unlocks it!
+
+- `atomic`
+    - A faster critical section (only for `x <op> = n`) -> `op = +, -, *, /, &, |, <<, >>`
+
+- `barrier`
+    - threads wait for eachother
+
+- `ordered`
+    - code is executed in sequentiall matter
+
+- `single`
+    - code is executed by a single thread
+
+- `master`
+    - code is executed by the main thread
+
+- `collapse(n)`
+    - `n` is the number of nested for loops that are executed concurrently
+
+- `flush(vars)`
+    - When a thread executes a flush directive, it forces any updates that the thread has made to its own cache to be written back to the main memory, so that other threads can see the updated data. 
+    - This is useful when multiple threads are accessing and updating shared data, as it ensures that the changes made by one thread are visible to other threads in a timely manner.
+
+### Tasks
+The task construct in OpenMP is a mechanism for expressing parallelism in your code that allows you to specify units of work (called tasks) that can be executed concurrently. 
+It provides a way to create parallelism that is more dynamic and flexible than the traditional OpenMP constructs, such as parallel and for.
+
+
+## OpenMPI (message passing interface)
+It is designed to allow multiple computers to work together as a single system 
+and to enable the efficient exchange of data between them.
+
+### Functions
+
+- `int MPI_Init(int *argc, char **argv);`
+    - initializes MPI and sets up connections between processes
+    - CLI arguments are passed only to process 0!
+
+- `int MPI_Comm_size(MPI_Comm, int *size)` 
+    - returns number of nodes/processes in comunication
+
+- `int MPI_Comm_rank(MPI_Comm, int *rank)`
+    - returns process id
+
+- `MPI_Finalize(void)`
+    - closes connections
+    - It is the last function call to MPI in our program.
+    - cleans up
+
+- `MPI_Send(void *message, int count, MPI_Datatype datatype, int destination, int tag, MPI_Comm comm)`
+    -  send message to process, using its id(`destination`)
+    - < 16kB `MPI_Bsend()`
+    - > 16kB `MPI_Ssend()`
+
+- `MPI_Ssend()`
+    - returns information about message transmission
+    - waits for reciever confirmation of data
+    - Blocking function
+
+- `MPI_Bsend()`
+    - The message is buffered.
+    - Function ends when message is written into a buffer
+    - No clue if the message was recieved or not.
+
+- `MPI_Isend(&buf, count, datatype, dest, tag, comm, request)`
+    - Nonblocking send fucntion
+    - We can test its success by executing `MPI_Test(&request, &done, MPI_STATUS_IGNORE)`
+    - Faster execution of code
+
+- `MPI_Recv(void *message, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status status)`
+    - recv message, from predefined source or use  `MPI_ANY_SOURCE` to listen for all messages
+
+- `MPI_Barrier(MPI_Comm comm)`
+    - Classic barrier
+
+- `MPI_Bcast(void *buf, int count, MPI_Datatype, int root, MPI_Comm comm)`
+    - `root` broadcasts its message to all other participants
+    - `root` process sets the `*buf, all other processes read from it
+    - All the processes should call this function
+
+- `MPI_Reduce(void *sendbuf, void *recvbuf, int count, MPI_Datatype datatype, MPI_Op op, int root, MPI_Comm comm)`
+    - All the sendbufs are joined on the root recvbuf using operation op
+    - op can be max, min, sum, product, land, lor,...
+
+- `MPI_Scatter(void *sendbuf, int sendcount, MPI_Datatype sendtype, void *recvbuf, int recvcount, MPI_Datatype recvtype, int root, MPI_Comm comm)`
+    - Array / string / buffer gets equaly splitteed to all the processes from the root process, root process also gets its piece
+
+- `MPI_Gather(void *sendbuf, int sendcount, MPI_Datatype sendtype, void *recvbuf, int recvcount, MPI_Datatype recvtype, int root, MPI_Comm comm)`
+    - Array / string / buffer gets equaly gathered to the root process
+
+- `MPI_Gatherv` and `MPI_Scatterv`
+    - Same as Scatter and gather, but you have control over displacenents and send counts for each process
+    - basically you can control how larg chunk everey process will handle
