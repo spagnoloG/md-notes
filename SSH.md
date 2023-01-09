@@ -60,3 +60,21 @@ oli@bert:~$ ssh tim
 oli@tim:~$ export DISPLAY=:0
 oli@tim:~$ firefox
 ```
+
+### Reverse SSH tunnel
+If you want some port that is behind the firewall, but exposed on the server.
+You can spawn a reverse ssh tunnel to that port issuing this command:
+
+```bash
+ssh -L 8888:localhost:8888 -f -N hsrv_devel
+```
+
+or: `ssh -L [LOCAL_IP:]LOCAL_PORT:DESTINATION:DESTINATION_PORT [USER@]SSH_SERVER`
+
+read [here](https://linuxize.com/post/how-to-setup-ssh-tunneling/) more.
+
+or forcily:
+
+```bash
+ssh -L 8888:localhost:8888 -f -N hsrv_devel -o ClearAllForwardings=yes
+```

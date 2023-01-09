@@ -528,3 +528,103 @@ and to enable the efficient exchange of data between them.
 - `MPI_Gatherv` and `MPI_Scatterv`
     - Same as Scatter and gather, but you have control over displacenents and send counts for each process
     - basically you can control how larg chunk everey process will handle
+
+## CUDA C
+
+Cuda program consists:
+- Code thet runs on host(CPU)
+- Kernel that runs on GPU
+- Threads are organized in block, which make up grid
+- Every kernel executes single grid
+
+Code execution:
+- Copy data to GPU
+- request for computation
+- compute
+- copu data from GPU memory to main system memory
+
+### Streaming multiprocessor(SM)
+
+```
+|      I cache        | 
+|      MT issue       |
+|      C cache        |
+| SP       | SP       |
+| SP       | SP       |
+| ...      | ...      |
+| SP       | SP       |
+| SFU      | SFU      |
+|      registers      |
+|  Shared    Memory   |
+|  Local     Memory   |
+```
+
+Consists of:
+- `SP` ~ streaming processors -> 2times the clock speed (fast clock)
+- `SFU` ~ special function units
+- `Shared memory`
+- `cache`
+
+Properties:
+- A block of thread is executed by single streaming multiprocessor.
+- SM can process many blocks concurrently.
+- Threads that are in the same block are easily synchronized.
+- Threads that are executed on different SM **cannot** be synchronized ((efficently)) -> hence faster computation!
+- All the threads in the same block execute the same code
+- Every SM has 8 SP, and a warp has 32 threads, so threads are executed in four steps (pipeline)
+- Each instruction in ALE/MAD unit takes about 4 ticks(fast clock), So it lines up with warp pipeline execution (each fast tick 8 threads are created and computed)
+
+Function units:
+- 8 32bit FP(floating point) ALU/MAD(multiply and add)
+- 8 integer units for jump instructions
+- 2 SFUs, trigonometric functions,..
+- 1 64 bit MAD unit (allows 64 bit operations), that means that computation with 64bit values will be at least 8-12 times slower than 32bit
+
+Shared memory:
+- Really fast memory, but very limited in size.
+- It is meant for communication between threads in the same SM.
+- Meant for saving some value (example counter sum for all threads)
+- All data is lost when the kernel finishes.
+- Data from and into shared memory is transfered to and from registers using `LOAD/STORE`.
+
+Registers:
+- Each SM has a few registers(static), faster than shared memory
+- Then each SP has a few dynamically allocated registers
+
+Local memory:
+- private for each thread
+- used when there are no registers left
+- a bit slower
+
+Warp (micro architecture):
+- consists of 32 parallel threads, that execute the same code
+- each SM can execute 32 warps
+
+
+### Global & constant & texture memory:
+- It is slower
+- All threads can access it
+- CPU can write and read from it.
+- Memory stays there when the kernel finishes (You must clean it up after usage).
+- constant memory: small, around 64KB, used for instructions
+- texture memory: used for storing constatns and textures in graphichal applications
+
+
+### CUDA kernel
+
+- Does not return anything
+- Accepts arguments, but pointers from device memory
+
+Compiler function labels:
+    - `__global__` ~ Function is ran on device, and the one calling it is the host
+    - `__device__` ~ Function is ran on device, and can be called only from within device
+    - `__host__` ~ Function is ran on the host ( default )
+
+### Some CUDA functions
+
+- `cudaMalloc()`
+    - Allocate memory on the GPU
+- `cudaFree()`
+    - Free memory on the GPU
+- `cudaMemcpy(p1, p2, ssize_t, cudaMemcpyDeviceToHost | cudaMemcpyHostToDevice)`
+    - Copy from main memory to gpu memory and vice versa.

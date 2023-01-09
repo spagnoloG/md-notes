@@ -22,7 +22,7 @@
 | ifconfig enp6s0 192.168.2.24                                | ip addr add 192.168.2.24/24 dev enp6s0                  |
 | ifconfig enp6s0 netmask 255.255.255.0                       | ip addr add 192.168.1.1/24 dev enp6s0                   |
 | ifconfig enp6s0 mtu 9000                                    | ip link set enp6s0 mtu 9000                             |
-| ifconfig enp6s0:0 192.168.2.25                              | ip addr add 192.168.2.25/24 dev enp6s0                  |
+| ifconfig enp7s0:0 192.168.2.25                              | ip addr add 192.168.2.25/24 dev enp6s0                  |
 | netstat                                                     | ss                                                      |
 | netstat -tulpn                                              | ss -tulpn                                               |
 | netstat -neopa                                              | ss -neopa                                               |
