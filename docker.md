@@ -250,3 +250,9 @@ basically add this segment to file `/etc/ufw/after.rules`.
 COMMIT
 # END UFW AND DOCKER
 ```
+
+
+## Best flag for debugging dockerfile
+`docker compose --verbose up --build`
+But do not fuck up the order of the arguments!
+

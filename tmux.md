@@ -1,5 +1,4 @@
 # Tmux
-
 ### Window operations
 - `ctrl+b c` - spawn new window
 - `ctrl+b n` - move to next window
@@ -53,3 +52,8 @@ tmux new-session ssh "${ssh_list[0]}" ';' \
     set-option -w synchronize-panes
 ```
 [source](https://unix.stackexchange.com/a/533673)
+
+
+## Source updated config file?
+
+`:source-file ~/.tmux.conf`
