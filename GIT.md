@@ -97,3 +97,19 @@ This will apply the remaining changes and complete the rebase process.
 If you encounter any issues during the rebase process, you can use the git rebase --abort command to abort the process and return your local branch to its original state.
 
 Once the rebase is complete, your local branch will contain the changes from the main Git branch, and your local commits will be replayed on top of them. You can then push your changes to your remote repository if needed.
+
+
+## Deleted a commit and want to revive it
+
+### Firstly locate it
+```bash
+git fsck --full --no-reflogs --unreachable --lost-found | grep commit | cut -d " " -f 3 | xargs -n 1 git log -n 1 --pretty=oneline | grep "<commit-message>"
+```
+Then checkout to the that commit hash. Good luck ;)
+
+
+## Edit last commit message
+```bash
+ git commit --amend
+ ```
+
