@@ -42,6 +42,11 @@ Comment Multiple Lines
 ### Nvim tree mappings
 ` :help nvim-tree-default-mappings`
 
+### Delete all the whitespaces
+```bash
+:g/^$/d
+```
+
 
 ## Marks
 

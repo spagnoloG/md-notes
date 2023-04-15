@@ -28,9 +28,8 @@ It is basically gui for command tools
 -> `topic monitor` gui topics
 
 ### Compiled packages are not listed?
-Re-source: `. ~/.bash.rc` or in docker container which uses zsh: `. ~/.zshrc`.
-
-
+Re-source: `. ./devel/setup.zsh --extend`.
+Check for successful source: `echo $ROS_PACKAGE_PATH`
 
 ### Launchfile
 

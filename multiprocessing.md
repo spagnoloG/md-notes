@@ -628,3 +628,10 @@ Compiler function labels:
     - Free memory on the GPU
 - `cudaMemcpy(p1, p2, ssize_t, cudaMemcpyDeviceToHost | cudaMemcpyHostToDevice)`
     - Copy from main memory to gpu memory and vice versa.
+
+
+
+## Cuda on fedora
+
+Follow the instructions [here](https://rpmfusion.org/Howto/CUDA)
+

@@ -16,6 +16,7 @@
 - `ctrl+b space` - toggle pane layouts
 - `ctrl+b !` - convert pane into a window
 - `ctrl+b x` - kill current pane
+- `ctrl+b { or }` - Move the panes 
 
 
 ### Tms written in rust (https://github.com/jrmoulton/tmux-sessionizer)
