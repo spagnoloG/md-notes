@@ -17,7 +17,7 @@
 #### Generate keypair
 
 ```bash
-ssh-keygen -t ed25519 -f ~/.ssh/keys/id_ed2552_devel_server
+ssh-keygen -t ed25519 -f ~/.ssh/keys/id_ed25519_devel_server
 ```
 ### Copy to remote
 
@@ -52,6 +52,24 @@ Host vpn.de
 ```
 
 *note*:  You should put your server's ip in `/etc/hosts/` for easier migrations.
+
+### Jump host
+```bash
+ssh -J jumphost_user@jumphost.example.com target_user@target_host
+```
+or directly in ssh config
+```bash
+Host jumphost
+  HostName jumphost.example.com
+  User jumphost_user
+  IdentityFile /path/to/jumphost_key
+
+Host target_host
+  HostName target_host.example.com
+  User target_user
+  IdentityFile /path/to/target_key
+  ProxyJump jumphost
+```
 
 ### How to joke around with medic
 
