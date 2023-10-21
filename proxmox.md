@@ -67,6 +67,21 @@ pct rollback <ct_id> <snapshot-name>
 pct delsnapshot <ct_id> <snapshot-name>
 ```
 
+#### Running docker in privileged container
+
+Since of lately you must add apparmor rule:
+
+```bash
+--
+version: "2.1"
+services:
+  service_name:
+    image: image_name 
+    container_name: container_name 
+    security_opt:
+      - apparmor:unconfined
+```
+
 
 ### Virtual Machines
 
