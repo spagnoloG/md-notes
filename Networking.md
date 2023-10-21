@@ -56,3 +56,11 @@ Scan for subdomains
 ```bash
 gobuster vhost -w /opt/useful/SecLists/Discovery/DNS/subdomains-top1million5000.txt -u http://thetoppers.htb
 ```
+
+### Manipulate interfaces 
+
+```bash
+# Set bridged network interface down and remove it
+sudo ip link set br-24cd8c4a8185 down
+sudo ip link delete br-24cd8c4a8185 type bridge
+```
