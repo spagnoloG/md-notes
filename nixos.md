@@ -34,4 +34,7 @@ sudo nix-store --optimize
 sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
 ```
 
+### Home manager
+manage user configuration files using nix
 
+Install it [here](https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module).

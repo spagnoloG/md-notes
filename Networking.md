@@ -64,3 +64,10 @@ gobuster vhost -w /opt/useful/SecLists/Discovery/DNS/subdomains-top1million5000.
 sudo ip link set br-24cd8c4a8185 down
 sudo ip link delete br-24cd8c4a8185 type bridge
 ```
+
+### Reset dns records in chrome / brave
+
+```text
+chrome://net-internals/#dns -> Clear host cache
+chrome://net-internals/#sockets -> flush socket pools
+```
