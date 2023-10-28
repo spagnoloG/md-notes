@@ -27,3 +27,8 @@
 ### VIRT MANAGER
 
 https://www.xmodulo.com/convert-ova-to-qcow2-linux.html
+
+#### Enable copy and paste from vm to host
+
+[Issue](https://unix.stackexchange.com/a/671298)
+

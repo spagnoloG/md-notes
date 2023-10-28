@@ -33,3 +33,9 @@ gpg --export-secret-keys <key> > private-key-backup.asc
 ```bash
 gpg --armor --export <key> > public-key.asc
 ```
+
+### Import private key
+
+```bash
+gpg --import private-key-backup.asc
+```
