@@ -82,6 +82,80 @@ Example python flake environment:
 
 ```
 
+
+Example R and C++ development environment:
+You should really swithc to flakes if you are using nixos ;) .
+
+```
+{
+  description = "R and C++: DataScience environment";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+          };
+        };
+        
+        my-R-packages = with pkgs.rPackages; [
+          ggplot2
+          dplyr
+          xts
+          gridExtra
+          shiny
+          shinydashboard
+          tidyr
+          tidyverse
+          viridis
+          arrow
+          data_table
+          tinytex
+          reshape2
+        ];
+
+        my-cpp-packages = with pkgs; [
+          arrow-cpp
+          clang
+          gcc
+          cmake
+          pkg-config
+        ];
+
+        RStudio-with-my-packages = pkgs.rstudioWrapper.override {
+          packages = my-R-packages;
+        };
+
+        R-with-my-packages = pkgs.rWrapper.override {
+          packages = my-R-packages;
+        };
+
+        latex-pkgs = with pkgs; [
+            texlive.combined.scheme-basic
+        ];
+        
+      in
+      {
+        devShell = pkgs.mkShell {
+          buildInputs = [
+            R-with-my-packages
+            RStudio-with-my-packages
+            my-cpp-packages
+            latex-pkgs
+          ];
+        };
+      }
+    );
+}
+```
+
 To enter development environmnent issue:
 
 ```bash
@@ -92,6 +166,5 @@ if you add any new dependency to the list issue:
 
 ```bash
 nix flake lock --update-input nixpkgs
+nix develop --refresh
 ```
-
-

@@ -58,3 +58,13 @@ tmux new-session ssh "${ssh_list[0]}" ';' \
 ## Source updated config file?
 
 `:source-file ~/.tmux.conf`
+
+## Problems on server?
+
+```bash
+root@ml-node:~# tmux
+missing or unsuitable terminal: alacritty
+# Fix, export a terminal variable
+export TERM=xterm-256color
+```
+
