@@ -86,7 +86,7 @@ Example python flake environment:
 Example R and C++ development environment:
 You should really swithc to flakes if you are using nixos ;) .
 
-```
+```nix
 {
   description = "R and C++: DataScience environment";
 
