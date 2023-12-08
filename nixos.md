@@ -172,7 +172,8 @@ nix develop --refresh
 
 ## Example rust development environment
 
-# To start a rust project, firstly:
+#### To start a rust project, firstly:
+
 - Enter nix shell; `nix-shell -P cargo`
 - Run `cargo init`
 - Add dependencies to Cargo.toml
@@ -180,9 +181,18 @@ nix develop --refresh
 - Exit nix shell, `ctrl+d`
 - Run `nix develop`, and replace the cargoSha256 hash in `flake.nix` with the one generated
 
+
 ```nix
 {
   description = "Rust development environment";
+
+  # To start a rust project, firstly:
+  # Enter nix shell; nix-shell -P cargo
+  # Run cargo init
+  # Add dependencies to Cargo.toml
+  # Run cargo check, to generate Cargo.lock
+  # Exit nix shell
+  # Run nix develop, and replace the cargoSha256 hash with the one generated
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
@@ -195,30 +205,39 @@ nix develop --refresh
       let
         pkgs = import nixpkgs {
           inherit system;
-          overlays = [ rust-overlay.overlay ];
+           overlays = [ rust-overlay.overlays.default ];
         };
 
         rustEnv = pkgs.rustPlatform.buildRustPackage {
           pname = "w3";
           version = "0.1.0";
-          src = ./.; # Source directory
+          src = ./.;
+          cargoSha256 = "";
 
-          # This needs to be the actual sha256 hash of your dependencies
-          # You can obtain this by initially setting a wrong hash and then
-          # running the build to get the correct hash
-          cargoSha256 = "sha256-MB+QEW5+yuuy3T4YOvBKzhdLwvjjREx853FfqiLZfYA=";
-
-          buildInputs = with pkgs; [ 
-            pkgs.openssl 
+          nativeBuildInputs = [
+            pkgs.pkg-config
+            pkgs.cmake
+            pkgs.openssl
+            pkgs.libiconv
+            pkgs.libssh
+            pkgs.freetype
           ];
 
+          buildInputs = [
+            pkgs.fontconfig
+          ];
+
+          # Set the PKG_CONFIG_PATH in the shell environment
+          shellHook = ''
+            export PKG_CONFIG_PATH=${pkgs.fontconfig}/lib/pkgconfig:$PKG_CONFIG_PATH
+          '';
         };
       in {
         devShells.default = pkgs.mkShell {
-          buildInputs = [
-            rustEnv
+          nativeBuildInputs = [
             pkgs.rustc
             pkgs.cargo
+            rustEnv
           ];
         };
       }
