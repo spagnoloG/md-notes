@@ -168,3 +168,60 @@ if you add any new dependency to the list issue:
 nix flake lock --update-input nixpkgs
 nix develop --refresh
 ```
+
+
+## Example rust development environment
+
+# To start a rust project, firstly:
+- Enter nix shell; `nix-shell -P cargo`
+- Run `cargo init`
+- Add dependencies to Cargo.toml
+- Run `cargo check`, to generate `Cargo.lock`
+- Exit nix shell, `ctrl+d`
+- Run `nix develop`, and replace the cargoSha256 hash in `flake.nix` with the one generated
+
+```nix
+{
+  description = "Rust development environment";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    flake-utils.url = "github:numtide/flake-utils";
+    rust-overlay.url = "github:oxalica/rust-overlay";
+  };
+
+  outputs = { self, nixpkgs, flake-utils, rust-overlay, ... } @ inputs:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [ rust-overlay.overlay ];
+        };
+
+        rustEnv = pkgs.rustPlatform.buildRustPackage {
+          pname = "w3";
+          version = "0.1.0";
+          src = ./.; # Source directory
+
+          # This needs to be the actual sha256 hash of your dependencies
+          # You can obtain this by initially setting a wrong hash and then
+          # running the build to get the correct hash
+          cargoSha256 = "sha256-MB+QEW5+yuuy3T4YOvBKzhdLwvjjREx853FfqiLZfYA=";
+
+          buildInputs = with pkgs; [ 
+            pkgs.openssl 
+          ];
+
+        };
+      in {
+        devShells.default = pkgs.mkShell {
+          buildInputs = [
+            rustEnv
+            pkgs.rustc
+            pkgs.cargo
+          ];
+        };
+      }
+    );
+}
+```

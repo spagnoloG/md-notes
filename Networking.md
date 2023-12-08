@@ -71,3 +71,17 @@ sudo ip link delete br-24cd8c4a8185 type bridge
 chrome://net-internals/#dns -> Clear host cache
 chrome://net-internals/#sockets -> flush socket pools
 ```
+
+
+### Nmcli
+
+List all available netowrks:
+```bash
+nmcli device wifi list
+```
+
+List all  active connections:
+
+```bash
+nmcli con show --active
+```

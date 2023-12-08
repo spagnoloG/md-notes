@@ -27,3 +27,11 @@ pdftk "${files[@]}" cat output combined.pdf
 
 echo "All slides have been combined into combined.pdf"
 ```
+
+### Change the creation date of a pdf
+
+```bash
+exiftool -overwrite_original -P -AllDates="YYYY:MM:DD HH:MM:SS" Document.pdf
+# or
+exiftool -CreateDate="YYYY:MM:DD HH:MM:SS" Document.pdf 
+```
