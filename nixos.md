@@ -313,6 +313,107 @@ naersk.lib."${targetPlatform.system}".buildPackage rec {
 }
 ```
 
+#### C development environment with custom library
+
+`download_library.sh`
+
+```bash
+#!/bin/bash
+
+set -eux
+
+WFDB_LIB_URL="https://archive.physionet.org/physiotools/wfdb/lib"
+
+mkdir -p wfdb
+cd wfdb
+
+# List of files to download
+files=(
+  "COPYING.LIB"
+  "Makefile"
+  "Makefile.top"
+  "Makefile.tpl"
+  "annot.c"
+  "calib.c"
+  "ecgcodes.h"
+  "ecgmap.h"
+  "signal.c"
+  "wfdb.h"
+  "wfdb.h0"
+  "wfdbinit.c"
+  "wfdbio.c"
+  "wfdblib.h"
+  "wfdblib.h0"
+)
+
+for file in "${files[@]}"; do
+    echo "Downloading $file..."
+    curl -O "$WFDB_LIB_URL/$file"
+done
+
+echo "All files downloaded."
+```
+
+
+```nix
+{
+  description = "A Nix flake for C project with WFDB library";
+
+  inputs = {
+    nixpkgs.url = "nixpkgs/nixos-23.05";
+  };
+
+  outputs = { self, nixpkgs }: {
+
+    defaultPackage.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.stdenv.mkDerivation {
+      name = "obss-assignment-1";
+
+      src = self;
+
+      buildInputs = [
+        nixpkgs.legacyPackages.x86_64-linux.gcc
+        nixpkgs.legacyPackages.x86_64-linux.gnumake
+        nixpkgs.legacyPackages.x86_64-linux.curl
+      ];
+
+      unpackPhase = "true";
+
+      buildPhase = ''
+        # Copy the wfdb directory to the build directory
+        cp -r ${self}/a1/wfdb .
+
+        cd wfdb
+        chmod -R u+w .
+
+        # Build the WFDB library
+        make -f Makefile
+
+        # Create a symlink for the linker to find the library
+        ln -s libwfdb.so.10.6 libwfdb.so
+
+        cd ..
+
+        # Building your program with the correct include path
+        gcc -Iwfdb -o qrs_detect ${self}/a1/example.c -lm -L./wfdb -lwfdb
+      '';
+
+      installPhase = ''
+        mkdir -p $out/bin
+        mkdir -p $out/lib
+
+        # Copy the binary
+        cp qrs_detect $out/bin/
+
+        # Copy the library files to the output directory
+        cp wfdb/libwfdb.so.10.6 $out/lib/
+        ln -s $out/lib/libwfdb.so.10.6 $out/lib/libwfdb.so
+        ln -s $out/lib/libwfdb.so.10.6 $out/lib/libwfdb.so.10
+      '';
+    };
+  };
+}
+```
+
 To enter development environmnent issue:
 
 ```bash
