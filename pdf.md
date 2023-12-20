@@ -35,3 +35,14 @@ exiftool -overwrite_original -P -AllDates="YYYY:MM:DD HH:MM:SS" Document.pdf
 # or
 exiftool -CreateDate="YYYY:MM:DD HH:MM:SS" Document.pdf 
 ```
+
+### Convert svg to pdf
+
+```bash
+inkscape input_image.svg --export-filename=output_pdf.pdf
+```
+or batched:
+
+```bash
+for file in *.svg; do inkscape "$file" --export-filename="${file%.svg}.pdf"; done
+```
