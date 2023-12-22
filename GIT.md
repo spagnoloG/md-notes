@@ -113,3 +113,42 @@ Then checkout to the that commit hash. Good luck ;)
  git commit --amend
  ```
 
+## Pre-commit hooks
+
+Instead of writing bash scripts you can use this nice tool: https://pre-commit.com/
+
+```bash
+python3 -m venv .venv
+. .venv/bin/activate
+pip install pre-commit
+```
+
+write a `.pre-commit-config.yaml` file in the root of your repo:
+(here is an example for python)
+
+```yaml
+repos:
+  - repo: https://github.com/pycqa/flake8
+    rev: '6.1.0' 
+    hooks:
+      - id: flake8
+        args: ['--config=a2/.flake8']  # Specify the path to config file
+        files: ^a2/  # Only run on files in the a2 directory
+
+  - repo: https://github.com/psf/black
+    rev: '23.12.0'
+    hooks:
+      - id: black
+        language_version: python3
+        files: ^a2/  # Only run on files in the a2 directory
+```
+
+Then run `pre-commit install` to install the git hook into your `.git/hooks/pre-commit` file. 
+Every time you commit a change, the hook will run and check the files you have changed. 
+If any of the checks fail, the commit will be aborted and you will have to fix the errors before you can commit again.
+
+Or if you want idempotence run `pre-commit autoupdate`. 
+
+
+
+
