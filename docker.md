@@ -85,7 +85,7 @@ web:
 ```yml
 ports:
   - "3000"
-  - "8000:80"  # guest:host
+  - "8000:80"  # machine - port : container - port
 # expose ports to linked services (not to host)
 expose: ["3000"]
 ```

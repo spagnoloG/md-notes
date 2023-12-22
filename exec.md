@@ -27,4 +27,3 @@ sufixes:
 - `p` ~ search in `$PATH` for provided executable
 - `P` ~ specifying that we will provide a path to an executable
 - `e` ~ enviromental variables are provided in a char array
-
