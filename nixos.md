@@ -414,6 +414,153 @@ echo "All files downloaded."
 }
 ```
 
+#### Python development with opencv plotting enabled and open3d library (took me hours)
+
+```nix
+{
+  description = "opencv and open3d python development environment";
+
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
+    flake-utils.url = "github:numtide/flake-utils";
+  };
+
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config = { allowUnfree = true; };
+        };
+
+        fetchPypi = pkgs.python3Packages.fetchPypi;
+
+        customPython = pkgs.python3.override {
+          packageOverrides = self: super: {
+            opencv4 = super.opencv4.override {
+              enableGtk2 = true;
+              gtk2 = pkgs.gtk2;
+              enableFfmpeg = true;
+            };
+          };
+        };
+
+        nbformat-570 = pkgs.python3Packages.nbformat.overridePythonAttrs
+          (old: rec {
+            version = "5.7.0";
+
+            JUPYTER_PLATFORM_DIRS = 1;
+            src = fetchPypi {
+              inherit version;
+              pname = old.pname;
+              hash = "sha256-HUdgwVwaBCae9crzdb6LmN0vaW5eueYD7Cvwkfmw0/M=";
+            };
+          });
+
+        # Define a custom Python packages set with the nbformat override, version collision!
+        customPythonPackages = pkgs.python3Packages.override {
+          overrides = self: super: {
+            nbformat = nbformat-570;
+          };
+        };
+
+        open3d = pkgs.python3Packages.buildPythonPackage rec {
+          pname = "open3d";
+          version = "0.17.0";
+          format = "wheel";
+
+          src = pkgs.python3Packages.fetchPypi {
+            pname = "open3d";
+            version = "0.17.0";
+            format = "wheel";
+            sha256 = "sha256-PcMAaXMgu2iCRsXQn2gQRYFcMyIlaFc/GWSy11ZDFlc=";
+            dist = "cp310";
+            python = "cp310";
+            abi = "cp310";
+            platform = "manylinux_2_27_x86_64";
+          };
+
+          nativeBuildInputs = [ pkgs.autoPatchelfHook ];
+          autoPatchelfIgnoreMissingDeps = [
+            "libtorch_cuda_cpp.so"
+            "libtorch_cuda_cu.so"
+            "libtorch_cuda.so"
+            "libc10_cuda.so"
+          ];
+
+          buildInputs = with pkgs; [
+            cudaPackages.cudatoolkit
+            stdenv.cc.cc.lib
+            libusb.out
+            libGL
+            cudaPackages.cudatoolkit
+            libtorch-bin
+            libtensorflow
+            expat
+            xorg.libXfixes
+            mesa
+            xorg.libX11
+            xorg.libXfixes
+          ];
+
+          propagatedBuildInputs = with customPythonPackages; [
+            nbformat-570
+            numpy
+            dash
+            configargparse
+            scikit-learn
+            ipywidgets
+            addict
+            matplotlib
+            pandas
+            pyyaml
+            tqdm
+            pyquaternion
+          ];
+
+          postInstall = ''
+            ln -s "${pkgs.llvm_10.lib}/lib/libLLVM-10.so" "$out/lib/libLLVM-10.so.1"
+
+            rm $out/lib/python3.10/site-packages/open3d/libGL.so.1
+            rm $out/lib/python3.10/site-packages/open3d/swrast_dri.so
+            rm $out/lib/python3.10/site-packages/open3d/libgallium_dri.so
+            rm $out/lib/python3.10/site-packages/open3d/kms_swrast_dri.so
+            rm $out/lib/python3.10/site-packages/open3d/libEGL.so.1
+          '';
+
+        };
+
+        pythonEnv = customPython.withPackages (ps:
+          with ps; [
+            matplotlib
+            numpy
+            scipy
+            requests
+            opencv4
+            flake8
+            black
+            open3d
+          ]);
+
+      in {
+        devShell = pkgs.mkShell {
+          buildInputs =
+            [ pythonEnv pkgs.python3Packages.pip pkgs.gtk2 pkgs.ffmpeg ];
+
+          shellHook = ''
+            if [ ! -d ./.venv ]; then
+              python3 -m venv .venv
+            fi
+            source .venv/bin/activate
+            pip install pre-commit
+            pre-commit autoupdate
+            echo "Welcome to the Python development environment."
+          '';
+        };
+      });
+}
+```
+
 To enter development environmnent issue:
 
 ```bash

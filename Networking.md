@@ -137,3 +137,17 @@ sudo bettercap -iface <monitor_interface>
 ```
 
 captured handshakes are stored in `~/bettercap-wifi-handshakes.pcap`
+
+
+## Network usage
+
+nload (nice graphs in terminal)
+
+```bash
+nload -i <interface>
+```
+
+or 
+```
+ss -i
+```
