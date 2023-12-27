@@ -40,6 +40,27 @@ manage user configuration files using nix
 Install it [here](https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module).
 
 
+### Updating nixos to new release
+
+
+Firstly go to [nixos.org](https://nixos.org/manual/nixos/stable/release-notes) and pick the release you want to update to.
+
+Then to update nixos
+```bash
+sudo nix-channel --add https://nixos.org/channels/nixos-XX.XX nixos
+sudo nix-channel --update
+sudo nixos-rebuild switch --upgrade
+```
+
+For the home manager [follow](https://nix-community.github.io/home-manager/index.xhtml#ch-installation) the instructions.
+
+```bash
+nix-channel --add https://github.com/nix-community/home-manager/archive/release-XX.XX.tar.gz home-manager
+nix-channel --update
+nix-shell '<home-manager>' -A install
+```
+
+To find home-manager package options, use this [site](https://mipmip.github.io/home-manager-option-search/)
 
 ### Flakes
 
