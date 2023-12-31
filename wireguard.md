@@ -94,62 +94,49 @@ DNS = <ip from command>
 version: "3"
 
 services:
-
-  # WireGuard VPN service
-  wireguard:
-    image: linuxserver/wireguard:latest
-    container_name: wireguard
-    environment:
-      - PUID=1000
-      - PGID=1000
-      - TZ=Europe/Ljubljana
-      - SERVERURL=xx.xx.xx.xx # Server IP
-      - SERVERPORT=51820 # Check the firewall
-      - PEERDNS=auto
-      - ALLOWEDIPS=0.0.0.0/0
+  boringtun:
+    image: ghcr.io/ntkme/boringtun:edge
+    command:
+      - wg0
+    container_name: boringtun
+    # use the network of the 'wireguard-ui' service. this enables to show active clients in the status page
+    network_mode: service:wireguard-ui
     cap_add:
       - NET_ADMIN
     volumes:
-      - ./wg_server_config:/config
-      - /lib/modules:/lib/modules
+      - /dev/net/tun:/dev/net/tun
+      - ./config:/etc/wireguard
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1 # Enable kernel packet forwarding
-    ports:
-      # Port for WireGuard-UI
-      - "5000:5000"
-      # Port of the WireGuard VPN server
-      - "51820:51820/udp"
-    restart: unless-stopped
 
-  # WireGuard-UI service
+
   wireguard-ui:
-    image: ngoduykhanh/wireguard-ui:latest
+    image: ngoduykhanh/wireguard-ui:0.5.2
     container_name: wireguard-ui
-    depends_on:
-      - wireguard
     cap_add:
       - NET_ADMIN
-    # Use the network of the 'wireguard' service
-    # This enables to show active clients in the status page
-    network_mode: service:wireguard
     environment:
       - SENDGRID_API_KEY
       - EMAIL_FROM_ADDRESS
       - EMAIL_FROM_NAME
       - SESSION_SECRET
-      - WGUI_USERNAME=spanskiduh
-      - WGUI_PASSWORD=sizemisludabosdubumojegeslo
+      - WGUI_USERNAME=admin
+      - WGUI_PASSWORD=no_password_for_u
       - WG_CONF_TEMPLATE
       - WGUI_MANAGE_START=true
       - WGUI_MANAGE_RESTART=true
-    restart: unless-stopped
     logging:
       driver: json-file
       options:
         max-size: 50m
     volumes:
-      - ./wg_ui_db:/app/db
-      - ./wg_server_config/wg_confs/:/etc/wireguard
+      - ./db:/app/db
+      - ./config:/etc/wireguard
+    ports:
+      # port for wireguard-ui
+      - "5000:5000"
+      # port of the wireguard server. this must be set here as the `boringtun` container joins the network of this container and hasn't its own network over which it could publish the ports
+      - "51820:51820/udp"
 ```
 
 And then add these iptables rules to the server:
