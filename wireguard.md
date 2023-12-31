@@ -87,3 +87,73 @@ If you are using the WireGuard Server as a VPN gateway for all your peer’s tra
 ...
 DNS = <ip from command>
 ```
+
+## Setup wireguard ui;
+
+```yaml
+version: "3"
+
+services:
+
+  # WireGuard VPN service
+  wireguard:
+    image: linuxserver/wireguard:latest
+    container_name: wireguard
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/Ljubljana
+      - SERVERURL=xx.xx.xx.xx # Server IP
+      - SERVERPORT=51820 # Check the firewall
+      - PEERDNS=auto
+      - ALLOWEDIPS=0.0.0.0/0
+    cap_add:
+      - NET_ADMIN
+    volumes:
+      - ./wg_server_config:/config
+      - /lib/modules:/lib/modules
+    sysctls:
+      - net.ipv4.conf.all.src_valid_mark=1 # Enable kernel packet forwarding
+    ports:
+      # Port for WireGuard-UI
+      - "5000:5000"
+      # Port of the WireGuard VPN server
+      - "51820:51820/udp"
+    restart: unless-stopped
+
+  # WireGuard-UI service
+  wireguard-ui:
+    image: ngoduykhanh/wireguard-ui:latest
+    container_name: wireguard-ui
+    depends_on:
+      - wireguard
+    cap_add:
+      - NET_ADMIN
+    # Use the network of the 'wireguard' service
+    # This enables to show active clients in the status page
+    network_mode: service:wireguard
+    environment:
+      - SENDGRID_API_KEY
+      - EMAIL_FROM_ADDRESS
+      - EMAIL_FROM_NAME
+      - SESSION_SECRET
+      - WGUI_USERNAME=spanskiduh
+      - WGUI_PASSWORD=sizemisludabosdubumojegeslo
+      - WG_CONF_TEMPLATE
+      - WGUI_MANAGE_START=true
+      - WGUI_MANAGE_RESTART=true
+    restart: unless-stopped
+    logging:
+      driver: json-file
+      options:
+        max-size: 50m
+    volumes:
+      - ./wg_ui_db:/app/db
+      - ./wg_server_config/wg_confs/:/etc/wireguard
+```
+
+And then add these iptables rules to the server:
+```bash
+PreUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -A FORWARD -o wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE;
+PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -D FORWARD -o wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o eth0 -j MASQUERADE;
+```
