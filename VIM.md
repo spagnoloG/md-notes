@@ -10,8 +10,6 @@ Comment Multiple Lines
 - `x[visual]` delete character at current pos
 - `dw[visual]` delete a word
 
--- vimtutor 2.5
-
 
 #### Nerdtree
 - `s` - open horizontally
@@ -38,6 +36,32 @@ Comment Multiple Lines
 - `:sav file.txt` ~ save new file
 - `:new file.txt` ~ create new file and open horizontally
 - `:vsp file.txt` ~ create new file and open vertically
+
+
+### Terminal mode
+- `:term` ~ open terminal
+- `ctrl +  \ and then ctrl +n` ~ Go into visual mode 
+
+### Shell output into vim
+
+`:r !ls` ~ paste the output of ls into vim
+
+### Multiline macro
+
+Record a macro with `qa` where `a` is the register name
+
+Then do the macro and then stop recording with `q`
+
+Then run the macro with `@a` where `a` is the register name
+
+then:
+`:5,10norm! @a` ~ run the macro from line 5 to 10
+`:5,$norm! @a` ~ run the macro from line 5 to end of file
+`:%norm! @a` ~ run the macro on the whole file
+`:g/pattern/norm! @a` ~ run the macro on all the lines that match the pattern
+
+To execute the macro on visually selected lines, press V and the j or k until the desired region is selected. 
+Then type `:norm! @a` and observe the that following input line is shown.
 
 ### Nvim tree mappings
 ` :help nvim-tree-default-mappings`
