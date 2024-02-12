@@ -201,3 +201,36 @@ main
 ## Clear all pip packages
 
 `pip freeze | xargs pip uninstall -y`
+
+
+## Simple inventory with ssh private key
+
+```yaml
+---
+all: 
+  main:
+    vars:
+      ansible_connection: ssh
+      ansible_become: yes 
+      ansible_become_method: sudo
+    hosts:
+      ssh_host_with_key:
+        ansible_host: ml-node
+        ansible_ssh_user: ml-node
+        ansible_ssh_private_key_file: /home/spagnologasper/.ssh/keys/id_ed25519_ml-node
+```
+
+list hosts in inventory file:
+```bash
+λ ansible all --list-hosts -i inventory.yml
+  hosts (8):
+    hsrv
+    ml-node
+    nextcloud-node
+    jellyfin-node
+    prism-node
+    transmission-node
+    ass-node
+    adguard-node
+```
+
