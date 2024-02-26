@@ -57,7 +57,7 @@ For the home manager [follow](https://nix-community.github.io/home-manager/index
 ```bash
 nix-channel --add https://github.com/nix-community/home-manager/archive/release-XX.XX.tar.gz home-manager
 nix-channel --update
-nix-shell '<home-manager>' -A install
+nix-shell '<home-manager>' -A install # or home-manager switch
 ```
 
 To find home-manager package options, use this [site](https://mipmip.github.io/home-manager-option-search/)
@@ -593,4 +593,41 @@ if you add any new dependency to the list issue:
 ```bash
 nix flake lock --update-input nixpkgs
 nix develop --refresh
+```
+
+If you want to update the flake:
+
+```bash
+nix flake update
+```
+## Nixos configurations collection and guides
+
+- [Configuration collection](https://nixos.wiki/wiki/Configuration_Collection)
+- [Nixos Home + Flakes Book](https://nixos-and-flakes.thiscute.world/)
+
+## Flakes
+
+Tutorials:
+
+- [Part-1 -> AN INTRODUCTION AND TUTORIAL](https://www.tweag.io/blog/2020-05-25-flakes/)
+- [Part-2 -> EVALUATION CACHING](https://www.tweag.io/blog/2020-06-25-eval-cache/)
+- [Part-3 -> MANAGING NIXOS SYSTEMS](https://www.tweag.io/blog/2020-07-31-nixos-flakes/)
+- [Writing a flake](https://serokell.io/blog/practical-nix-flakes)
+
+Run `flake.nix` binary directly from github:
+
+```bash
+nix shell github:edolstra/dwarffs --command dwarffs --version
+```
+
+Check flake metadata:
+
+```bash
+nix flake metadata github:edolstra/dwarffs
+```
+
+Show flake outputs:
+
+```bash
+nix flake show github:edolstra/dwarffs
 ```
