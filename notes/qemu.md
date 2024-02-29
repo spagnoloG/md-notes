@@ -10,17 +10,17 @@
 
 - install
   `qemu-system-aarch64 \                                                    
-    -cpu cortex-a72 -smp 4 -M virt -m 4096 -nographic \
-    -drive if=pflash,format=raw,file=QEMU_EFI.img \
-    -drive if=pflash,file=varstore.img \
-    -drive if=virtio,file=arm.img\
-    -drive if=virtio, format=raw, file=file.iso`
+  -cpu cortex-a72 -smp 4 -M virt -m 4096 -nographic \
+  -drive if=pflash,format=raw,file=QEMU_EFI.img \
+  -drive if=pflash,file=varstore.img \
+  -drive if=virtio,file=arm.img\
+  -drive if=virtio, format=raw, file=file.iso`
 - run
   `qemu-system-aarch64 \                                                    
-    -cpu cortex-a72 -smp 4 -M virt -m 4096 -nographic \
-    -drive if=pflash,format=raw,file=QEMU_EFI.img \
-    -drive if=pflash,file=varstore.img \
-    -drive if=virtio,file=arm.img\`
+  -cpu cortex-a72 -smp 4 -M virt -m 4096 -nographic \
+  -drive if=pflash,format=raw,file=QEMU_EFI.img \
+  -drive if=pflash,file=varstore.img \
+  -drive if=virtio,file=arm.img\`
 
 ### VIRT MANAGER
 
