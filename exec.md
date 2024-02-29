@@ -1,6 +1,5 @@
 # EXEC
 
-
 It is a family of functions that do the same thing but actually no.
 When we call `exec()`, we never reutrn back to the callling program. The program
 called by the `exec()` function replaces itself with the calling progam. The only way
@@ -9,19 +8,22 @@ Thats why we usually use `fork() & exec()`, so that we can safely return to main
 without losing anything :).
 
 what stays:
+
 - `PID`, `PPID`
 - opened file descriptors
 - current directory, root directory
 
 what does not:
+
 - code
 - stack
 - heap
-- data 
+- data
 
 (new stack and new heap)
 
 sufixes:
+
 - `l` ~ arguments are passed as function arguments
 - `v` ~ arguments are passed by char array
 - `p` ~ search in `$PATH` for provided executable

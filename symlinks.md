@@ -1,6 +1,7 @@
 # Difference between hardlinks and symlinks
 
 ### Hardlinks
+
 - implementation of `ln`
 - kinda like shortcut, but a shortcut to a physical memory location!!!!
 
@@ -19,6 +20,7 @@ int hardlink(char *dest, char *name) {
 ```
 
 ### Softlinks
+
 - implementation of `ln -s`
 - it works like a shortcut to original file
 

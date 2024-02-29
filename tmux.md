@@ -1,5 +1,7 @@
 # Tmux
+
 ### Window operations
+
 - `ctrl+b c` - spawn new window
 - `ctrl+b n` - move to next window
 - `ctrl+b p` - move to previous window
@@ -7,34 +9,36 @@
 - `ctrl+b x` - kill current window
 
 ### Panes
+
 - `ctrl+b %` - spawn new pane horizontally
 - `ctrl+b "` - spawn new pane vertically"
 - `ctrl+b arrow_key` - switch through panes
 - `ctrl+b ctrl + arrow_key` - resize pane
-- `ctrl+b o` - switch to next pane 
+- `ctrl+b o` - switch to next pane
 - `ctrl+b loong o` - switch panes :sunglasses:
 - `ctrl+b space` - toggle pane layouts
 - `ctrl+b !` - convert pane into a window
 - `ctrl+b x` - kill current pane
-- `ctrl+b { or }` - Move the panes 
-
+- `ctrl+b { or }` - Move the panes
 
 ### Tms written in rust (https://github.com/jrmoulton/tmux-sessionizer)
+
 Very useful for fuzzy finding git projects in your filesystem.
 
 ```bash
  tms config --paths /home/<user>/Documents/
-````
+```
 
 then just run tms and fuzzy find your project. The tms will
-then create a new session for you and also activate venv if you have 
+then create a new session for you and also activate venv if you have
 it configured. Which is awesome.
 
 ## Rename pane :)
+
 `ctrl+b ,`
 
-
 ## Multiple ssh servers ?
+
 no problem
 
 ```bash
@@ -52,8 +56,8 @@ tmux new-session ssh "${ssh_list[0]}" ';' \
     select-layout tiled ';' \
     set-option -w synchronize-panes
 ```
-[source](https://unix.stackexchange.com/a/533673)
 
+[source](https://unix.stackexchange.com/a/533673)
 
 ## Source updated config file?
 
@@ -67,4 +71,3 @@ missing or unsuitable terminal: alacritty
 # Fix, export a terminal variable
 export TERM=xterm-256color
 ```
-

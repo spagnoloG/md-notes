@@ -1,8 +1,9 @@
 # Find
 
 ### Examples of find command
+
 - `sudo find / -type d -iname "gasper"` - search direcotry
-- `sudo find /etc -type f -name "*.conf"` - display all configuration files, for more percison you should `|`  into `grep`.
+- `sudo find /etc -type f -name "*.conf"` - display all configuration files, for more percison you should `|` into `grep`.
 - `sudo find / -iname "*~"  -exec rm -i {} \;` - remove all files with `~` in name
 - `sudo find / -type f -size +100M` - find files larger than 100MB
 - `sudo find / -type f -size +100M -exec ls -lh {} \;` - find files larger than 100MB and list them

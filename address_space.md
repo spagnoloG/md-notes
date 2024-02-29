@@ -1,6 +1,7 @@
 # Address space
 
 ## AS in C
+
 ```
 [code       ]
 [init data  ]

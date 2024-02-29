@@ -1,6 +1,6 @@
 # RUST
 
-## Basic cli tools 
+## Basic cli tools
 
 - `cargo init` ~ create new rust project
 - `cargo run` ~ build & run
@@ -9,7 +9,6 @@
 
 ## Rust basics
 
-
 ### Arrays
 
 ```rust
@@ -17,7 +16,7 @@
 pub fn run() {
   let mut numbers: [i32; 5] = [1, 2, 3, 4, 5];
 
-  numbers[2] = 20; // [1, 2, 20, 4, 5] 
+  numbers[2] = 20; // [1, 2, 20, 4, 5]
 
   println!("Single value: {}", numbers[0]);  // 1
 
@@ -117,7 +116,7 @@ pub fn run() {
   let get_sum = add(5, 5);
   println!("Sum: {}", get_sum);
 
-  // Closure 
+  // Closure
   let n3: i32 = 10;
   let add_nums = |n1: i32, n2: i32 | n1 + n2 + n3;
   println!("C Sum: {}", add_nums(3,3)); // 16
@@ -140,7 +139,7 @@ fn add(n1: i32, n2: i32) -> i32 {
 pub fn run(){
 
   let mut count = 0;
-  
+
   // Infinite Loop
   loop {
     count += 1;
@@ -176,7 +175,7 @@ pub fn run(){
     } else {
       println!("{}", x);
     }
-  }  
+  }
 }
 ```
 
@@ -191,7 +190,7 @@ pub fn run() {
   // Primitive array
   let arr1 = [1, 2, 3];
   let arr2 = arr1;
-  
+
   // Vector
   let vec1 = vec![1, 2, 3];
   let vec2 = &vec1;
@@ -201,29 +200,31 @@ pub fn run() {
 ```
 
 ### Format strings
+
 ```rust
 pub fn run() {
     // Print to console
     println!("Hello from print.rs file");
-    
+
     println!("{} se uci {}", "Gasper", "rust");
 
     // Positional args
     println!("{0} is from {1} and {0} likes to {2}", "Gasper", "SLovEniA", "program");
-    
+
     // Named args
     println!("{name} likes to play {activity}", name = "John", activity = "Tennis");
 
     // Placeholder traits
-    println!("Binary: {:b} Hex: {:x} Octal: {:o}", 10, 10, 10); // Binary: 1010 Hex: a Octal: 12 
+    println!("Binary: {:b} Hex: {:x} Octal: {:o}", 10, 10, 10); // Binary: 1010 Hex: a Octal: 12
 
     // Placeholder for debug trait
-    println!("{:?}", (12, true, "hello")); // (12, true, "hello") 
+    println!("{:?}", (12, true, "hello")); // (12, true, "hello")
 
     // Basic math
     println!("10 + 10 = {}", 10 + 10);
 }
 ```
+
 ### String manipulation
 
 ```rust
@@ -244,7 +245,7 @@ pub fn run() {
 
   // Capacity in bytes (work on both)
   println!("Capacity: {}", growale_hello.capacity());
-  
+
   println!("Is Empty: {}", hello.is_empty());
   println!("Is Empty: {}", growale_hello.is_empty());
 
@@ -260,12 +261,12 @@ pub fn run() {
   for word in growale_hello.split_whitespace() {
     println!("{}", word);
   }
-  
+
   // Create string with predefined capacity
   let mut s = String::with_capacity(10);
   s.push('a');
   s.push('b');
-  println!("{}", s); // ab 
+  println!("{}", s); // ab
 
   // Assertion testing
   assert_eq!(2, s.len());
@@ -338,6 +339,7 @@ pub fn run() {
   println!("Person tuple {:?}", p.to_tuple());
 }
 ```
+
 ### Tuples
 
 ```rust
@@ -350,7 +352,7 @@ pub fn run() {
 }
 ```
 
-### Types 
+### Types
 
 ```rust
 pub fn run() {
@@ -369,7 +371,7 @@ pub fn run() {
 
    // Boolean
    let is_active: bool = true;
-   
+
    // Get boolean from expression
    let is_greater:bool = 10 > 5;
 
@@ -388,13 +390,13 @@ pub fn run() {
 // Rust is a block-scoped language
 
 pub fn run() {
-   let name = "Gasper"; 
+   let name = "Gasper";
    let mut age = 22;
    let mut i_mutate: i128 = 42069;
 
    println!("My name is {} and I am {}", name, age);
 
-   // Chage vaue 
+   // Chage vaue
    age = 23;
 
    // Define constant
@@ -423,8 +425,8 @@ pub fn run() {
   let mut numbers: Vec<i32> = vec![1, 2, 3, 4, 5];
 
   // Assign a value
-  numbers[2] = 20;  
-  // Add on to a vector  
+  numbers[2] = 20;
+  // Add on to a vector
   numbers.push(5);
   numbers.push(6);
 
@@ -442,7 +444,7 @@ pub fn run() {
   let sliced: &[i32] = &numbers[0..2];
 
   println!("Sliced: {:?}", sliced); // Sliced: [1, 2]
-  
+
   // Loop through vector values
   for x in numbers.iter() {
     println!("Number: {}", x);
@@ -451,7 +453,6 @@ pub fn run() {
   // Loop and mutate values
   for x in numbers.iter_mut() {
     *x *= 2;
-  } // [2, 4, 40, 8, 10, 10] 
+  } // [2, 4, 40, 8, 10, 10]
 }
 ```
-

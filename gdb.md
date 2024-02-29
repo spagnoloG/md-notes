@@ -1,6 +1,7 @@
 # Gdb
 
 ### Basics
+
 - `r` ~ run program
 - `ni` ~ step to next instruction
 - `c` ~ coninue execution of program to breakpoint or end of program if no breakpoint is set
@@ -14,32 +15,40 @@
 - `x/4i 0x0000000000401393` ~ get 4 instructions on provided address
 
 #### Show all secitons of a file
+
 - `info file`
 
 #### Display current state of registers
+
 - `info registers`
 
 #### List all maped memory regions
+
 - `info proc mappings`
 
 ### Check protections used on a file
+
 issue command `checksec`
+
 - `Canary` ~
 - `NX` ~
 - `PIE` ~
 - `Fortify` ~ nobody knows
-- `RelRO` ~ 
+- `RelRO` ~
 
 ### ROP gadgedts
+
 - `~/.local/bin/ROPgadget --binary a.out`
 - registers:
-    - `rdi` ~ first argument
-    - `rsi` ~ second argument
+  - `rdi` ~ first argument
+  - `rsi` ~ second argument
 
 ### HEAP
+
 - `vis` ~ show heap visually
 - `heap` ~ display chunks
 - `bins` ~ diplay TCACHE, FASTBIN, UNSORTED BIN pointers
 
 ### If binary is stripped
+
 `info file` -> break at entry point

@@ -1,8 +1,8 @@
 # ROS
 
 ### Run ros on any distro
-[ROS-DOCKER](https://github.com/turlucode/ros-docker-gui)
 
+[ROS-DOCKER](https://github.com/turlucode/ros-docker-gui)
 
 ### Basic commands
 
@@ -20,19 +20,19 @@
 - `rosparam list` list all available parameters
 - `rosmsg info <message> e.g. geometry_msgs/Twist` check the message structure.
 - `rosbag record <topic> --duration=<X in seconds>` record some topic
-- `rosbag play <topic_file>` replay the recorded topics  (very usefull for debugging)
-
+- `rosbag play <topic_file>` replay the recorded topics (very usefull for debugging)
 
 ## RQT
+
 It is basically gui for command tools
 -> `topic monitor` gui topics
 
 ### Compiled packages are not listed?
+
 Re-source: `. ./devel/setup.zsh --extend`.
 Check for successful source: `echo $ROS_PACKAGE_PATH`
 
 ### Launchfile
-
 
 ```xml
 <launch>
@@ -45,14 +45,12 @@ Check for successful source: `echo $ROS_PACKAGE_PATH`
 </launch>
 ```
 
-
 ### CmakeLists.txt
-
 
 ```bash
 # Here you add addidional packages:
 - rospy: to compile with python libraries
 - roscpp: ROs c++ compiler
-- geometry_msgs: Useful structs for position estimation 
+- geometry_msgs: Useful structs for position estimation
 find_package(catkin REQUIRED COMPONENTS rospy roscpp geometry_msgs)
 ```

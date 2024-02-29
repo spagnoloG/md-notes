@@ -10,7 +10,6 @@ mysql -h <host> -u <user> -p
 mysql -h localhost -u root -p
 ```
 
-
 ## PostgreSQL
 
 Connect to PostgreSQL server:
@@ -51,7 +50,6 @@ sqlite3 <database>
 sqlite3 test.db
 ```
 
-
 ## Milvus DB
 
 Milvus is a powerful open-source vector database that is designed to handle large-scale machine learning and deep learning applications. Some of the best use cases for Milvus include:
@@ -61,7 +59,6 @@ Milvus is a powerful open-source vector database that is designed to handle larg
 - Anomaly Detection
 - Recommendation Systems
 - Facial Recognition
-
 
 ### Milvus cli
 
@@ -85,7 +82,7 @@ Pymilvus version: 2.2.1
 Learn more: https://github.com/zilliztech/milvus_cli.
 
 
-milvus_cli > connect <options> # to connect to the database 
+milvus_cli > connect <options> # to connect to the database
 # You can always use the help command to help you craft better
 ```
 
@@ -95,7 +92,7 @@ As it is more suitable for rapid development.
 ### Useful commands
 
 ```bash
-show collections 
+show collections
 delete collection <coll_name>
-describe collection -c <coll_name> 
+describe collection -c <coll_name>
 ```

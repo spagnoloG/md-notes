@@ -1,6 +1,7 @@
 # Docker
 
 ## Nuke docker
+
 ```bash
 
 #!/bin/bash
@@ -16,11 +17,11 @@ docker image ls | awk '{print $3}' | xargs docker image rm --force
 ```
 
 ## Basic config example
- 
+
 ```yml
 # docker-compose.yml
-version: '3'
- 
+version: "3"
+
 services:
   web:
     build: .
@@ -28,42 +29,42 @@ services:
     context: ./Path
     dockerfile: Dockerfile
     ports:
-     - "5000:5000"
+      - "5000:5000"
     volumes:
-     - .:/code
+      - .:/code
   redis:
     image: redis
 ```
- 
+
 ## Common commands
- 
+
 ```bash
 # Starts existing containers for a service.
 docker-compose start
- 
+
 # Stops running containers without removing them.
 docker-compose stop
- 
+
 # Pauses running containers of a service.
 docker-compose pause
- 
+
 # Unpauses paused containers of a service.
 docker-compose unpause
- 
+
 # Lists containers.
 docker-compose ps
- 
+
 # Builds, (re)creates, starts, and attaches to containers for a service.
 docker-compose up
- 
+
 # Stops containers and removes containers, networks, volumes, and images created by up.
 docker-compose down
 ```
- 
+
 ## Config file reference
- 
+
 ### Building
- 
+
 ```yml
 web:
   # build from Dockerfile
@@ -79,82 +80,82 @@ web:
   image: example-registry:4000/postgresql
   image: a4bc65fd
 ```
- 
+
 ### Ports
- 
+
 ```yml
 ports:
   - "3000"
-  - "8000:80"  # machine - port : container - port
+  - "8000:80" # machine - port : container - port
 # expose ports to linked services (not to host)
 expose: ["3000"]
 ```
- 
+
 ### Commands
- 
+
 ```yml
 # command to execute
 command: bundle exec thin -p 3000
 command: [bundle, exec, thin, -p, 3000]
- 
+
 # override the entrypoint
 entrypoint: /app/start.sh
 entrypoint: [php, -d, vendor/bin/phpunit]
 ```
- 
+
 ### Environment variables
- 
+
 ```yml
 # environment vars
 environment:
   RACK_ENV: development
 environment:
   - RACK_ENV=development
- 
+
 # environment vars from file
 env_file: .env
 env_file: [.env, .development.env]
 ```
- 
+
 ### Dependencies
- 
+
 ```yml
 # makes the `db` service available as the hostname `database`
 # (implies depends_on)
 links:
   - db:database
   - redis
- 
+
 # make sure `db` is alive before starting
 depends_on:
   - db
 ```
- 
+
 ### Other options
- 
+
 ```yml
 # make this service extend another
 extends:
-  file: common.yml  # optional
+  file: common.yml # optional
   service: webapp
 volumes:
   - /var/lib/mysql
   - ./_data:/var/lib/mysql
 ```
- 
+
 ## Advanced features
- 
+
 ### Labels
- 
+
 ```yml
 services:
   web:
     labels:
       com.example.description: "Accounting web app"
 ```
- 
+
 ### DNS servers
- 
+
 ```yml
 services:
   web:
@@ -163,18 +164,18 @@ services:
       - 8.8.8.8
       - 8.8.4.4
 ```
- 
+
 ### Devices
- 
+
 ```yml
 services:
   web:
     devices:
       - "/dev/ttyUSB0:/dev/ttyUSB0"
 ```
- 
+
 ### External links
- 
+
 ```yml
 services:
   web:
@@ -182,26 +183,26 @@ services:
       - redis_1
       - project_db_1:mysql
 ```
- 
+
 ### Hosts
- 
+
 ```yml
 services:
   web:
     extra_hosts:
       - "somehost:192.168.1.100"
 ```
- 
+
 ### Network
- 
+
 ```yml
 # creates a custom network called `frontend`
 networks:
   frontend:
 ```
- 
+
 ### External network
- 
+
 ```yml
 # join a preexisting network
 networks:
@@ -215,7 +216,6 @@ networks:
 Well this comes with experience iguess. I once disabled all traffic, but the ssh and https using UFW
 ,but did not know that docker fucks up iptables and bypasses ufw. So I left
 the database open...
-
 
 So there is thankfully a [workadound](https://github.com/chaifeng/ufw-docker/blob/master/README.md#solving-ufw-and-docker-issues),
 
@@ -251,13 +251,12 @@ COMMIT
 # END UFW AND DOCKER
 ```
 
-
 ## Best flag for debugging dockerfile
+
 `docker compose --verbose up --build`
 But do not fuck up the order of the arguments!
 
 ## Composing dockerfiles
-
 
 ### Postgres dockerfile with init script
 
@@ -350,7 +349,6 @@ CMD ["bash", "-c", "while true; do python main.py; sleep 30; done"]
 ```
 
 ## Jupyter notebook
-
 
 ```dockerfile
 FROM python:3.11.1-bullseye

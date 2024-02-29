@@ -1,7 +1,9 @@
-#  Bash
+# Bash
 
 ### Read file line by line using bash
+
 Gotta love those oneliners ;)
+
 ```bash
     while read line; do printf "$line\n"; printf "other commands\n"; done < /etc/passwd
 ```
@@ -46,7 +48,7 @@ Ctrl + L   Clear the Screen, similar to the clear command
   Alt + c   Capitalize the character under the cursor and move to the end of the word.
   Alt + r   Cancel the changes and put back the line as it was in the history (revert).
  ctrl + _   Undo
- 
+
  TAB        Tab completion for file/directory names
 ```
 
@@ -80,7 +82,7 @@ similarly Ctrl+v ENTER will display the escape sequence for the Enter key: ^M
 ```bash
   Ctrl + r   Recall the last command including the specified character(s).
              searches the command history as you type.
-             Equivalent to : vim ~/.bash_history. 
+             Equivalent to : vim ~/.bash_history.
   Ctrl + p   Previous command in history (i.e. walk back through the command history).
   Ctrl + n   Next command in history (i.e. walk forward through the command history).
 

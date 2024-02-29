@@ -1,7 +1,7 @@
 # WFDB
 
 - `sampfreq <filename>` ~ Get the sampling frequency
-- `rdsamp -r s20011 | head`  ~ Print the first 10 lines of the record
+- `rdsamp -r s20011 | head` ~ Print the first 10 lines of the record
 
 ```text
               0	     55	     81
@@ -18,7 +18,7 @@
 
 - `rdsamp -r s20011 -t 0:00:02.00 | less` ~ Print the first 2 seconds of the record
 
--  Plot samples using octave
+- Plot samples using octave
 
 ```bash
 rdsamp -r s20011 -f 0 -t 0:00:02.00 > sample.txt # Store the first 2 seconds of the record in a file

@@ -1,8 +1,8 @@
 # Nixos
 
-### Managing system generations 
+### Managing system generations
 
-###### List system generations 
+###### List system generations
 
 ```
 sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
@@ -13,19 +13,21 @@ sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
 ```bash
 sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
 ```
+
 ###### Collect garbage
 
 ```bash
 sudo nix-collect-garbage -d
 ```
 
-######  Hard link identical files (remove duplicate libraries)
+###### Hard link identical files (remove duplicate libraries)
 
 ```bash
 sudo nix-store --optimize
 ```
 
 file: clean-nix.sh
+
 ```bash
 sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
 sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
@@ -35,17 +37,17 @@ sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
 ```
 
 ### Home manager
+
 manage user configuration files using nix
 
 Install it [here](https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module).
 
-
 ### Updating nixos to new release
-
 
 Firstly go to [nixos.org](https://nixos.org/manual/nixos/stable/release-notes) and pick the release you want to update to.
 
 Then to update nixos
+
 ```bash
 sudo nix-channel --add https://nixos.org/channels/nixos-XX.XX nixos
 sudo nix-channel --update
@@ -67,6 +69,7 @@ To find home-manager package options, use this [site](https://mipmip.github.io/h
 Flakes are cool to have nice reproducible environments.
 
 #### Python development environment:
+
 ```nix
 {
   description = "Python development environment";
@@ -102,7 +105,6 @@ Flakes are cool to have nice reproducible environments.
 
 ```
 
-
 Example R and C++ development environment:
 You should really swithc to flakes if you are using nixos ;) .
 
@@ -126,7 +128,7 @@ You should really swithc to flakes if you are using nixos ;) .
             allowUnfree = true;
           };
         };
-        
+
         my-R-packages = with pkgs.rPackages; [
           ggplot2
           dplyr
@@ -162,7 +164,7 @@ You should really swithc to flakes if you are using nixos ;) .
         latex-pkgs = with pkgs; [
             texlive.combined.scheme-basic
         ];
-        
+
       in
       {
         devShell = pkgs.mkShell {
@@ -178,7 +180,6 @@ You should really swithc to flakes if you are using nixos ;) .
 }
 ```
 
-
 #### Rust development environment:
 
 ##### To start a rust project, firstly:
@@ -189,7 +190,6 @@ You should really swithc to flakes if you are using nixos ;) .
 - Run `cargo check`, to generate `Cargo.lock`
 - Exit nix shell, `ctrl+d`
 - Run `nix develop`, and replace the cargoSha256 hash in `flake.nix` with the one generated
-
 
 This [flake](https://hoverbear.org/blog/a-flake-for-your-crate/) is a modified version of the one found.
 
@@ -207,7 +207,7 @@ This [flake](https://hoverbear.org/blog/a-flake-for-your-crate/) is a modified v
     naersk.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, naersk, flake-utils, ... }: 
+  outputs = { self, nixpkgs, naersk, flake-utils, ... }:
     let
       cargoToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
       supportedSystems = [ "x86_64-linux" "aarch64-linux" "x86_64-darwin" ];
@@ -374,7 +374,6 @@ done
 
 echo "All files downloaded."
 ```
-
 
 ```nix
 {
@@ -600,6 +599,7 @@ If you want to update the flake:
 ```bash
 nix flake update
 ```
+
 ## Nixos configurations collection and guides
 
 - [Configuration collection](https://nixos.wiki/wiki/Configuration_Collection)

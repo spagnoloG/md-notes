@@ -1,7 +1,9 @@
 # PDF MANIPULATION
 
 ### PDFTK
+
 Take individual pages out of pdf
+
 ```bash
 thinkpad :: ~/Downloads » pdftk Document_2022-08-14_152049.pdf cat 1 output subvencija/karmen_spagnolo.pdf
 thinkpad :: ~/Downloads » pdftk Document_2022-08-14_152049.pdf cat 2 output subvencija/brigita_spagnolo.pdf
@@ -9,8 +11,8 @@ thinkpad :: ~/Downloads » pdftk Document_2022-08-14_152049.pdf cat 3 output sub
 ```
 
 ### Pandoc
-- `pandoc -o doc.pdf doc.md` - convert md to pdf
 
+- `pandoc -o doc.pdf doc.md` - convert md to pdf
 
 ### Create a sorted pdf
 
@@ -33,7 +35,7 @@ echo "All slides have been combined into combined.pdf"
 ```bash
 exiftool -overwrite_original -P -AllDates="YYYY:MM:DD HH:MM:SS" Document.pdf
 # or
-exiftool -CreateDate="YYYY:MM:DD HH:MM:SS" Document.pdf 
+exiftool -CreateDate="YYYY:MM:DD HH:MM:SS" Document.pdf
 ```
 
 ### Convert svg to pdf
@@ -41,6 +43,7 @@ exiftool -CreateDate="YYYY:MM:DD HH:MM:SS" Document.pdf
 ```bash
 inkscape input_image.svg --export-filename=output_pdf.pdf
 ```
+
 or batched:
 
 ```bash

@@ -20,16 +20,16 @@ Well here is [example](https://ktomk.github.io/writing/yaml-anchor-alias-and-mer
   label: center/big
 
 - # Merge one map
-  << : *CENTER
+  <<: *CENTER
   r: 10
   label: center/big
 
 - # Merge multiple maps
-  << : [ *CENTER, *BIG ]
+  <<: [*CENTER, *BIG]
   label: center/big
 
 - # Override
-  << : [ *BIG, *LEFT, *SMALL ]
+  <<: [*BIG, *LEFT, *SMALL]
   x: 1
   label: center/big
 ```

@@ -11,6 +11,3 @@
 - `mpv $(find ~/Music -type f | fzf)` ~ find and play a music file with mpv
 - `docker logs $(docker ps | fzf | awk '{print $1}')` ~ select a running docker container and view its logs
 - `ssh $(grep Host ~/.ssh/config | awk '{print $2}' | fzf)` ~ select and connect to an SSH host defined in ~/.ssh/config
-
-
-

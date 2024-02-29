@@ -1,4 +1,5 @@
 # System information
+
 ### Basic user enumeration
 
 - `whoami` `hostname` - get username and hostname
@@ -6,8 +7,8 @@
 - `groups $USER` - check groups
 - `last` - check users that logged in recently
 
-
 ### Cpu, memory
+
 - `lscpu` - show cpu information
 - `free -h` - display memory usage
 - `uname -p` or `uname -m` - show system architecture
@@ -15,9 +16,9 @@
 - `lsb_release -a` or `cat /etc/*release` - see running distribution
 
 ### Another useful tool `sysstat` package
+
 - `iostat` - show current io (disk usage, cpu usage)
 - `mpstat` - show current cpu usage (detailed)
-
 
 Simple script to log system resources:
 

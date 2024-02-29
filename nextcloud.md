@@ -1,14 +1,13 @@
 # NEXTCLOUD
 
-
 ### Nextcloud API
 
 Upload folder recursively to Nextcloud
 
 ```bash
 NEXTCLOUD_USER="your_username"
-NEXTCLOUD_PASS="your_password"  
-NEXTCLOUD_URL="nextcloud.aaa.com" 
+NEXTCLOUD_PASS="your_password"
+NEXTCLOUD_URL="nextcloud.aaa.com"
 LOCAL_FOLDER="./folder_to_upload"
 NEXTCLOUD_FOLDER="/photos/2023"
 
@@ -64,5 +63,3 @@ do
     fi
 done
 ```
-
-

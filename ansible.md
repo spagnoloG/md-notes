@@ -1,18 +1,17 @@
 # Ansible
 
-
 ### Errors:
 
 #### E1:
 
 If you get error like that:
+
 ```bash
 TASK [Gathering Facts] **************************************************************************************************************************************************************
 fatal: [localhost]: FAILED! => {"ansible_facts": {}, "changed": false, "failed_modules": {"ansible.legacy.setup": {"ansible_facts": {"discovered_interpreter_python": "/usr/bin/python3"}, "failed": true, "module_stderr": "sudo: a password is required\n", "module_stdout": "", "msg": "MODULE FAILURE\nSee stdout/stderr for the exact error", "rc": 1}}, "msg": "The following modules failed to execute: ansible.legacy.setup\n"}
 ```
 
 then issue this command: `ln -s /usr/bin/python3 /usr/bin/python`.
-
 
 ## Setup azure
 
@@ -25,6 +24,7 @@ then issue this command: `ln -s /usr/bin/python3 /usr/bin/python`.
 `ansible-galaxy collection install azure.azcollection`
 
 So becouse i could not set it up properly, this is is my `requirements.txt`:
+
 ```python
 adal==1.2.7
 ansible==6.5.0
@@ -120,6 +120,7 @@ typing_extensions==4.4.0
 urllib3==1.26.12
 xmltodict==0.13.0
 ```
+
 so then just run `pip3 install -r requirements.txt` and you should be ready to rock!
 
 Then go to Azure website and generate a new resource group.
@@ -132,13 +133,14 @@ az ad sp create-for-rbac --name <some_random_name>  \
                          --role Contributor \
                          --scopes /subscriptions/<subscription-ID>/resourceGroups/<resource-group-name>
 ```
-to get the password. Other stuff can be fethced with  `az account list`.
 
+to get the password. Other stuff can be fethced with `az account list`.
 
 Now write these creds into file:
 `$HOME/.azure/credentials`
 
 like so:
+
 ```
 [default]
 subscription_id= (when you create group)
@@ -158,7 +160,7 @@ RESOURCE_GROUP_LOCATION="francecentral"
 ROLE_NAME="test"
 
 main() {
-  
+
   printf "Creating %s resource group\n" $RESOURCE_GROUP_NAME
 
   C1=$(az group create --name $RESOURCE_GROUP_NAME --location  $RESOURCE_GROUP_LOCATION)
@@ -173,7 +175,7 @@ main() {
 
 
 echo $C2 | jq
-  
+
   AZURE_CLIENT_ID=$(echo $C2 | jq '.appId' | sed 's/"//g')
   AZURE_TENANT_ID=$(echo $C2 | jq '.tenant' | sed 's/"//g')
   AZURE_CLIENT_SECRET=$(echo $C2 | jq '.password' | sed 's/^\"//;s/\"$//')
@@ -184,7 +186,7 @@ echo $C2 | jq
   export AZURE_TENANT_ID
   export AZURE_CLIENT_SECRET
   export AZURE_SUBSCRIPTION_ID
-  
+
   # Terraform
   export TF_VAR_subscription_id=$AZURE_SUBSCRIPTION_ID
   export TF_VAR_client_id=$AZURE_CLIENT_ID
@@ -202,16 +204,15 @@ main
 
 `pip freeze | xargs pip uninstall -y`
 
-
 ## Simple inventory with ssh private key
 
 ```yaml
 ---
-all: 
+all:
   main:
     vars:
       ansible_connection: ssh
-      ansible_become: yes 
+      ansible_become: yes
       ansible_become_method: sudo
     hosts:
       ssh_host_with_key:
@@ -221,6 +222,7 @@ all:
 ```
 
 list hosts in inventory file:
+
 ```bash
 λ ansible all --list-hosts -i inventory.yml
   hosts (8):
@@ -233,4 +235,3 @@ list hosts in inventory file:
     ass-node
     adguard-node
 ```
-
