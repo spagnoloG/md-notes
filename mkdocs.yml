@@ -1,0 +1,9 @@
+site_name: Md Notes 
+docs_dir: notes
+theme:
+  name: simple-blog
+  components:
+    menu: false
+    title: false
+
+
