@@ -11,6 +11,12 @@ It should work
 
 `resize2fs /dev/sdb 100G` -> resized my partition on hetzner from 50G to 100G ez
 
+### Fdisk
+
+`lsblk` -> to list all the drives
+
+`sudo fdisk /dev/sda` -> to start the tool
+
 ### Lvm
 
 How to resize it:

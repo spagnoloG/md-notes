@@ -16,12 +16,21 @@
 
         python3 = pkgs.python3.override {
           packageOverrides = python-self: python-super: {
-            mkdocs-simple-blog = python-super.buildPythonPackage rec {
-              pname = "mkdocs-simple-blog";
-              version = "0.0.9";
+            trove_classifiers = python-super.trove_classifiers.overrideAttrs
+              (oldAttrs: {
+                version = "2023.10.18";
+                src = python-super.fetchPypi {
+                  pname = "sha256-";
+                  version = "2023.10.18";
+                  sha256 = "sha256-8385160a12aac69c93fff058fb613472ed773a24a27eb3cd4b144cfbdd79f38c";
+                };
+              });
+            mkdocs_material = python-super.buildPythonPackage rec {
+              pname = "mkdocs_material";
+              version = "9.5.12";
               src = python-super.fetchPypi {
                 inherit pname version;
-                sha256 = "sha256-DiRLvXi59w8F8YQ//aUlQKRKsb0jNh1jYilu5oc1SkU=";
+                sha256 = "sha256-X2nO9qiqpAULgS9ysQlP2j0Hm5pRzyeiRyRMA+xFXpc=";
               };
 
               nativeBuildInputs = with python-super; [
@@ -33,14 +42,19 @@
                 hatch-requirements-txt
               ];
 
-              propagatedBuildInputs = with python-super; [ setuptools pyyaml ];
+              propagatedBuildInputs = with python-super; [
+                setuptools
+                pyyaml
+                trove_classifiers
+              ];
 
               format = "pyproject";
             };
           };
         };
+
         pythonEnv =
-          python3.withPackages (ps: with ps; [ mkdocs mkdocs-simple-blog ]);
+          python3.withPackages (ps: with ps; [ mkdocs mkdocs-material ]);
       in {
         devShells.default = pkgs.mkShell { buildInputs = [ pythonEnv ]; };
       });
