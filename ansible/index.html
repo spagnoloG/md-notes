@@ -1,0 +1,2165 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../address-space/">
+      
+      
+        <link rel="next" href="../autorandr/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Ansible - Md Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ansible" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Md Notes" class="md-header__button md-logo" aria-label="Md Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Md Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Ansible
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Md Notes" class="md-nav__button md-logo" aria-label="Md Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Md Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../address-space/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Address space
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Ansible
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Ansible
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Errors:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Errors:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e1" class="md-nav__link">
+    <span class="md-ellipsis">
+      E1:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup azure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clear-all-pip-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clear all pip packages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-inventory-with-ssh-private-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simple inventory with ssh private key
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autorandr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autorandr
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bash
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binary-patching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Binary patching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binary-vs-text-files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Binary vs text files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../burpsuite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BURPSUITE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../certs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CERTS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clipboard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Clipboard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compression/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compression
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Curl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../databases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Databases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dig/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dig
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disk-usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disk usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disk-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disk utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Emacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EXEC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ffmpeg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FFMPEG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../find/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forensics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FORENSICS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fork/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fork
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fzf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FZF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gcc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gdb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gdb
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GIT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hydra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HYDRA - brute forcing tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licesing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licesing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Locate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lxc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LXC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Math
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mitmproxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mitm Proxy Advanced Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mosquitto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mosquitto
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mount/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multiprocessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../named-pipes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Named pipes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nextcloud/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NEXTCLOUD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nixos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nixos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NMAP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../os-flashing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OS FLASHING
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pdf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PDF MANIPULATION
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../permissions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PERMS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipewire/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PIPEWIRE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../powerusage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Check deatiled power usage on linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proces-sorting-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sorting algorithms (SL)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proxmox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PROXMOX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pwn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PWN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python-specifics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PYTHON SPECIFICS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qemu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Qemu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REGEX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ripgrep
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ROS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rstudio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rstudio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RUST
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services-and-process-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Services and process management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQUID tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSH
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../symlinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Difference between hardlinks and symlinks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-information/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System information
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tmux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tracks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tracks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Connect to uart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ufw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    UFW
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vfs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VFS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vim-tutor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim Tutor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VIM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vimium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vimium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wasm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wasm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wfdb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WFDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wireguard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wireguard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wl-mirror/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WL-mirror (wayland exclusive for managing displays)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yaml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    YAML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#errors" class="md-nav__link">
+    <span class="md-ellipsis">
+      Errors:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Errors:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#e1" class="md-nav__link">
+    <span class="md-ellipsis">
+      E1:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-azure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup azure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clear-all-pip-packages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Clear all pip packages
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simple-inventory-with-ssh-private-key" class="md-nav__link">
+    <span class="md-ellipsis">
+      Simple inventory with ssh private key
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ansible">Ansible</h1>
+<h3 id="errors">Errors:</h3>
+<h4 id="e1">E1:</h4>
+<p>If you get error like that:</p>
+<pre><code class="language-bash">TASK [Gathering Facts] **************************************************************************************************************************************************************
+fatal: [localhost]: FAILED! =&gt; {&quot;ansible_facts&quot;: {}, &quot;changed&quot;: false, &quot;failed_modules&quot;: {&quot;ansible.legacy.setup&quot;: {&quot;ansible_facts&quot;: {&quot;discovered_interpreter_python&quot;: &quot;/usr/bin/python3&quot;}, &quot;failed&quot;: true, &quot;module_stderr&quot;: &quot;sudo: a password is required\n&quot;, &quot;module_stdout&quot;: &quot;&quot;, &quot;msg&quot;: &quot;MODULE FAILURE\nSee stdout/stderr for the exact error&quot;, &quot;rc&quot;: 1}}, &quot;msg&quot;: &quot;The following modules failed to execute: ansible.legacy.setup\n&quot;}
+</code></pre>
+<p>then issue this command: <code>ln -s /usr/bin/python3 /usr/bin/python</code>.</p>
+<h2 id="setup-azure">Setup azure</h2>
+<p><code>sudo apt install azure-cli</code></p>
+<p><code>python3 -m venv ~/.venv-azure</code></p>
+<p><code>source ~/.venv-azure/bin/activate</code></p>
+<p><code>ansible-galaxy collection install azure.azcollection</code></p>
+<p>So becouse i could not set it up properly, this is is my <code>requirements.txt</code>:</p>
+<pre><code class="language-python">adal==1.2.7
+ansible==6.5.0
+ansible-core==2.13.5
+applicationinsights==0.11.10
+argcomplete==1.12.3
+azure-cli-core==2.34.0
+azure-cli-telemetry==1.0.6
+azure-common==1.1.11
+azure-core==1.26.0
+azure-graphrbac==0.61.1
+azure-identity==1.7.0
+azure-keyvault==1.0.0a1
+azure-mgmt-apimanagement==0.2.0
+azure-mgmt-authorization==0.51.1
+azure-mgmt-automation==1.0.0
+azure-mgmt-batch==5.0.1
+azure-mgmt-cdn==3.0.0
+azure-mgmt-compute==26.1.0
+azure-mgmt-containerinstance==1.4.0
+azure-mgmt-containerregistry==2.0.0
+azure-mgmt-containerservice==9.1.0
+azure-mgmt-core==1.3.2
+azure-mgmt-cosmosdb==0.15.0
+azure-mgmt-datafactory==2.0.0
+azure-mgmt-datalake-nspkg==2.0.0
+azure-mgmt-datalake-store==0.5.0
+azure-mgmt-devtestlabs==3.0.0
+azure-mgmt-dns==2.1.0
+azure-mgmt-eventhub==2.0.0
+azure-mgmt-hdinsight==0.1.0
+azure-mgmt-iothub==0.7.0
+azure-mgmt-keyvault==1.1.0
+azure-mgmt-loganalytics==1.0.0
+azure-mgmt-managedservices==1.0.0
+azure-mgmt-managementgroups==0.2.0
+azure-mgmt-marketplaceordering==0.1.0
+azure-mgmt-monitor==3.0.0
+azure-mgmt-network==19.1.0
+azure-mgmt-notificationhubs==2.0.0
+azure-mgmt-nspkg==2.0.0
+azure-mgmt-privatedns==0.1.0
+azure-mgmt-rdbms==1.9.0
+azure-mgmt-recoveryservices==0.4.0
+azure-mgmt-recoveryservicesbackup==0.6.0
+azure-mgmt-redis==13.0.0
+azure-mgmt-resource==10.2.0
+azure-mgmt-search==3.0.0
+azure-mgmt-servicebus==0.5.3
+azure-mgmt-sql==3.0.1
+azure-mgmt-storage==19.0.0
+azure-mgmt-trafficmanager==0.50.0
+azure-mgmt-web==0.41.0
+azure-nspkg==2.0.0
+azure-storage==0.35.1
+bcrypt==4.0.1
+certifi==2022.9.24
+cffi==1.15.1
+charset-normalizer==2.1.1
+cryptography==38.0.1
+humanfriendly==10.0
+idna==3.4
+isodate==0.6.1
+Jinja2==3.1.2
+jmespath==1.0.1
+knack==0.9.0
+MarkupSafe==2.1.1
+msal==1.20.0
+msal-extensions==0.3.1
+msrest==0.6.21
+msrestazure==0.6.4
+oauthlib==3.2.2
+packaging==21.3
+paramiko==2.11.0
+pkginfo==1.8.3
+portalocker==1.7.1
+psutil==5.9.3
+pycparser==2.21
+Pygments==2.13.0
+PyJWT==2.6.0
+PyNaCl==1.5.0
+pyOpenSSL==22.1.0
+pyparsing==3.0.9
+PySocks==1.7.1
+python-dateutil==2.8.2
+PyYAML==6.0
+requests==2.28.1
+requests-oauthlib==1.3.1
+resolvelib==0.8.1
+six==1.16.0
+tabulate==0.9.0
+typing_extensions==4.4.0
+urllib3==1.26.12
+xmltodict==0.13.0
+</code></pre>
+<p>so then just run <code>pip3 install -r requirements.txt</code> and you should be ready to rock!</p>
+<p>Then go to Azure website and generate a new resource group.
+Try to generate az command for that</p>
+<p>Then execute command:</p>
+<pre><code class="language-bash">az ad sp create-for-rbac --name &lt;some_random_name&gt;  \
+                         --role Contributor \
+                         --scopes /subscriptions/&lt;subscription-ID&gt;/resourceGroups/&lt;resource-group-name&gt;
+</code></pre>
+<p>to get the password. Other stuff can be fethced with <code>az account list</code>.</p>
+<p>Now write these creds into file:
+<code>$HOME/.azure/credentials</code></p>
+<p>like so:</p>
+<pre><code>[default]
+subscription_id= (when you create group)
+client_id= (appId in az ad)
+secret= (az ad sp password)
+tenant= (tennantId in both)
+</code></pre>
+<p>Or just use my bash script to set <code>env</code> variables:</p>
+<pre><code class="language-bash">#!/bin/sh
+
+# Set those variables
+RESOURCE_GROUP_NAME=&quot;ansible_terraform_rg&quot;
+RESOURCE_GROUP_LOCATION=&quot;francecentral&quot;
+ROLE_NAME=&quot;test&quot;
+
+main() {
+
+  printf &quot;Creating %s resource group\n&quot; $RESOURCE_GROUP_NAME
+
+  C1=$(az group create --name $RESOURCE_GROUP_NAME --location  $RESOURCE_GROUP_LOCATION)
+  SCOPE=$(echo $C1 | jq '.id'| sed 's/&quot;//g')
+  echo $C1 | jq
+
+  printf &quot;Creating %s countributor in %s resource group\n&quot; $ROLE_NAME $RESOURCE_GROUP_NAME
+
+  C2=$(az ad sp create-for-rbac --name $ROLE_NAME  \
+                          --role Contributor \
+                          --scopes $SCOPE )
+
+
+echo $C2 | jq
+
+  AZURE_CLIENT_ID=$(echo $C2 | jq '.appId' | sed 's/&quot;//g')
+  AZURE_TENANT_ID=$(echo $C2 | jq '.tenant' | sed 's/&quot;//g')
+  AZURE_CLIENT_SECRET=$(echo $C2 | jq '.password' | sed 's/^\&quot;//;s/\&quot;$//')
+  AZURE_SUBSCRIPTION_ID=$(echo $SCOPE | awk -F/ '{ print $3 }')
+
+  # Ansible
+  export AZURE_CLIENT_ID
+  export AZURE_TENANT_ID
+  export AZURE_CLIENT_SECRET
+  export AZURE_SUBSCRIPTION_ID
+
+  # Terraform
+  export TF_VAR_subscription_id=$AZURE_SUBSCRIPTION_ID
+  export TF_VAR_client_id=$AZURE_CLIENT_ID
+  export TF_VAR_client_secret=$AZURE_CLIENT_SECRET
+  export TF_VAR_tenant_id=$AZURE_TENANT_ID
+
+
+  printf 'Environmental variables set! \n'
+}
+
+main
+</code></pre>
+<h2 id="clear-all-pip-packages">Clear all pip packages</h2>
+<p><code>pip freeze | xargs pip uninstall -y</code></p>
+<h2 id="simple-inventory-with-ssh-private-key">Simple inventory with ssh private key</h2>
+<pre><code class="language-yaml">---
+all:
+  main:
+    vars:
+      ansible_connection: ssh
+      ansible_become: yes
+      ansible_become_method: sudo
+    hosts:
+      ssh_host_with_key:
+        ansible_host: ml-node
+        ansible_ssh_user: ml-node
+        ansible_ssh_private_key_file: /home/spagnologasper/.ssh/keys/id_ed25519_ml-node
+</code></pre>
+<p>list hosts in inventory file:</p>
+<pre><code class="language-bash">λ ansible all --list-hosts -i inventory.yml
+  hosts (8):
+    hsrv
+    ml-node
+    nextcloud-node
+    jellyfin-node
+    prism-node
+    transmission-node
+    ass-node
+    adguard-node
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

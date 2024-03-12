@@ -1,0 +1,2930 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../vfs/">
+      
+      
+        <link rel="next" href="../vim/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Vim Tutor - Md Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vim-tutor" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Md Notes" class="md-header__button md-logo" aria-label="Md Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Md Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Vim Tutor
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Md Notes" class="md-nav__button md-logo" aria-label="Md Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Md Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../address-space/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Address space
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ansible/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autorandr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autorandr
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bash
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binary-patching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Binary patching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binary-vs-text-files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Binary vs text files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../burpsuite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BURPSUITE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../certs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CERTS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clipboard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Clipboard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compression/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compression
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Curl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../databases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Databases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dig/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dig
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disk-usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disk usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disk-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disk utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Emacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EXEC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ffmpeg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FFMPEG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../find/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forensics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FORENSICS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fork/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fork
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fzf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FZF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gcc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gdb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gdb
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GIT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hydra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HYDRA - brute forcing tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licesing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licesing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Locate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lxc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LXC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Math
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mitmproxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mitm Proxy Advanced Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mosquitto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mosquitto
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mount/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multiprocessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../named-pipes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Named pipes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nextcloud/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NEXTCLOUD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nixos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nixos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NMAP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../os-flashing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OS FLASHING
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pdf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PDF MANIPULATION
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../permissions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PERMS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipewire/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PIPEWIRE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../powerusage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Check deatiled power usage on linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proces-sorting-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sorting algorithms (SL)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proxmox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PROXMOX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pwn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PWN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python-specifics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PYTHON SPECIFICS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qemu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Qemu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REGEX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ripgrep
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ROS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rstudio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rstudio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RUST
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services-and-process-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Services and process management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQUID tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSH
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../symlinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Difference between hardlinks and symlinks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-information/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System information
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tmux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tracks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tracks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Connect to uart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ufw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    UFW
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vfs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VFS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Vim Tutor
+  </span>
+  
+
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VIM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vimium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vimium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wasm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wasm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wfdb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WFDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wireguard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wireguard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wl-mirror/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WL-mirror (wayland exclusive for managing displays)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yaml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    YAML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="vim-tutor">Vim Tutor</h1>
+<h1 id="welcome-to-the-neovim-tutorial">Welcome to the Neovim Tutorial</h1>
+<p>Neovim is a very powerful editor that has many commands, too many to explain in
+a tutorial such as this. This tutorial is designed to describe enough of the
+commands that you will be able to easily use Neovim as an all-purpose editor.
+It is IMPORTANT to remember that this tutorial is set up to teach by use. That
+means that you need to do the exercises to learn them properly. If you only
+read the text, you will soon forget what is most important!</p>
+<p>For now, make sure that your Caps-Lock is off and press the <code>j</code>{normal} key enough
+times to move the cursor so that Lesson 0 completely fills the screen.</p>
+<h1 id="lesson-0">Lesson 0</h1>
+<p>NOTE: The commands in the lessons will modify the text, but those changes
+won't be saved. Don't worry about messing things up; just remember that
+pressing <a href="Esc"><Esc></a> and then <a href="u">u</a> will undo the latest change.</p>
+<p>This tutorial is interactive, and there are a few things you should know.</p>
+<ul>
+<li>Type <a href="Enter"><Enter></a> on links <a href="holy-grail">like this</a> to open the linked help section.</li>
+<li>Or simply type <a href="K">K</a> on any word to find its documentation!</li>
+<li>You can close this help window with <code>:q</code>{vim}</li>
+<li>Sometimes you will be required to modify text like</li>
+</ul>
+<p>this here</p>
+<p>Once you have done the changes correctly, the ✗ sign at the left will change
+to ✓. I imagine you can already see how neat Neovim can be.
+Other times, you'll be prompted to run a command (I'll explain this later):</p>
+<pre><code class="language-cmd">    :help &lt;Enter&gt;
+</code></pre>
+<p>or press a sequence of keys</p>
+<pre><code class="language-normal">    &lt;Esc&gt;0f&lt;Space&gt;d3wP$P
+</code></pre>
+<p>Text within &lt;'s and &gt;'s (like <code>&lt;Enter&gt;</code>{normal}) describes a key to press
+instead of text to type.</p>
+<p>Now, move to the next lesson (use the <code>j</code>{normal} key to scroll down).</p>
+<h2 id="lesson-11-moving-the-cursor">Lesson 1.1: MOVING THE CURSOR</h2>
+<p>** To move the cursor, press the <code>h</code>, <code>j</code>, <code>k</code>, <code>l</code> keys as indicated. **</p>
+<pre><code>      ↑
+      k         Hint: The `h`{normal} key is at the left and moves left.
+ ← h    l →           The `l`{normal} key is at the right and moves right.
+     j                The `j`{normal} key looks like a down arrow.
+     ↓
+</code></pre>
+<ol>
+<li>
+<p>Move the cursor around the screen until you are comfortable.</p>
+</li>
+<li>
+<p>Hold down the down key (<code>j</code>{normal}) until it repeats.
+    Now you know how to move to the next lesson.</p>
+</li>
+<li>
+<p>Using the down key, move to Lesson 1.2.</p>
+</li>
+</ol>
+<p>NOTE: If you are ever unsure about something you typed, press <Esc> to place
+you in Normal mode. Then retype the command you wanted.</p>
+<p>NOTE: The cursor keys should also work. But using hjkl you will be able to
+move around much faster, once you get used to it.</p>
+<h1 id="lesson-12-exiting-neovim">Lesson 1.2: EXITING NEOVIM</h1>
+<p>!! NOTE: Before executing any of the steps below, read the entire lesson !!</p>
+<ol>
+<li>
+<p>Press the <Esc> key (to make sure you are in Normal mode).</p>
+</li>
+<li>
+<p>Type:</p>
+<p><code>:q!</code>{vim} <code>&lt;Enter&gt;</code>{normal}.</p>
+<p>This quits the editor, DISCARDING any changes you have made.</p>
+</li>
+<li>
+<p>Open Neovim and get back here by executing the command that got you into
+    this tutorial. That might be:</p>
+<p>:Tutor <Enter></p>
+</li>
+<li>
+<p>If you have these steps memorized and are confident, execute steps
+    1 through 3 to exit and re-enter the editor.</p>
+</li>
+</ol>
+<p>NOTE: <a href=":q">:q!</a> <Enter> discards any changes you made. In a few lessons you
+will learn how to save the changes to a file.</p>
+<ol>
+<li>Move the cursor down to Lesson 1.3.</li>
+</ol>
+<h2 id="lesson-13-text-editing-deletion">Lesson 1.3: TEXT EDITING - DELETION</h2>
+<p>** Press <code>x</code>{normal} to delete the character under the cursor. **</p>
+<ol>
+<li>
+<p>Move the cursor to the line below marked ✗.</p>
+</li>
+<li>
+<p>To fix the errors, move the cursor until it is on top of the
+    character to be deleted.</p>
+</li>
+<li>
+<p>Press <a href="x">the x key</a> to delete the unwanted character.</p>
+</li>
+<li>
+<p>Repeat steps 2 through 4 until the sentence is correct.</p>
+</li>
+</ol>
+<p>The ccow jumpedd ovverr thhe mooon.</p>
+<ol>
+<li>Now that the line is correct, go on to Lesson 1.4.</li>
+</ol>
+<p>NOTE: As you go through this tutorial, do not try to memorize everything,
+your Neovim vocabulary will expand with usage. Consider returning to
+this tutorial periodically for a refresher.</p>
+<h1 id="lesson-14-text-editing-insertion">Lesson 1.4: TEXT EDITING: INSERTION</h1>
+<p>** Press <code>i</code>{normal} to insert text. **</p>
+<ol>
+<li>
+<p>Move the cursor to the first line below marked ✗.</p>
+</li>
+<li>
+<p>To make the first line the same as the second, move the cursor on top
+    of the first character AFTER where the text is to be inserted.</p>
+</li>
+<li>
+<p>Press <code>i</code>{normal} and type in the necessary additions.</p>
+</li>
+<li>
+<p>As each error is fixed press <code>&lt;Esc&gt;</code>{normal} to return to Normal mode.
+    Repeat steps 2 through 4 to correct the sentence.</p>
+</li>
+</ol>
+<p>There is text misng this .
+There is some text missing from this line.</p>
+<ol>
+<li>When you are comfortable inserting text move to Lesson 1.5.</li>
+</ol>
+<h1 id="lesson-15-text-editing-appending">Lesson 1.5: TEXT EDITING: APPENDING</h1>
+<p>** Press <code>A</code>{normal} to append text. **</p>
+<ol>
+<li>
+<p>Move the cursor to the first line below marked ✗.
+    It does not matter on what character the cursor is in that line.</p>
+</li>
+<li>
+<p>Press <a href="A">A</a> and type in the necessary additions.</p>
+</li>
+<li>
+<p>As the text has been appended press <code>&lt;Esc&gt;</code>{normal} to return to Normal
+    mode.</p>
+</li>
+<li>
+<p>Move the cursor to the second line marked ✗ and repeat
+    steps 2 and 3 to correct this sentence.</p>
+</li>
+</ol>
+<p>There is some text missing from th
+There is some text missing from this line.
+There is also some text miss
+There is also some text missing here.</p>
+<ol>
+<li>When you are comfortable appending text move to Lesson 1.6.</li>
+</ol>
+<h1 id="lesson-16-editing-a-file">Lesson 1.6: EDITING A FILE</h1>
+<p>** Use <code>:wq</code>{vim} to write a file and quit. **</p>
+<p>!! NOTE: Before executing any of the steps below, read the entire lesson !!</p>
+<ol>
+<li>
+<p>Exit this tutorial as you did in Lesson 1.2: <code>:q!</code>{vim}
+    Or, if you have access to another terminal, do the following there.</p>
+</li>
+<li>
+<p>At the shell prompt type this command:</p>
+</li>
+</ol>
+<pre><code class="language-sh">    $ nvim tutor
+</code></pre>
+<pre><code>'nvim' is the command to start the Nvim editor, 'tutor' is the name of
+the file you wish to edit. Use a file that may be changed.
+</code></pre>
+<ol>
+<li>
+<p>Insert and delete text as you learned in the previous lessons.</p>
+</li>
+<li>
+<p>Save the file with changes and exit Neovim with:</p>
+</li>
+</ol>
+<pre><code class="language-cmd">    :wq
+</code></pre>
+<pre><code>Note you'll need to press `&lt;Enter&gt;` to execute the command.
+</code></pre>
+<ol>
+<li>
+<p>If you have quit this tutorial in step 1, restart and move down
+    to the following summary.</p>
+</li>
+<li>
+<p>After reading and understanding the above steps: do them.</p>
+</li>
+</ol>
+<h1 id="lesson-1-summary">Lesson 1 SUMMARY</h1>
+<ol>
+<li>
+<p>The cursor is moved using either the arrow keys or the hjkl keys.
+    h (left) j (down) k (up) l (right)</p>
+</li>
+<li>
+<p>To start Neovim from the shell prompt type:</p>
+</li>
+</ol>
+<pre><code class="language-sh">    $ nvim FILENAME
+</code></pre>
+<ol>
+<li>
+<p>To exit Neovim type: <code>&lt;Esc&gt;</code>{normal} <code>:q!</code>{vim} <code>&lt;Enter&gt;</code>{normal} to trash all changes.
+    OR type: <code>&lt;Esc&gt;</code>{normal} <code>:wq</code>{vim} <code>&lt;Enter&gt;</code>{normal} to save the changes.</p>
+</li>
+<li>
+<p>To delete the character at the cursor type: <code>x</code>{normal}</p>
+</li>
+<li>
+<p>To insert or append text type:
+    <code>i</code>{normal} insert text <code>&lt;Esc&gt;</code>{normal} insert before the cursor.
+    <code>A</code>{normal} append text <code>&lt;Esc&gt;</code>{normal} append after the line.</p>
+</li>
+</ol>
+<p>NOTE: Pressing <code>&lt;Esc&gt;</code>{normal} will place you in Normal mode or will cancel
+an unwanted and partially completed command.</p>
+<p>Now continue with Lesson 2.</p>
+<h1 id="lesson-21-deletion-commands">Lesson 2.1: DELETION COMMANDS</h1>
+<p>** Type <code>dw</code>{normal} to delete a word. **</p>
+<ol>
+<li>
+<p>Press <code>&lt;Esc&gt;</code>{normal} to make sure you are in Normal mode.</p>
+</li>
+<li>
+<p>Move the cursor to the line below marked ✗.</p>
+</li>
+<li>
+<p>Move the cursor to the beginning of a word that needs to be deleted.</p>
+</li>
+<li>
+<p>Type <a href="d">d</a><a href="w">w</a> to make the word disappear.</p>
+</li>
+</ol>
+<p>There are a some words fun that don't belong paper in this sentence.</p>
+<ol>
+<li>Repeat steps 3 and 4 until the sentence is correct and go to Lesson 2.2.</li>
+</ol>
+<h1 id="lesson-22-more-deletion-commands">Lesson 2.2: MORE DELETION COMMANDS</h1>
+<p>** Type <code>d$</code>{normal} to delete to the end of the line. **</p>
+<ol>
+<li>
+<p>Press <code>&lt;Esc&gt;</code>{normal} to make sure you are in Normal mode.</p>
+</li>
+<li>
+<p>Move the cursor to the line below marked ✗.</p>
+</li>
+<li>
+<p>Move the cursor to the end of the correct line (AFTER the first . ).</p>
+</li>
+<li>
+<p>Type <code>d$</code>{normal} to delete to the end of the line.</p>
+</li>
+</ol>
+<p>Somebody typed the end of this line twice. end of this line twice.</p>
+<ol>
+<li>Move on to Lesson 2.3 to understand what is happening.</li>
+</ol>
+<h1 id="lesson-23-on-operators-and-motions">Lesson 2.3: ON OPERATORS AND MOTIONS</h1>
+<p>Many commands that change text are made from an <a href="operator">operator</a> and a <a href="navigation">motion</a>.
+The format for a delete command with the <a href="d">d</a> delete operator is as follows:</p>
+<pre><code>d   motion
+</code></pre>
+<p>Where:
+d - is the delete operator.
+motion - is what the operator will operate on (listed below).</p>
+<p>A short list of motions:
+<a href="w">w</a> - until the start of the next word, EXCLUDING its first character.
+<a href="e">e</a> - to the end of the current word, INCLUDING the last character.
+<a href="$">$</a> - to the end of the line, INCLUDING the last character.</p>
+<p>Thus typing <code>de</code>{normal} will delete from the cursor to the end of the word.</p>
+<p>NOTE: Pressing just the motion while in Normal mode without an operator
+will move the cursor as specified.</p>
+<h1 id="lesson-24-using-a-count-for-a-motion">Lesson 2.4: USING A COUNT FOR A MOTION</h1>
+<p>** Typing a number before a motion repeats it that many times. **</p>
+<ol>
+<li>
+<p>Move the cursor to the start of the line marked ✓ below.</p>
+</li>
+<li>
+<p>Type <code>2w</code>{normal} to move the cursor two words forward.</p>
+</li>
+<li>
+<p>Type <code>3e</code>{normal} to move the cursor to the end of the third word forward.</p>
+</li>
+<li>
+<p>Type <code>0</code>{normal} (<a href="0">zero</a>) to move to the start of the line.</p>
+</li>
+<li>
+<p>Repeat steps 2 and 3 with different numbers.</p>
+</li>
+</ol>
+<p>This is just a line with words you can move around in.</p>
+<ol>
+<li>Move on to Lesson 2.5.</li>
+</ol>
+<h1 id="lesson-25-using-a-count-to-delete-more">Lesson 2.5: USING A COUNT TO DELETE MORE</h1>
+<p>** Typing a number with an operator repeats it that many times. **</p>
+<p>In the combination of the delete operator and a motion mentioned above you
+insert a count before the motion to delete more:
+d number motion</p>
+<ol>
+<li>
+<p>Move the cursor to the first UPPER CASE word in the line marked ✗.</p>
+</li>
+<li>
+<p>Type <code>d2w</code>{normal} to delete the two UPPER CASE words</p>
+</li>
+<li>
+<p>Repeat steps 1 and 2 with a different count to delete the consecutive
+    UPPER CASE words with one command</p>
+</li>
+</ol>
+<p>This ABC DE line FGHI JK LMN OP of words is Q RS TUV cleaned up.</p>
+<h1 id="lesson-26-operating-on-lines">Lesson 2.6: OPERATING ON LINES</h1>
+<p>** Type <code>dd</code>{normal} to delete a whole line. **</p>
+<p>Due to the frequency of whole line deletion, the designers of Vi decided
+it would be easier to simply type two d's to delete a line.</p>
+<ol>
+<li>
+<p>Move the cursor to the second line in the phrase below.</p>
+</li>
+<li>
+<p>Type <a href="dd">dd</a> to delete the line.</p>
+</li>
+<li>
+<p>Now move to the fourth line.</p>
+</li>
+<li>
+<p>Type <code>2dd</code>{normal} to delete two lines.</p>
+</li>
+</ol>
+<p>1)  Roses are red,
+2)  Mud is fun,
+3)  Violets are blue,
+4)  I have a car,
+5)  Clocks tell time,
+6)  Sugar is sweet
+7)  And so are you.</p>
+<h1 id="lesson-27-the-undo-command">Lesson 2.7: THE UNDO COMMAND</h1>
+<p>** Press <code>u</code>{normal} to undo the last commands, <code>U</code>{normal} to fix a whole line. **</p>
+<ol>
+<li>
+<p>Move the cursor to the line below marked ✗ and place it on the first error.</p>
+</li>
+<li>
+<p>Type <code>x</code>{normal} to delete the first unwanted character.</p>
+</li>
+<li>
+<p>Now type <code>u</code>{normal} to undo the last command executed.</p>
+</li>
+<li>
+<p>This time fix all the errors on the line using the <code>x</code>{normal} command.</p>
+</li>
+<li>
+<p>Now type a capital <code>U</code>{normal} to return the line to its original state.</p>
+</li>
+<li>
+<p>Now type <code>u</code>{normal} a few times to undo the <code>U</code>{normal} and preceding commands.</p>
+</li>
+<li>
+<p>Now type <code>&lt;C-r&gt;</code>{normal} (Control + R) a few times to redo the commands.</p>
+</li>
+</ol>
+<p>Fiix the errors oon thhis line and reeplace them witth undo.</p>
+<ol>
+<li>These are very useful commands. Now move on to the Lesson 2 Summary.</li>
+</ol>
+<h1 id="lesson-2-summary">Lesson 2 SUMMARY</h1>
+<ol>
+<li>
+<p>To delete from the cursor up to the next word type: <code>dw</code>{normal}</p>
+</li>
+<li>
+<p>To delete from the cursor to the end of a line type: <code>d$</code>{normal}</p>
+</li>
+<li>
+<p>To delete a whole line type: <code>dd</code>{normal}</p>
+</li>
+<li>
+<p>To repeat a motion prepend it with a number: <code>2w</code>{normal}</p>
+</li>
+<li>
+<p>The format for a change command is:</p>
+<pre><code>operator   [number]   motion
+</code></pre>
+<p>where:</p>
+<pre><code>operator -   is what to do, such as [d](d) for delete
+[number] -   is an optional count to repeat the motion
+motion   -   moves over the text to operate on, such as:
+                [w](w) (word),
+                [$]($) (to the end of line), etc.
+</code></pre>
+</li>
+<li>
+<p>To move to the start of the line use a zero: <a href="0">0</a></p>
+</li>
+<li>
+<p>To undo previous actions, type: <code>u</code>{normal} (lowercase u)
+    To undo all the changes on a line, type: <code>U</code>{normal} (capital U)
+    To undo the undo's, type: <code>&lt;C-r&gt;</code>{normal}</p>
+</li>
+</ol>
+<h1 id="lesson-31-the-put-command">Lesson 3.1: THE PUT COMMAND</h1>
+<p>** Type <code>p</code>{normal} to put previously deleted text after the cursor. **</p>
+<ol>
+<li>
+<p>Move the cursor to the first ✓ line below.</p>
+</li>
+<li>
+<p>Type <code>dd</code>{normal} to delete the line and store it in a Neovim register.</p>
+</li>
+<li>
+<p>Move the cursor to the c) line, ABOVE where the deleted line should go.</p>
+</li>
+<li>
+<p>Type <code>p</code>{normal} to put the line below the cursor.</p>
+</li>
+<li>
+<p>Repeat steps 2 through 4 to put all the lines in correct order.</p>
+</li>
+</ol>
+<p>d) Can you learn too?
+b) Violets are blue,
+c) Intelligence is learned,
+a) Roses are red,</p>
+<p>NOTE: You can also put the text before the cursor with <code>P</code>{normal} (capital P)</p>
+<h1 id="lesson-32-the-replace-command">Lesson 3.2: THE REPLACE COMMAND</h1>
+<p>** Type <code>rx</code>{normal} to replace the character at the cursor with x. **</p>
+<ol>
+<li>
+<p>Move the cursor to the first line below marked ✗.</p>
+</li>
+<li>
+<p>Move the cursor so that it is on top of the first error.</p>
+</li>
+<li>
+<p>Type <code>r</code>{normal} and then the character which should be there.</p>
+</li>
+<li>
+<p>Repeat steps 2 and 3 until the first line is equal to the second one.</p>
+</li>
+</ol>
+<p>Whan this lime was tuoed in, someone presswd some wrojg keys!
+When this line was typed in, someone pressed some wrong keys!</p>
+<ol>
+<li>Now move on to Lesson 3.3.</li>
+</ol>
+<p>NOTE: Remember that you should be learning by doing, not memorizing.</p>
+<h1 id="lesson-33-the-change-operator">Lesson 3.3: THE CHANGE OPERATOR</h1>
+<p>** To change until the end of a word, type <code>ce</code>{normal}. **</p>
+<ol>
+<li>
+<p>Move the cursor to the first line below marked ✗.</p>
+</li>
+<li>
+<p>Place the cursor on the "u" in "lubw".</p>
+</li>
+<li>
+<p>Type <code>ce</code>{normal} and the correct word (in this case, type "ine" ).</p>
+</li>
+<li>
+<p>Press <code>&lt;Esc&gt;</code>{normal} and move to the next character that needs to be changed.</p>
+</li>
+<li>
+<p>Repeat steps 3 and 4 until the first sentence is the same as the second.</p>
+</li>
+</ol>
+<p>This lubw has a few wptfd that mrrf changing usf the change operator.
+This line has a few words that need changing using the change operator.</p>
+<p>Notice that <a href="c">c</a>e deletes the word and places you in Insert mode.</p>
+<h1 id="lesson-34-more-changes-using-cnormal">Lesson 3.4: MORE CHANGES USING <code>c</code>{normal}</h1>
+<p>** The change operator is used with the same motions as delete. **</p>
+<ol>
+<li>
+<p>The change operator works in the same way as delete. The format is:</p>
+<pre><code>c    [number]   motion
+</code></pre>
+</li>
+<li>
+<p>The motions are the same, such as <code>w</code>{normal} (word) and <code>$</code>{normal} (end of line).</p>
+</li>
+<li>
+<p>Move to the first line below marked ✗.</p>
+</li>
+<li>
+<p>Move the cursor to the first error.</p>
+</li>
+<li>
+<p>Type <code>c$</code>{normal} and type the rest of the line like the second and press <code>&lt;Esc&gt;</code>{normal}.</p>
+</li>
+</ol>
+<p>The end of this line needs some help to make it like the second.
+The end of this line needs to be corrected using the <code>c$</code>{normal} command.</p>
+<p>NOTE: You can use the Backspace key to correct mistakes while typing.</p>
+<h1 id="lesson-3-summary">Lesson 3 SUMMARY</h1>
+<ol>
+<li>
+<p>To put back text that has just been deleted, type <a href="p">p</a>. This puts the
+    deleted text AFTER the cursor (if a line was deleted it will go on the
+    line below the cursor).</p>
+</li>
+<li>
+<p>To replace the character under the cursor, type <a href="r">r</a> and then the
+    character you want to have there.</p>
+</li>
+<li>
+<p>The <a href="c">change operator</a> allows you to change from the cursor to where
+    the motion takes you. Type <code>ce</code>{normal} to change from the cursor to the
+    end of the word, <code>c$</code>{normal} to change to the end of a line, etc.</p>
+</li>
+<li>
+<p>The format for change is:</p>
+<pre><code>c   [number]   motion
+</code></pre>
+</li>
+</ol>
+<p>Now go on to the next lesson.</p>
+<h1 id="lesson-41-cursor-location-and-file-status">Lesson 4.1: CURSOR LOCATION AND FILE STATUS</h1>
+<p>** Type <code>&lt;C-g&gt;</code>{normal} to show your location in a file and the file status.
+Type <code>G</code>{normal} to move to a line in the file. **</p>
+<p>NOTE: Read the entire lesson before executing any of these steps!!</p>
+<ol>
+<li>Hold down the <code>&lt;Ctrl&gt;</code>{normal} key and press <code>g</code>{normal}. We call this <code>&lt;C-g&gt;</code>{normal}.
+    A message will appear at the bottom of the page with the filename and
+    the position in the file. Remember the line number for Step 3.</li>
+</ol>
+<p>NOTE: You may see the cursor position in the lower right corner of the
+screen. This happens when the <a href="" title="ruler">'ruler'</a> option is set.</p>
+<ol>
+<li>
+<p>Press <a href="G">G</a> to move you to the bottom of the file.
+    Type <a href="gg">gg</a> to move you to the start of the file.</p>
+</li>
+<li>
+<p>Type the number of the line you were on and then <code>G</code>{normal}. This will
+    return you to the line you were on when you first pressed <code>&lt;C-g&gt;</code>{normal}.</p>
+</li>
+<li>
+<p>If you feel confident to do this, execute steps 1 through 3.</p>
+</li>
+</ol>
+<h1 id="lesson-42-the-search-command">Lesson 4.2: THE SEARCH COMMAND</h1>
+<p>** Type <code>/</code>{normal} followed by a phrase to search for the phrase. **</p>
+<ol>
+<li>
+<p>In Normal mode type the <code>/</code>{normal} character. Notice that it and the
+    cursor appear at the bottom of the screen as with the <code>:</code>{normal} command.</p>
+</li>
+<li>
+<p>Now type 'errroor' <code>&lt;Enter&gt;</code>{normal}. This is the word you want to search for.</p>
+</li>
+<li>
+<p>To search for the same phrase again, simply type <a href="n">n</a>.
+    To search for the same phrase in the opposite direction, type <a href="N">N</a>.</p>
+</li>
+<li>
+<p>To search for a phrase in the backward direction, use <a href="?">?</a> instead of <code>/</code>{normal}.</p>
+</li>
+<li>
+<p>To go back to where you came from press <code>&lt;C-o&gt;</code>{normal}.
+    (keep <code>&lt;Ctrl&gt;</code>{normal} pressed down while pressing the letter <code>o</code>{normal}).
+    Repeat to go back further. <code>&lt;C-i&gt;</code>{normal} goes forward.</p>
+</li>
+</ol>
+<p>"errroor" is not the way to spell error; errroor is an error.</p>
+<p>NOTE: When the search reaches the end of the file it will continue at the
+start, unless the <a href="" title="wrapscan">'wrapscan'</a> option has been reset.</p>
+<h1 id="lesson-43-matching-parentheses-search">Lesson 4.3: MATCHING PARENTHESES SEARCH</h1>
+<p>** Type <code>%</code>{normal} to find a matching ),], or }. **</p>
+<ol>
+<li>
+<p>Place the cursor on any (, [, or { in the line below marked ✓.</p>
+</li>
+<li>
+<p>Now type the <a href="%">%</a> character.</p>
+</li>
+<li>
+<p>The cursor will move to the matching parenthesis or bracket.</p>
+</li>
+<li>
+<p>Type <code>%</code>{normal} to move the cursor to the other matching bracket.</p>
+</li>
+<li>
+<p>Move the cursor to another (,),[,],{ or } and see what <code>%</code>{normal} does.</p>
+</li>
+</ol>
+<p>This ( is a test line with ('s, ['s ] and {'s } in it. ))</p>
+<p>NOTE: This is very useful in debugging a program with unmatched parentheses!</p>
+<h1 id="lesson-44-the-substitute-command">Lesson 4.4: THE SUBSTITUTE COMMAND</h1>
+<p>** Type <code>:s/old/new/g</code> to substitute "new" for "old". **</p>
+<ol>
+<li>
+<p>Move the cursor to the line below marked ✗.</p>
+</li>
+<li>
+<p>Type</p>
+</li>
+</ol>
+<pre><code class="language-cmd">        :s/thee/the/
+</code></pre>
+<pre><code>NOTE: the [:s](:s) command only changed the first match of "thee" in the line.
+</code></pre>
+<ol>
+<li>Now type</li>
+</ol>
+<pre><code class="language-cmd">        :s/thee/the/g
+</code></pre>
+<pre><code>Adding the g [flag](:s_flags) means to substitute globally in the line,
+change all occurrences of "thee" in the line.
+</code></pre>
+<p>Usually thee best time to see thee flowers is in thee spring.</p>
+<ol>
+<li>To change every occurrence of a character string between two lines, type</li>
+</ol>
+<pre><code class="language-cmd">        :#,#s/old/new/g
+</code></pre>
+<pre><code>where # are the line numbers of the range of lines where the
+substitution is to be done (i.e., `1,3` means from line 1 to line 3, inclusive).
+
+Type
+</code></pre>
+<pre><code class="language-cmd">        :%s/old/new/g
+</code></pre>
+<pre><code>to change every occurrence in the whole file.
+
+Type
+</code></pre>
+<pre><code class="language-cmd">        :%s/old/new/gc
+</code></pre>
+<pre><code>to find every occurrence in the whole file, with a prompt whether to
+substitute or not.
+</code></pre>
+<p>NOTE: You can also select the lines you want to substitute first using visual-mode.
+This will be explained more in a future lesson.</p>
+<h1 id="lesson-4-summary">Lesson 4 SUMMARY</h1>
+<ol>
+<li>
+<p><code>&lt;C-g&gt;</code>{normal} displays your location and the file status.
+    <code>G</code>{normal} moves to the end of the file.
+    number <code>G</code>{normal} moves to that line number.
+    <code>gg</code>{normal} moves to the first line.</p>
+</li>
+<li>
+<p>Typing <code>/</code>{normal} followed by a phrase searches FORWARD for the phrase.
+    Typing <code>?</code>{normal} followed by a phrase searches BACKWARD for the phrase.
+    After a search type <code>n</code>{normal} to find the next occurrence in the same
+    direction or <code>N</code>{normal} to search in the opposite direction.
+    <code>&lt;C-o&gt;</code>{normal} takes you back to older positions, <code>&lt;C-i&gt;</code>{normal} to
+    newer positions.</p>
+</li>
+<li>
+<p>Typing <code>%</code>{normal} while the cursor is on a (,),[,],{, or } goes to its
+    match.</p>
+</li>
+<li>
+<p>To substitute new for the first old in a line type</p>
+</li>
+</ol>
+<pre><code class="language-cmd">        :s/old/new
+</code></pre>
+<pre><code>To substitute new for all 'old's on a line type
+</code></pre>
+<pre><code class="language-cmd">        :s/old/new/g
+</code></pre>
+<pre><code>To substitute phrases between two line #'s type
+</code></pre>
+<pre><code class="language-cmd">        :#,#s/old/new/g
+</code></pre>
+<pre><code>To substitute all occurrences in the file type
+</code></pre>
+<pre><code class="language-cmd">        :%s/old/new/g
+</code></pre>
+<pre><code>To ask for confirmation each time add 'c'
+</code></pre>
+<pre><code class="language-cmd">        :%s/old/new/gc
+</code></pre>
+<h1 id="lesson-51-how-to-execute-an-external-command">Lesson 5.1: HOW TO EXECUTE AN EXTERNAL COMMAND</h1>
+<p>** Type <code>:!</code>{vim} followed by an external command to execute that command. **</p>
+<ol>
+<li>
+<p>Type the familiar command <code>:</code>{normal} to set the cursor at the bottom of
+    the screen. This allows you to enter a command-line command.</p>
+</li>
+<li>
+<p>Now type the <a href="!cmd">!</a> (exclamation point) character. This allows you to
+    execute any external shell command.</p>
+</li>
+<li>
+<p>As an example type "ls" following the "!" and then hit <code>&lt;Enter&gt;</code>{normal}.
+    This will show you a listing of your directory, just as if you were
+    at the shell prompt.</p>
+</li>
+</ol>
+<p>NOTE: It is possible to execute any external command this way, and you
+can include arguments.</p>
+<p>NOTE: All <code>:</code>{vim} commands are executed when you press <code>&lt;Enter&gt;</code>{normal}.</p>
+<h1 id="lesson-52-more-on-writing-files">Lesson 5.2: MORE ON WRITING FILES</h1>
+<p>** To save the changes made to the text, type <code>:w</code>{vim} FILENAME. **</p>
+<ol>
+<li>
+<p>Type <code>:!ls</code>{vim} to get a listing of your directory.
+    You already know you must hit <code>&lt;Enter&gt;</code>{normal} after this.</p>
+</li>
+<li>
+<p>Choose a filename that does not exist yet, such as TEST.</p>
+</li>
+<li>
+<p>Now type:</p>
+</li>
+</ol>
+<pre><code class="language-cmd">        :w TEST
+</code></pre>
+<p>(where TEST is the filename you chose.)</p>
+<ol>
+<li>This saves the current file under the name TEST.
+    To verify this, type <code>:!ls</code>{vim} again to see your directory.</li>
+</ol>
+<p>NOTE: If you were to exit Neovim and start it again with <code>nvim TEST</code>, the file
+would be an exact copy of the tutorial when you saved it.</p>
+<ol>
+<li>Now remove the file by typing:</li>
+</ol>
+<pre><code class="language-cmd">        :!rm TEST
+</code></pre>
+<h1 id="lesson-53-selecting-text-to-write">Lesson 5.3: SELECTING TEXT TO WRITE</h1>
+<p>** To save part of the file, type <code>v</code>{normal} motion <code>:w FILENAME</code>{vim}. **</p>
+<ol>
+<li>
+<p>Move the cursor to this line.</p>
+</li>
+<li>
+<p>Press <a href="v">v</a> and move the cursor to the fifth item below. Notice that the
+    text is highlighted.</p>
+</li>
+<li>
+<p>Press the <code>:</code>{normal} character. At the bottom of the screen</p>
+<pre><code>`:'&lt;,'&gt;`{vim}
+</code></pre>
+<p>will appear.</p>
+</li>
+<li>
+<p>Type</p>
+<pre><code>`:w TEST`{vim}
+</code></pre>
+<p>where TEST is a filename that does not exist yet. Verify that you see</p>
+<pre><code>`:'&lt;,'&gt;w TEST`{vim}
+</code></pre>
+<p>before you press <code>&lt;Enter&gt;</code>{normal}.</p>
+</li>
+<li>
+<p>Neovim will write the selected lines to the file TEST. Use <code>:!ls</code>{vim} to see it.
+    Do not remove it yet! We will use it in the next lesson.</p>
+</li>
+</ol>
+<p>NOTE: Pressing <a href="v">v</a> starts <a href="visual-mode">Visual selection</a>. You can move the cursor around to
+make the selection bigger or smaller. Then you can use an operator to
+do something with the text. For example, <code>d</code>{normal} deletes the text.</p>
+<h1 id="lesson-54-retrieving-and-merging-files">Lesson 5.4: RETRIEVING AND MERGING FILES</h1>
+<p>** To retrieve the contents of a file, type <code>:r FILENAME</code>{vim}. **</p>
+<ol>
+<li>Place the cursor just above this line.</li>
+</ol>
+<p>NOTE: After executing Step 2 you will see text from Lesson 5.3. Then move
+DOWN to see this lesson again.</p>
+<ol>
+<li>
+<p>Now retrieve your TEST file using the command</p>
+<pre><code>`:r TEST`{vim}
+</code></pre>
+<p>where TEST is the name of the file you used.
+The file you retrieve is placed below the cursor line.</p>
+</li>
+<li>
+<p>To verify that a file was retrieved, cursor back and notice that there
+    are now two copies of Lesson 5.3, the original and the retrieved version.</p>
+</li>
+</ol>
+<p>NOTE: You can also read the output of an external command. For example,</p>
+<pre><code>    `:r !ls`{vim}
+
+  reads the output of the `ls` command and puts it below the cursor.
+</code></pre>
+<h1 id="lesson-5-summary">Lesson 5 SUMMARY</h1>
+<ol>
+<li>
+<p><a href=":!cmd">:!command</a> executes an external command.</p>
+<p>Some useful examples are:
+<code>:!ls</code>{vim} - shows a directory listing
+<code>:!rm FILENAME</code>{vim} - removes file FILENAME</p>
+</li>
+<li>
+<p><a href=":w">:w</a> FILENAME writes the current Neovim file to disk with
+    name FILENAME.</p>
+</li>
+<li>
+<p><a href="v">v</a> motion :w FILENAME saves the Visually selected lines in file
+    FILENAME.</p>
+</li>
+<li>
+<p><a href=":r">:r</a> FILENAME retrieves disk file FILENAME and puts it
+    below the cursor position.</p>
+</li>
+<li>
+<p><a href=":r!">:r !dir</a> reads the output of the dir command and
+    puts it below the cursor position.</p>
+</li>
+</ol>
+<h1 id="lesson-61-the-open-command">Lesson 6.1: THE OPEN COMMAND</h1>
+<p>** Type <code>o</code>{normal} to open a line below the cursor and place you in Insert mode. **</p>
+<ol>
+<li>
+<p>Move the cursor to the line below marked ✓.</p>
+</li>
+<li>
+<p>Type the lowercase letter <code>o</code>{normal} to <a href="o">open</a> up a line BELOW the
+    cursor and place you in Insert mode.</p>
+</li>
+<li>
+<p>Now type some text and press <code>&lt;Esc&gt;</code>{normal} to exit Insert mode.</p>
+</li>
+</ol>
+<p>After typing <code>o</code>{normal} the cursor is placed on the open line in Insert mode.</p>
+<ol>
+<li>To open up a line ABOVE the cursor, simply type a <a href="O">capital O</a>, rather
+    than a lowercase <code>o</code>{normal}. Try this on the line below.</li>
+</ol>
+<p>Open up a line above this by typing O while the cursor is on this line.</p>
+<h1 id="lesson-62-the-append-command">Lesson 6.2: THE APPEND COMMAND</h1>
+<p>** Type <code>a</code>{normal} to insert text AFTER the cursor. **</p>
+<ol>
+<li>
+<p>Move the cursor to the start of the line below marked ✗.</p>
+</li>
+<li>
+<p>Press <code>e</code>{normal} until the cursor is on the end of "li".</p>
+</li>
+<li>
+<p>Type the lowercase letter <code>a</code>{normal} to <a href="a">append</a> text AFTER the cursor.</p>
+</li>
+<li>
+<p>Complete the word like the line below it. Press <code>&lt;Esc&gt;</code>{normal} to exit Insert mode.</p>
+</li>
+<li>
+<p>Use <code>e</code>{normal} to move to the next incomplete word and repeat steps 3 and 4.</p>
+</li>
+</ol>
+<p>This li will allow you to pract appendi text to a line.
+This line will allow you to practice appending text to a line.</p>
+<p>NOTE: <a href="a">a</a>, <a href="i">i</a> and <a href="A">A</a> all go to the same Insert mode, the only
+difference is where the characters are inserted.</p>
+<h1 id="lesson-63-another-way-to-replace">Lesson 6.3: ANOTHER WAY TO REPLACE</h1>
+<p>** Type a capital <code>R</code>{normal} to replace more than one character. **</p>
+<ol>
+<li>
+<p>Move the cursor to the first line below marked ✗. Move the cursor to
+    the beginning of the first "xxx".</p>
+</li>
+<li>
+<p>Now press <code>R</code>{normal} (<a href="R">capital R</a>) and type the number below it in the
+    second line, so that it replaces the "xxx".</p>
+</li>
+<li>
+<p>Press <code>&lt;Esc&gt;</code>{normal} to leave <a href="mode-replace">Replace mode</a>. Notice that
+    the rest of the line remains unmodified.</p>
+</li>
+<li>
+<p>Repeat the steps to replace the remaining "xxx".</p>
+</li>
+</ol>
+<p>Adding 123 to xxx gives you xxx.
+Adding 123 to 456 gives you 579.</p>
+<p>NOTE: Replace mode is like Insert mode, but every typed character
+replaces an existing character.</p>
+<h1 id="lesson-64-copy-and-paste-text">Lesson 6.4: COPY AND PASTE TEXT</h1>
+<p>** Use the <code>y</code>{normal} operator to copy text and <code>p</code>{normal} to put it. **</p>
+<ol>
+<li>
+<p>Go to the line marked with ✓ below and place the cursor after "a)".</p>
+</li>
+<li>
+<p>Start Visual mode with <code>v</code>{normal} and move the cursor to just before
+    "first".</p>
+</li>
+<li>
+<p>Type <code>y</code>{normal} to <a href="yank">yank</a> (copy) the highlighted text.</p>
+</li>
+<li>
+<p>Move the cursor to the end of the next line: <code>j$</code>{normal}</p>
+</li>
+<li>
+<p>Type <code>p</code>{normal} to <a href="put">put</a> (paste) the text.</p>
+</li>
+<li>
+<p>Press <code>a</code>{normal} and then type "second". Press <code>&lt;Esc&gt;</code>{normal} to leave
+    Insert mode.</p>
+</li>
+<li>
+<p>Use Visual mode to select "item.", yank it with <code>y</code>{normal}, move to the
+    end of the next line with <code>j$</code>{normal} and put the text there with <code>p</code>{normal}</p>
+</li>
+</ol>
+<p>a) This is the first item.
+b)</p>
+<p>NOTE: you can use <code>y</code>{normal} as an operator: <code>yw</code>{normal} yanks one word.</p>
+<p>NOTE: you can use <code>P</code>{normal} to put before the cursor, rather than after.</p>
+<h1 id="lesson-65-set-option">Lesson 6.5: SET OPTION</h1>
+<p>** Set an option so search and substitute commands ignore case. **</p>
+<p>There are many settings in Neovim that you can configure to suit your needs.</p>
+<ol>
+<li>
+<p>Search for 'ignore' by entering: <code>/ignore</code>
+    Repeat several times by pressing <code>n</code>{normal}.</p>
+</li>
+<li>
+<p>Set the 'ic' (Ignore case) option by entering:</p>
+</li>
+</ol>
+<pre><code class="language-cmd">        :set ic
+</code></pre>
+<ol>
+<li>
+<p>Now search for 'ignore' again by pressing <code>n</code>{normal}.
+    Notice that Ignore and IGNORE are now also found.</p>
+</li>
+<li>
+<p>Set the 'hlsearch' and 'incsearch' options:</p>
+</li>
+</ol>
+<pre><code class="language-cmd">        :set hls is
+</code></pre>
+<ol>
+<li>
+<p>Now type the search command again and see what happens: /ignore <Enter></p>
+</li>
+<li>
+<p>To disable ignoring case enter:</p>
+</li>
+</ol>
+<pre><code class="language-cmd">        :set noic
+</code></pre>
+<ol>
+<li>To invert the value of a setting, prepend it with "inv":</li>
+</ol>
+<pre><code class="language-cmd">        :set invic
+</code></pre>
+<p>NOTE: To remove the highlighting of matches enter:</p>
+<pre><code class="language-cmd">        :nohlsearch
+</code></pre>
+<p>NOTE: If you want to ignore case for just one search command, use <a href="/\c">\c</a>
+in the phrase: /ignore\c <Enter></p>
+<h1 id="lesson-6-summary">Lesson 6 SUMMARY</h1>
+<ol>
+<li>
+<p>Type <code>o</code>{normal} to open a line BELOW the cursor and start Insert mode.
+    Type <code>O</code>{normal} to open a line ABOVE the cursor.</p>
+</li>
+<li>
+<p>Type <code>a</code>{normal} to insert text AFTER the cursor.
+    Type <code>A</code>{normal} to insert text after the end of the line.</p>
+</li>
+<li>
+<p>The <code>e</code>{normal} command moves to the end of a word.</p>
+</li>
+<li>
+<p>The <code>y</code>{normal} operator copies text, <code>p</code>{normal} pastes it.</p>
+</li>
+<li>
+<p>Typing a capital <code>R</code>{normal} enters Replace mode until <code>&lt;Esc&gt;</code>{normal} is
+    pressed.</p>
+</li>
+<li>
+<p>Typing "<a href=":set">:set</a> xxx" sets the option "xxx". Some options are:</p>
+<pre><code>'ic' 'ignorecase'   ignore upper/lower case when searching
+'is' 'incsearch'    show partial matches for a search phrase
+'hls' 'hlsearch'    highlight all matching phrases
+</code></pre>
+<p>You can either use the long or the short option name.</p>
+</li>
+<li>
+<p>Prepend "no" to switch an option off:</p>
+</li>
+</ol>
+<pre><code class="language-cmd">        :set noic
+</code></pre>
+<ol>
+<li>Prepend "inv" to invert an option:</li>
+</ol>
+<pre><code class="language-cmd">        :set invic
+</code></pre>
+<h1 id="lesson-71-getting-help">Lesson 7.1: GETTING HELP</h1>
+<p>** Use the online help system. **</p>
+<p>Neovim has a comprehensive online help system.</p>
+<p>To get started, try one of these three:</p>
+<ul>
+<li>press the <code>&lt;F1&gt;</code>{normal} key (if you have one)</li>
+<li>type <code>:help</code>{vim}</li>
+</ul>
+<p>Read the text in the help window to find out how the help works.
+Type <code>&lt;C-w&gt;&lt;C-w&gt;</code>{normal} to jump from one window to another.
+Type <code>:q</code>{vim} to close the help window.</p>
+<p>You can find help on just about any subject, by giving an argument to the
+":help" command. Try these (don't forget to press <Enter>):</p>
+<pre><code class="language-cmd">    :help w
+    :help c_CTRL-D
+    :help insert-index
+    :help user-manual
+</code></pre>
+<h1 id="lesson-72-create-a-startup-script">Lesson 7.2: CREATE A STARTUP SCRIPT</h1>
+<p>** Enable Neovim features. **</p>
+<p>Neovim is a very configurable editor. You can customise it any way you like.
+To start using more features create an "init.vim" file.</p>
+<ol>
+<li>
+<p>Start editing the "init.vim" file.</p>
+<p><code>:call mkdir(stdpath('config'),'p')</code>{vim}
+<code>:exe 'edit' stdpath('config').'/init.vim'</code>{vim}</p>
+</li>
+<li>
+<p>Write the file with:</p>
+<p><code>:w</code>{vim}</p>
+</li>
+</ol>
+<p>You can add all your preferred settings to this "init.vim" file.
+For more information type <code>:help init.vim</code>{vim}.</p>
+<h1 id="lesson-73-completion">Lesson 7.3: COMPLETION</h1>
+<p>** Command line completion with <code>&lt;C-d&gt;</code>{normal} and <code>&lt;Tab&gt;</code>{normal}. **</p>
+<ol>
+<li>
+<p>List the contents of the current directory: <code>:!ls</code>{vim}</p>
+</li>
+<li>
+<p>Type the start of a command: <code>:e</code>{vim}</p>
+</li>
+<li>
+<p>Press <code>&lt;C-d&gt;</code>{normal} and Neovim will show a list of commands beginning with "e".</p>
+</li>
+<li>
+<p>Press <code>&lt;Tab&gt;</code>{normal} and Neovim will complete the command name to ":edit".</p>
+</li>
+<li>
+<p>Now add a space and the start of an existing file name: <code>:edit FIL</code>{vim}</p>
+</li>
+<li>
+<p>Press <code>&lt;Tab&gt;</code>{normal}. Neovim will complete the name ("FIL" -&gt; "FILE", if it is unique).</p>
+</li>
+</ol>
+<p>NOTE: Completion works for many commands. It is especially useful for <code>:help</code>{vim}.</p>
+<h1 id="lesson-7-summary">Lesson 7 SUMMARY</h1>
+<ol>
+<li>
+<p>Type <code>:help</code>{vim}
+    or press <code>&lt;F1&gt;</code>{normal} or <code>&lt;Help&gt;</code>{normal} to open a help window.</p>
+</li>
+<li>
+<p>Type <code>:help TOPIC</code>{vim} to find help on TOPIC.</p>
+</li>
+<li>
+<p>Type <code>&lt;C-w&gt;&lt;C-w&gt;</code>{normal} to jump to another window</p>
+</li>
+<li>
+<p>Type <code>:q</code>{vim} to close the help window</p>
+</li>
+<li>
+<p>Create an init.vim startup script to keep your preferred settings.</p>
+</li>
+<li>
+<p>While in command mode, press <code>&lt;C-d&gt;</code>{normal} to see possible completions.
+    Press <code>&lt;Tab&gt;</code>{normal} to use one completion.</p>
+</li>
+</ol>
+<h1 id="conclusion">CONCLUSION</h1>
+<p>This was intended to give a brief overview of the Neovim editor, just enough to
+allow you to use it fairly easily. It is far from complete as Neovim has
+many many more commands. Consult the help often.
+There are also countless great tutorials and videos to be found online.
+Here's a bunch of them:</p>
+<ul>
+<li><em>Learn Vim Progressively</em>:
+  http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/</li>
+<li><em>Learning Vim in 2013</em>:
+  http://benmccormick.org/learning-vim-in-2014/</li>
+<li><em>Vimcasts</em>:
+  http://vimcasts.org/</li>
+<li><em>Vim Video-Tutorials by Derek Wyatt</em>:
+  http://derekwyatt.org/vim/tutorials/</li>
+<li><em>Learn Vimscript the Hard Way</em>:
+  http://learnvimscriptthehardway.stevelosh.com/</li>
+<li><em>7 Habits of Effective Text Editing</em>:
+  http://www.moolenaar.net/habits.html</li>
+<li><em>vim-galore</em>:
+  https://github.com/mhinz/vim-galore</li>
+</ul>
+<p>If you prefer a book, <em>Practical Vim</em> by Drew Neil is recommended often
+(the sequel, <em>Modern Vim</em>, includes material specific to Neovim).</p>
+<p>This tutorial was written by Michael C. Pierce and Robert K. Ware, Colorado
+School of Mines using ideas supplied by Charles Smith, Colorado State
+University. E-mail: bware@mines.colorado.edu.</p>
+<p>Modified for Vim by Bram Moolenaar.
+Modified for vim-tutor-mode by Felipe Morales.
+Modified for Neovim by Rory Nesbitt.</p>
+<p>// vim: nowrap</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

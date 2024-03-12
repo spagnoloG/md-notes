@@ -1,0 +1,2745 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../nextcloud/">
+      
+      
+        <link rel="next" href="../nmap/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Nixos - Md Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#nixos" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Md Notes" class="md-header__button md-logo" aria-label="Md Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Md Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Nixos
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Md Notes" class="md-nav__button md-logo" aria-label="Md Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Md Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../address-space/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Address space
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ansible/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autorandr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autorandr
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bash
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binary-patching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Binary patching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binary-vs-text-files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Binary vs text files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../burpsuite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BURPSUITE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../certs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CERTS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clipboard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Clipboard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compression/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compression
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Curl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../databases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Databases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dig/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dig
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disk-usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disk usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disk-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disk utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Emacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EXEC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ffmpeg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FFMPEG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../find/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forensics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FORENSICS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fork/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fork
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fzf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FZF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gcc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gdb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gdb
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GIT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hydra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HYDRA - brute forcing tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licesing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licesing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Locate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lxc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LXC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Math
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mitmproxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mitm Proxy Advanced Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mosquitto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mosquitto
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mount/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../multiprocessing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Multiprocessing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../named-pipes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Named pipes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nextcloud/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NEXTCLOUD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Nixos
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Nixos
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#managing-system-generations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing system generations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing system generations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-system-generations" class="md-nav__link">
+    <span class="md-ellipsis">
+      List system generations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-old-generations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete old generations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collect-garbage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collect garbage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hard-link-identical-files-remove-duplicate-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hard link identical files (remove duplicate libraries)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#home-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Home manager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-nixos-to-new-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating nixos to new release
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flakes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Flakes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python development environment:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r-and-c-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      R and C++ development environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rust-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rust development environment:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rust development environment:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-start-a-rust-project-firstly" class="md-nav__link">
+    <span class="md-ellipsis">
+      To start a rust project, firstly:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-development-environment-with-custom-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      C development environment with custom library
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-development-with-opencv-plotting-enabled-and-open3d-library-took-me-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python development with opencv plotting enabled and open3d library (took me hours)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nixos-configurations-collection-and-guides" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nixos configurations collection and guides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flakes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flakes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NMAP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../os-flashing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OS FLASHING
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pdf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PDF MANIPULATION
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../permissions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PERMS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipewire/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PIPEWIRE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../powerusage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Check deatiled power usage on linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proces-sorting-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sorting algorithms (SL)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proxmox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PROXMOX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pwn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PWN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python-specifics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PYTHON SPECIFICS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qemu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Qemu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REGEX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ripgrep
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ROS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rstudio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rstudio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RUST
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services-and-process-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Services and process management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQUID tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSH
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../symlinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Difference between hardlinks and symlinks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-information/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System information
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tmux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tracks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tracks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Connect to uart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ufw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    UFW
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vfs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VFS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vim-tutor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim Tutor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VIM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vimium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vimium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wasm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wasm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wfdb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WFDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wireguard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wireguard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wl-mirror/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WL-mirror (wayland exclusive for managing displays)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yaml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    YAML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#managing-system-generations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Managing system generations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Managing system generations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-system-generations" class="md-nav__link">
+    <span class="md-ellipsis">
+      List system generations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#delete-old-generations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Delete old generations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#collect-garbage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Collect garbage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#hard-link-identical-files-remove-duplicate-libraries" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hard link identical files (remove duplicate libraries)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#home-manager" class="md-nav__link">
+    <span class="md-ellipsis">
+      Home manager
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#updating-nixos-to-new-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      Updating nixos to new release
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flakes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flakes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Flakes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#python-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python development environment:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#r-and-c-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      R and C++ development environment
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rust-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rust development environment:
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Rust development environment:">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#to-start-a-rust-project-firstly" class="md-nav__link">
+    <span class="md-ellipsis">
+      To start a rust project, firstly:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#c-development-environment-with-custom-library" class="md-nav__link">
+    <span class="md-ellipsis">
+      C development environment with custom library
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#python-development-with-opencv-plotting-enabled-and-open3d-library-took-me-hours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Python development with opencv plotting enabled and open3d library (took me hours)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#nixos-configurations-collection-and-guides" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nixos configurations collection and guides
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#flakes_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Flakes
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="nixos">Nixos</h1>
+<h3 id="managing-system-generations">Managing system generations</h3>
+<h6 id="list-system-generations">List system generations</h6>
+<pre><code>sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+</code></pre>
+<h6 id="delete-old-generations">Delete old generations</h6>
+<pre><code class="language-bash">sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
+</code></pre>
+<h6 id="collect-garbage">Collect garbage</h6>
+<pre><code class="language-bash">sudo nix-collect-garbage -d
+</code></pre>
+<h6 id="hard-link-identical-files-remove-duplicate-libraries">Hard link identical files (remove duplicate libraries)</h6>
+<pre><code class="language-bash">sudo nix-store --optimize
+</code></pre>
+<p>file: clean-nix.sh</p>
+<pre><code class="language-bash">sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+sudo nix-env --delete-generations old --profile /nix/var/nix/profiles/system
+sudo nix-collect-garbage -d
+sudo nix-store --optimize
+sudo nix-env --list-generations --profile /nix/var/nix/profiles/system
+</code></pre>
+<h3 id="home-manager">Home manager</h3>
+<p>manage user configuration files using nix</p>
+<p>Install it <a href="https://nix-community.github.io/home-manager/index.html#sec-install-nixos-module">here</a>.</p>
+<h3 id="updating-nixos-to-new-release">Updating nixos to new release</h3>
+<p>Firstly go to <a href="https://nixos.org/manual/nixos/stable/release-notes">nixos.org</a> and pick the release you want to update to.</p>
+<p>Then to update nixos</p>
+<pre><code class="language-bash">sudo nix-channel --add https://nixos.org/channels/nixos-XX.XX nixos
+sudo nix-channel --update
+sudo nixos-rebuild switch --upgrade
+</code></pre>
+<p>For the home manager <a href="https://nix-community.github.io/home-manager/index.xhtml#ch-installation">follow</a> the instructions.</p>
+<pre><code class="language-bash">nix-channel --add https://github.com/nix-community/home-manager/archive/release-XX.XX.tar.gz home-manager
+nix-channel --update
+nix-shell '&lt;home-manager&gt;' -A install # or home-manager switch
+</code></pre>
+<p>To find home-manager package options, use this <a href="https://mipmip.github.io/home-manager-option-search/">site</a></p>
+<h3 id="flakes">Flakes</h3>
+<p>Flakes are cool to have nice reproducible environments.</p>
+<h4 id="python-development-environment">Python development environment:</h4>
+<pre><code class="language-nix">{
+  description = &quot;Python development environment&quot;;
+
+  inputs = {
+    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixos-23.05&quot;;
+    flake-utils.url = &quot;github:numtide/flake-utils&quot;;
+  };
+
+  outputs = { self, nixpkgs, flake-utils, ... } @ inputs:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          overlays = [];
+        };
+        pythonEnv = pkgs.python3.withPackages (ps: with ps; [
+          matplotlib
+          opencv4
+          pip
+          pillow
+          tqdm
+        ]);
+      in {
+        devShells.default = pkgs.mkShell {
+          buildInputs = [
+            pythonEnv
+          ];
+        };
+      }
+    );
+}
+
+</code></pre>
+<p>Example R and C++ development environment:
+You should really swithc to flakes if you are using nixos ;) .</p>
+<h4 id="r-and-c-development-environment">R and C++ development environment</h4>
+<pre><code class="language-nix">{
+  description = &quot;R and C++: DataScience environment&quot;;
+
+  inputs = {
+    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixos-23.05&quot;;
+    flake-utils.url = &quot;github:numtide/flake-utils&quot;;
+  };
+
+  outputs = { self, nixpkgs, flake-utils, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config = {
+            allowUnfree = true;
+          };
+        };
+
+        my-R-packages = with pkgs.rPackages; [
+          ggplot2
+          dplyr
+          xts
+          gridExtra
+          shiny
+          shinydashboard
+          tidyr
+          tidyverse
+          viridis
+          arrow
+          data_table
+          tinytex
+          reshape2
+        ];
+
+        my-cpp-packages = with pkgs; [
+          arrow-cpp
+          clang
+          gcc
+          cmake
+          pkg-config
+        ];
+
+        RStudio-with-my-packages = pkgs.rstudioWrapper.override {
+          packages = my-R-packages;
+        };
+
+        R-with-my-packages = pkgs.rWrapper.override {
+          packages = my-R-packages;
+        };
+
+        latex-pkgs = with pkgs; [
+            texlive.combined.scheme-basic
+        ];
+
+      in
+      {
+        devShell = pkgs.mkShell {
+          buildInputs = [
+            R-with-my-packages
+            RStudio-with-my-packages
+            my-cpp-packages
+            latex-pkgs
+          ];
+        };
+      }
+    );
+}
+</code></pre>
+<h4 id="rust-development-environment">Rust development environment:</h4>
+<h5 id="to-start-a-rust-project-firstly">To start a rust project, firstly:</h5>
+<ul>
+<li>Enter nix shell; <code>nix-shell -P cargo</code></li>
+<li>Run <code>cargo init</code></li>
+<li>Add dependencies to Cargo.toml</li>
+<li>Run <code>cargo check</code>, to generate <code>Cargo.lock</code></li>
+<li>Exit nix shell, <code>ctrl+d</code></li>
+<li>Run <code>nix develop</code>, and replace the cargoSha256 hash in <code>flake.nix</code> with the one generated</li>
+</ul>
+<p>This <a href="https://hoverbear.org/blog/a-flake-for-your-crate/">flake</a> is a modified version of the one found.</p>
+<p><code>flake.nix</code></p>
+<pre><code class="language-nix"># flake.nix
+{
+  description = &quot;Rust crate with Nix flake support&quot;;
+
+  inputs = {
+    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixos-23.05&quot;;
+    naersk.url = &quot;github:nmattia/naersk&quot;;
+    flake-utils.url = &quot;github:numtide/flake-utils&quot;;
+    naersk.inputs.nixpkgs.follows = &quot;nixpkgs&quot;;
+  };
+
+  outputs = { self, nixpkgs, naersk, flake-utils, ... }:
+    let
+      cargoToml = builtins.fromTOML (builtins.readFile ./Cargo.toml);
+      supportedSystems = [ &quot;x86_64-linux&quot; &quot;aarch64-linux&quot; &quot;x86_64-darwin&quot; ];
+      forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
+    in
+    {
+      overlay = final: prev: {
+        &quot;${cargoToml.package.name}&quot; = final.callPackage ./. { inherit naersk; };
+      };
+
+      packages = forAllSystems (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlay ];
+          };
+        in
+        {
+          &quot;${cargoToml.package.name}&quot; = pkgs.&quot;${cargoToml.package.name}&quot;;
+        });
+
+      defaultPackage = forAllSystems (system: (import nixpkgs {
+        inherit system;
+        overlays = [ self.overlay ];
+      }).&quot;${cargoToml.package.name}&quot;);
+
+      checks = forAllSystems (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlay ];
+          };
+        in
+        {
+          format = pkgs.runCommand &quot;check-format&quot; {
+            buildInputs = with pkgs; [ rustfmt cargo ];
+          } ''
+            ${pkgs.rustfmt}/bin/cargo-fmt fmt --manifest-path ${./.}/Cargo.toml -- --check
+            touch $out # it worked!
+          '';
+          &quot;${cargoToml.package.name}&quot; = pkgs.&quot;${cargoToml.package.name}&quot;;
+        });
+
+      devShell = forAllSystems (system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlay ];
+          };
+        in
+        pkgs.mkShell {
+          inputsFrom = with pkgs; [
+            pkgs.&quot;${cargoToml.package.name}&quot;
+          ];
+          buildInputs = with pkgs; [
+            rustfmt
+            nixpkgs-fmt
+            fontconfig
+          ];
+          LIBCLANG_PATH = &quot;${pkgs.llvmPackages.libclang.lib}/lib&quot;;
+        });
+    };
+}
+</code></pre>
+<p><code>default.nix</code></p>
+<pre><code class="language-nix"># default.nix
+{ lib
+, naersk
+, stdenv
+, clangStdenv
+, hostPlatform
+, targetPlatform
+, pkg-config
+, libiconv
+, rustfmt
+, cargo
+, rustc
+  # , llvmPackages # Optional
+  # , protobuf     # Optional
+}:
+
+let
+  cargoToml = (builtins.fromTOML (builtins.readFile ./Cargo.toml));
+in
+
+naersk.lib.&quot;${targetPlatform.system}&quot;.buildPackage rec {
+  src = ./.;
+
+  buildInputs = [
+    rustfmt
+    pkg-config
+    cargo
+    rustc
+    libiconv
+  ];
+  checkInputs = [ cargo rustc ];
+
+  doCheck = true;
+  CARGO_BUILD_INCREMENTAL = &quot;false&quot;;
+  RUST_BACKTRACE = &quot;full&quot;;
+  copyLibs = true;
+
+  # Optional things you might need:
+  #
+  # If you depend on `libclang`:
+  # LIBCLANG_PATH = &quot;${llvmPackages.libclang}/lib&quot;;
+  #
+  # If you depend on protobuf:
+  # PROTOC = &quot;${protobuf}/bin/protoc&quot;;
+  # PROTOC_INCLUDE = &quot;${protobuf}/include&quot;;
+
+  name = cargoToml.package.name;
+  version = cargoToml.package.version;
+
+  meta = with lib; {
+    description = cargoToml.package.description;
+    homepage = cargoToml.package.homepage;
+    license = with licenses; [ mit ];
+    maintainers = with maintainers; [ ];
+  };
+}
+</code></pre>
+<h4 id="c-development-environment-with-custom-library">C development environment with custom library</h4>
+<p><code>download_library.sh</code></p>
+<pre><code class="language-bash">#!/bin/bash
+
+set -eux
+
+WFDB_LIB_URL=&quot;https://archive.physionet.org/physiotools/wfdb/lib&quot;
+
+mkdir -p wfdb
+cd wfdb
+
+# List of files to download
+files=(
+  &quot;COPYING.LIB&quot;
+  &quot;Makefile&quot;
+  &quot;Makefile.top&quot;
+  &quot;Makefile.tpl&quot;
+  &quot;annot.c&quot;
+  &quot;calib.c&quot;
+  &quot;ecgcodes.h&quot;
+  &quot;ecgmap.h&quot;
+  &quot;signal.c&quot;
+  &quot;wfdb.h&quot;
+  &quot;wfdb.h0&quot;
+  &quot;wfdbinit.c&quot;
+  &quot;wfdbio.c&quot;
+  &quot;wfdblib.h&quot;
+  &quot;wfdblib.h0&quot;
+)
+
+for file in &quot;${files[@]}&quot;; do
+    echo &quot;Downloading $file...&quot;
+    curl -O &quot;$WFDB_LIB_URL/$file&quot;
+done
+
+echo &quot;All files downloaded.&quot;
+</code></pre>
+<pre><code class="language-nix">{
+  description = &quot;A Nix flake for C project with WFDB library&quot;;
+
+  inputs = {
+    nixpkgs.url = &quot;nixpkgs/nixos-23.05&quot;;
+  };
+
+  outputs = { self, nixpkgs }: {
+
+    defaultPackage.x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.stdenv.mkDerivation {
+      name = &quot;obss-assignment-1&quot;;
+
+      src = self;
+
+      buildInputs = [
+        nixpkgs.legacyPackages.x86_64-linux.gcc
+        nixpkgs.legacyPackages.x86_64-linux.gnumake
+        nixpkgs.legacyPackages.x86_64-linux.curl
+      ];
+
+      unpackPhase = &quot;true&quot;;
+
+      buildPhase = ''
+        # Copy the wfdb directory to the build directory
+        cp -r ${self}/a1/wfdb .
+
+        cd wfdb
+        chmod -R u+w .
+
+        # Build the WFDB library
+        make -f Makefile
+
+        # Create a symlink for the linker to find the library
+        ln -s libwfdb.so.10.6 libwfdb.so
+
+        cd ..
+
+        # Building your program with the correct include path
+        gcc -Iwfdb -o qrs_detect ${self}/a1/example.c -lm -L./wfdb -lwfdb
+      '';
+
+      installPhase = ''
+        mkdir -p $out/bin
+        mkdir -p $out/lib
+
+        # Copy the binary
+        cp qrs_detect $out/bin/
+
+        # Copy the library files to the output directory
+        cp wfdb/libwfdb.so.10.6 $out/lib/
+        ln -s $out/lib/libwfdb.so.10.6 $out/lib/libwfdb.so
+        ln -s $out/lib/libwfdb.so.10.6 $out/lib/libwfdb.so.10
+      '';
+    };
+  };
+}
+</code></pre>
+<h4 id="python-development-with-opencv-plotting-enabled-and-open3d-library-took-me-hours">Python development with opencv plotting enabled and open3d library (took me hours)</h4>
+<pre><code class="language-nix">{
+  description = &quot;opencv and open3d python development environment&quot;;
+
+  inputs = {
+    nixpkgs.url = &quot;github:NixOS/nixpkgs/nixos-23.05&quot;;
+    flake-utils.url = &quot;github:numtide/flake-utils&quot;;
+  };
+
+  outputs = { self, nixpkgs, flake-utils, ... }@inputs:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config = { allowUnfree = true; };
+        };
+
+        fetchPypi = pkgs.python3Packages.fetchPypi;
+
+        customPython = pkgs.python3.override {
+          packageOverrides = self: super: {
+            opencv4 = super.opencv4.override {
+              enableGtk2 = true;
+              gtk2 = pkgs.gtk2;
+              enableFfmpeg = true;
+            };
+          };
+        };
+
+        nbformat-570 = pkgs.python3Packages.nbformat.overridePythonAttrs
+          (old: rec {
+            version = &quot;5.7.0&quot;;
+
+            JUPYTER_PLATFORM_DIRS = 1;
+            src = fetchPypi {
+              inherit version;
+              pname = old.pname;
+              hash = &quot;sha256-HUdgwVwaBCae9crzdb6LmN0vaW5eueYD7Cvwkfmw0/M=&quot;;
+            };
+          });
+
+        # Define a custom Python packages set with the nbformat override, version collision!
+        customPythonPackages = pkgs.python3Packages.override {
+          overrides = self: super: {
+            nbformat = nbformat-570;
+          };
+        };
+
+        open3d = pkgs.python3Packages.buildPythonPackage rec {
+          pname = &quot;open3d&quot;;
+          version = &quot;0.17.0&quot;;
+          format = &quot;wheel&quot;;
+
+          src = pkgs.python3Packages.fetchPypi {
+            pname = &quot;open3d&quot;;
+            version = &quot;0.17.0&quot;;
+            format = &quot;wheel&quot;;
+            sha256 = &quot;sha256-PcMAaXMgu2iCRsXQn2gQRYFcMyIlaFc/GWSy11ZDFlc=&quot;;
+            dist = &quot;cp310&quot;;
+            python = &quot;cp310&quot;;
+            abi = &quot;cp310&quot;;
+            platform = &quot;manylinux_2_27_x86_64&quot;;
+          };
+
+          nativeBuildInputs = [ pkgs.autoPatchelfHook ];
+          autoPatchelfIgnoreMissingDeps = [
+            &quot;libtorch_cuda_cpp.so&quot;
+            &quot;libtorch_cuda_cu.so&quot;
+            &quot;libtorch_cuda.so&quot;
+            &quot;libc10_cuda.so&quot;
+          ];
+
+          buildInputs = with pkgs; [
+            cudaPackages.cudatoolkit
+            stdenv.cc.cc.lib
+            libusb.out
+            libGL
+            cudaPackages.cudatoolkit
+            libtorch-bin
+            libtensorflow
+            expat
+            xorg.libXfixes
+            mesa
+            xorg.libX11
+            xorg.libXfixes
+          ];
+
+          propagatedBuildInputs = with customPythonPackages; [
+            nbformat-570
+            numpy
+            dash
+            configargparse
+            scikit-learn
+            ipywidgets
+            addict
+            matplotlib
+            pandas
+            pyyaml
+            tqdm
+            pyquaternion
+          ];
+
+          postInstall = ''
+            ln -s &quot;${pkgs.llvm_10.lib}/lib/libLLVM-10.so&quot; &quot;$out/lib/libLLVM-10.so.1&quot;
+
+            rm $out/lib/python3.10/site-packages/open3d/libGL.so.1
+            rm $out/lib/python3.10/site-packages/open3d/swrast_dri.so
+            rm $out/lib/python3.10/site-packages/open3d/libgallium_dri.so
+            rm $out/lib/python3.10/site-packages/open3d/kms_swrast_dri.so
+            rm $out/lib/python3.10/site-packages/open3d/libEGL.so.1
+          '';
+
+        };
+
+        pythonEnv = customPython.withPackages (ps:
+          with ps; [
+            matplotlib
+            numpy
+            scipy
+            requests
+            opencv4
+            flake8
+            black
+            open3d
+          ]);
+
+      in {
+        devShell = pkgs.mkShell {
+          buildInputs =
+            [ pythonEnv pkgs.python3Packages.pip pkgs.gtk2 pkgs.ffmpeg ];
+
+          shellHook = ''
+            if [ ! -d ./.venv ]; then
+              python3 -m venv .venv
+            fi
+            source .venv/bin/activate
+            pip install pre-commit
+            pre-commit autoupdate
+            echo &quot;Welcome to the Python development environment.&quot;
+          '';
+        };
+      });
+}
+</code></pre>
+<p>To enter development environmnent issue:</p>
+<pre><code class="language-bash">nix develop
+</code></pre>
+<p>if you add any new dependency to the list issue:</p>
+<pre><code class="language-bash">nix flake lock --update-input nixpkgs
+nix develop --refresh
+</code></pre>
+<p>If you want to update the flake:</p>
+<pre><code class="language-bash">nix flake update
+</code></pre>
+<h2 id="nixos-configurations-collection-and-guides">Nixos configurations collection and guides</h2>
+<ul>
+<li><a href="https://nixos.wiki/wiki/Configuration_Collection">Configuration collection</a></li>
+<li><a href="https://nixos-and-flakes.thiscute.world/">Nixos Home + Flakes Book</a></li>
+</ul>
+<h2 id="flakes_1">Flakes</h2>
+<p>Tutorials:</p>
+<ul>
+<li><a href="https://www.tweag.io/blog/2020-05-25-flakes/">Part-1 -&gt; AN INTRODUCTION AND TUTORIAL</a></li>
+<li><a href="https://www.tweag.io/blog/2020-06-25-eval-cache/">Part-2 -&gt; EVALUATION CACHING</a></li>
+<li><a href="https://www.tweag.io/blog/2020-07-31-nixos-flakes/">Part-3 -&gt; MANAGING NIXOS SYSTEMS</a></li>
+<li><a href="https://serokell.io/blog/practical-nix-flakes">Writing a flake</a></li>
+</ul>
+<p>Run <code>flake.nix</code> binary directly from github:</p>
+<pre><code class="language-bash">nix shell github:edolstra/dwarffs --command dwarffs --version
+</code></pre>
+<p>Check flake metadata:</p>
+<pre><code class="language-bash">nix flake metadata github:edolstra/dwarffs
+</code></pre>
+<p>Show flake outputs:</p>
+<pre><code class="language-bash">nix flake show github:edolstra/dwarffs
+</code></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>

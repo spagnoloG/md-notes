@@ -1,0 +1,3305 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../mpi/">
+      
+      
+        <link rel="next" href="../named-pipes/">
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.13">
+    
+    
+      
+        <title>Multiprocessing - Md Notes</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.7e359304.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#multiprocessing" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Md Notes" class="md-header__button md-logo" aria-label="Md Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Md Notes
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Multiprocessing
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Md Notes" class="md-nav__button md-logo" aria-label="Md Notes" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Md Notes
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../address-space/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Address space
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ansible/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ansible
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../autorandr/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Autorandr
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../bash/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Bash
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binary-patching/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Binary patching
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../binary-vs-text-files/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Binary vs text files
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../burpsuite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    BURPSUITE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../certs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    CERTS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../clipboard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Clipboard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../compression/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compression
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../curl/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Curl
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../databases/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Databases
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../dig/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dig
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disk-usage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disk usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../disk-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Disk utils
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../docker/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Docker
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../emacs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Emacs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../exec/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    EXEC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ffmpeg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FFMPEG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../find/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Find
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../forensics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FORENSICS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fork/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Fork
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../fzf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    FZF
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gcc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GCC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gdb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gdb
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GIT
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../gpg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    GPG
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hardware/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Hardware
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../hydra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    HYDRA - brute forcing tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../licesing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Licesing
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../locate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Locate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../lxc/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    LXC
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../math/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Math
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mitmproxy/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mitm Proxy Advanced Usage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mosquitto/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mosquitto
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mount/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Mount
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mpi/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MPI
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Multiprocessing
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Multiprocessing
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nice-equations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nice equations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nice equations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#computing-speedup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computing speedup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computing-efficency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computing efficency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computation-price" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computation price
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amdhals-law" class="md-nav__link">
+    <span class="md-ellipsis">
+      Amdhals law
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pthreads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pthreads
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pthreads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#address-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address space
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#few-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Few properties:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronization-of-access-to-same-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronization of access to same variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deadlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deadlock
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#semaphore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Semaphore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conditional-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditional variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conditional variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementation-of-semaphore-using-conditional-variables-and-mutexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation of semaphore using conditional variables and mutexes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#barrier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Barrier
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models-of-parallelization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Models of parallelization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenMP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compiling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragmas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pragmas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pragmas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-parallel" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp parallel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-sections-pragma-omp-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp sections &amp; #pragma omp section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-parallel-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp parallel for
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="#pragma omp parallel for">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schedule-addon" class="md-nav__link">
+    <span class="md-ellipsis">
+      schedule addon
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#openmp-variable-addons" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenMp variable addons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronization-between-threads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronization between threads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openmpi-message-passing-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenMPI (message passing interface)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenMPI (message passing interface)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuda-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      CUDA C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CUDA C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#streaming-multiprocessorsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Streaming multiprocessor(SM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#global-constant-texture-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Global &amp; constant &amp; texture memory:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuda-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      CUDA kernel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#some-cuda-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Some CUDA functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuda-on-fedora" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuda on fedora
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../named-pipes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Named pipes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../networking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Networking
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nextcloud/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NEXTCLOUD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nixos/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Nixos
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../nmap/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    NMAP
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../os-flashing/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OS FLASHING
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pdf/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PDF MANIPULATION
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../permissions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PERMS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pipewire/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PIPEWIRE
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../powerusage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Check deatiled power usage on linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proces-sorting-algorithms/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Sorting algorithms (SL)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../proxmox/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PROXMOX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pwn/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PWN
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../python-specifics/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    PYTHON SPECIFICS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../qemu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Qemu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../regex/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    REGEX
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rg/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Ripgrep
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ros/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    ROS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rstudio/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Rstudio
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../rust/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    RUST
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../services-and-process-management/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Services and process management
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../squid/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQUID tool
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ssh/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SSH
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../symlinks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Difference between hardlinks and symlinks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../system-information/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    System information
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tmux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tmux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tracks/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tracks
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../uart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Connect to uart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../ufw/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    UFW
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vfs/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VFS
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vim-tutor/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vim Tutor
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vim/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    VIM
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../vimium/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Vimium
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wasm/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wasm
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wfdb/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WFDB
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wireguard/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Wireguard
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../wl-mirror/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    WL-mirror (wayland exclusive for managing displays)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../yaml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    YAML
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#nice-equations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Nice equations
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Nice equations">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#computing-speedup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computing speedup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computing-efficency" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computing efficency
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#computation-price" class="md-nav__link">
+    <span class="md-ellipsis">
+      Computation price
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#amdhals-law" class="md-nav__link">
+    <span class="md-ellipsis">
+      Amdhals law
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pthreads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pthreads
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pthreads">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#address-space" class="md-nav__link">
+    <span class="md-ellipsis">
+      Address space
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#few-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      Few properties:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronization-of-access-to-same-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronization of access to same variables
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#deadlock" class="md-nav__link">
+    <span class="md-ellipsis">
+      Deadlock
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#semaphore" class="md-nav__link">
+    <span class="md-ellipsis">
+      Semaphore
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#conditional-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Conditional variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Conditional variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementation-of-semaphore-using-conditional-variables-and-mutexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implementation of semaphore using conditional variables and mutexes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#barrier" class="md-nav__link">
+    <span class="md-ellipsis">
+      Barrier
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#models-of-parallelization" class="md-nav__link">
+    <span class="md-ellipsis">
+      Models of parallelization
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openmp" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenMP
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenMP">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#compiling" class="md-nav__link">
+    <span class="md-ellipsis">
+      Compiling
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragmas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pragmas
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Pragmas">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-parallel" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp parallel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-sections-pragma-omp-section" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp sections &amp; #pragma omp section
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pragma-omp-parallel-for" class="md-nav__link">
+    <span class="md-ellipsis">
+      #pragma omp parallel for
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="#pragma omp parallel for">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#schedule-addon" class="md-nav__link">
+    <span class="md-ellipsis">
+      schedule addon
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variables
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variables">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#openmp-variable-addons" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenMp variable addons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#synchronization-between-threads" class="md-nav__link">
+    <span class="md-ellipsis">
+      Synchronization between threads
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tasks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tasks
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#openmpi-message-passing-interface" class="md-nav__link">
+    <span class="md-ellipsis">
+      OpenMPI (message passing interface)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="OpenMPI (message passing interface)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuda-c" class="md-nav__link">
+    <span class="md-ellipsis">
+      CUDA C
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="CUDA C">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#streaming-multiprocessorsm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Streaming multiprocessor(SM)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#global-constant-texture-memory" class="md-nav__link">
+    <span class="md-ellipsis">
+      Global &amp; constant &amp; texture memory:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#cuda-kernel" class="md-nav__link">
+    <span class="md-ellipsis">
+      CUDA kernel
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#some-cuda-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Some CUDA functions
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cuda-on-fedora" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cuda on fedora
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="multiprocessing">Multiprocessing</h1>
+<h2 id="nice-equations">Nice equations</h2>
+<h3 id="computing-speedup">Computing speedup</h3>
+<pre><code>S(n, p) = t_serial(n) / t_parallel(n, p)
+...
+
+S(n,p) = (t_serial(n) + t_operations_that_can_be_parallelized)) / (t_serial(n) + t_operations_that_can_be_parallelized(n) / p + communication(n, p))
+</code></pre>
+<h3 id="computing-efficency">Computing efficency</h3>
+<pre><code>E(n,p) = t_serial(n) / (p * t_parallel(n, p)
+E(n,p) = S(n,p) / p
+</code></pre>
+<p>linear speedup: <code>0 &lt;= E(n,p) &lt;= 1</code>
+above-linear-speedup: E(n,p) &gt; 1</p>
+<h3 id="computation-price">Computation price</h3>
+<pre><code>P(n,p) = p * t_parallel(n) = (p * t_serial(n)) / S(n,p) = t_serial(n) / E(n,p)
+</code></pre>
+<h3 id="amdhals-law">Amdhals law</h3>
+<pre><code>S(n,p) &lt;= 1 / (f  + (1-f)/p)
+
+f-&gt; the code that cannot be parallelized
+</code></pre>
+<h2 id="pthreads">Pthreads</h2>
+<h3 id="address-space">Address space</h3>
+<pre><code>[code       ]
+[init data  ]
+[uninit data]
+[heap       ]
+[    |      ]
+[    .      ]
+[   free    ]
+[    .      ]
+[    |      ]
+[stack  (T1)]
+[stack  (T2)]
+    ...
+[stack  (Tn)]
+[args + env ]
+</code></pre>
+<ul>
+<li>Every thread has its own stack, stack pointer (SP), and program counter(PC)</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>Creates N structs, each thread processes it and returns it. No locks or anything fancy like that, just an example how
+somebody would start with pthreads in c.</p>
+<pre><code class="language-c">#include &lt;stdio.h&gt;
+#include &lt;pthread.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct {
+    int x;
+    int y;
+} thread_data;
+
+void *thread_func(void *arg) {
+    thread_data *data = (thread_data *)arg; // cast arguments to correct type
+
+    printf(&quot;thread id = %lu\n&quot;, pthread_self()); // Get unique thread id, type: pthread_t
+
+    // Perform complex operations here
+    printf(&quot;x = %d, y = %d\n&quot;, data-&gt;x, data-&gt;y);
+    data-&gt;x += 10;
+    data-&gt;y += 10;
+    //
+
+    //return NULL; // if you do not need to return anything
+    pthread_exit((void *)data);
+}
+
+int main(int argc, char *argv[]) {
+
+    if (argc != 2) {
+        printf(&quot;Usage: %s &lt;nthreads&gt;&quot;, argv[0]);
+        exit(1);
+    }
+
+    int nthreads = atoi(argv[1]);
+    pthread_t threads[nthreads];
+    thread_data data[nthreads];
+    thread_data *ret_data[nthreads];
+
+    for (int i = 0; i &lt; nthreads; i++) {
+        data[i].x = i;
+        data[i].y = i + 1;
+        pthread_create(&amp;threads[i], NULL, thread_func, (void *)&amp;data[i]); // Creaate thread with arguments
+    } // If main thread is killed, then all the
+      // threads are also killed
+
+    for (int i = 0; i &lt; nthreads; i++) {
+        pthread_join(threads[i], (void **)&amp;ret_data[i]); // Wait for every thread to finish
+        printf(&quot;x = %d, y = %d\n&quot;, ret_data[i]-&gt;x, ret_data[i]-&gt;y);
+    }
+
+    return 0;
+}
+</code></pre>
+<h3 id="few-properties">Few properties:</h3>
+<ul>
+<li>Memory is shared between the threads (basically heap is shared)</li>
+<li>Global variables are seen by every thread</li>
+<li>Communication between threads is therefore through global variables, or pointers to same structures</li>
+</ul>
+<h3 id="synchronization-of-access-to-same-variables">Synchronization of access to same variables</h3>
+<ul>
+<li>We want to limit acces to some variable, that all the threads are accessing, so that only single one will be addressed ( avoiding race condition )</li>
+<li>We solve this problem by using p_thread_mutexes or in other words <strong>locks</strong> and introduce a "critical section"</li>
+<li>So one threads reveserves execution of that part of the code for itself, and prevents other threads from accessing that part of the code</li>
+<li>When lock is released then the next thread can continue with execution of that part of the code</li>
+<li><strong>locks</strong> are created using atomic asm instructions (eg. test-and-set, fetch-and-add, compare-and-swap), that way a thread can lock part of a code using single instruction, preventing other threads from interrupting this behaivour.</li>
+</ul>
+<h3 id="deadlock">Deadlock</h3>
+<pre><code class="language-bash">        T1                                  T2
+pthread_mutex_lock_(&amp;m1)            pthread_mutex_lock_(&amp;m2)
+pthread_mutex_lock_(&amp;m2)            pthread_mutex_lock_(&amp;m1)
+...
+
+pthread_mutex_unlock(&amp;m2)           pthread_mutex_unlock(&amp;m1)
+pthread_mutex_unlock(&amp;m1)           pthread_mutex_unlock(&amp;m2)
+</code></pre>
+<p>T1 locks m1, Before it locks m2, thread T2 locks m2, T2 is now waiting for m1 to
+be unclocked, but the T1 wound release it until m2 is not free --&gt; DEADLOCK.</p>
+<h3 id="semaphore">Semaphore</h3>
+<p>A counting semaphore is a generalization of a binary semaphore that can have a maximum value greater than 1.
+It is used to control access to a common resource that can be shared by multiple threads.
+When a thread wants to use the resource, it decrements the value of the semaphore.
+If the semaphore's value is greater than 0, the thread can proceed.
+If the semaphore's value is 0, the thread is blocked until the semaphore is incremented by another thread.
+When the thread is finished using the resource, it increments the semaphore's value to allow other threads to use the resource.</p>
+<pre><code class="language-c">int sem_init(sem_t * semaphore_p, int shared,unsigned initial_value);
+int sem_wait(sem_t * semaphore_p);      // called on enter of critical section
+                                        // if value in sem &gt; 0:
+                                        //   -&gt; decrease value in sem
+                                        //   -&gt; continue execution
+                                        // else:
+                                        //   -&gt; wait for value in sem to be &gt; 0
+int sem_post(sem_t *semaphore_p)        // This is called on exit of critical section, it incrememts the semaphore value by one
+int sem_destroy(sem_t * semaphore_p);   // destroy the semaphore
+</code></pre>
+<h3 id="conditional-variables">Conditional variables</h3>
+<p>A conditional variable has the following operations:</p>
+<ul>
+<li>
+<p><code>pthread_cond_wait</code>: This function causes the calling thread to block until the specified condition is met. The thread must hold the mutex lock when calling this function, and it will be released while the thread is blocked. When the function returns, the mutex lock is reacquired by the thread.</p>
+</li>
+<li>
+<p><code>pthread_cond_signal</code>: This function unblocks one thread that is blocked on the specified condition variable. If no threads are blocked on the condition variable, the function has no effect.</p>
+</li>
+<li>
+<p><code>pthread_cond_broadcast</code>: This function unblocks all threads that are blocked on the specified condition variable. If no threads are blocked on the condition variable, the function has no effect.</p>
+</li>
+</ul>
+<p>example:</p>
+<pre><code class="language-c">#include &lt;pthread.h&gt;
+
+pthread_mutex_t mutex;
+pthread_cond_t cond;
+int shared_data = 0;
+
+void *thread_func(void *arg)
+{
+    pthread_mutex_lock(&amp;mutex);
+    while (shared_data == 0) {
+        pthread_cond_wait(&amp;cond, &amp;mutex);
+    }
+    printf(&quot;shared_data is now %d\n&quot;, shared_data);
+    pthread_mutex_unlock(&amp;mutex);
+    return NULL;
+}
+
+int main(int argc, char *argv[])
+{
+    pthread_t thread;
+    pthread_mutex_init(&amp;mutex, NULL);
+    pthread_cond_init(&amp;cond, NULL);
+    pthread_create(&amp;thread, NULL, thread_func, NULL);
+    sleep(1);
+    pthread_mutex_lock(&amp;mutex);
+    shared_data = 42;
+    pthread_cond_signal(&amp;cond);
+    pthread_mutex_unlock(&amp;mutex);
+    pthread_join(thread, NULL);
+    pthread_mutex_destroy(&amp;mutex);
+    pthread_cond_destroy(&amp;cond);
+    return 0;
+}
+</code></pre>
+<p>In this example, the main thread creates a new thread and then waits for 1 second before setting the value of shared_data to 42
+and signaling the condition variable. The new thread blocks on the condition variable until it is signaled, at which point it wakes up,
+acquires the mutex lock, and prints the value of shared_data.</p>
+<h4 id="implementation-of-semaphore-using-conditional-variables-and-mutexes">Implementation of semaphore using conditional variables and mutexes</h4>
+<pre><code class="language-c">typedef struct {
+    int value;
+    pthread_cond_t cond;
+    pthread_mutex_t lock;
+} Sem_t;
+
+void Sem_init(Sem_t *s, int value) {
+    s-&gt;value = value;
+    pthread_cond_init(&amp;s-&gt;cond, NULL);
+    pthread_mutex_init(&amp;s-&gt;lock, NULL);
+}
+
+void Sem_wait(Sem_t *s) {
+    pthread_mutex_lock(&amp;s-&gt;lock);
+    while(s-&gt;value &lt;= 0)
+        pthread_cond_wait(&amp;s-&gt; cond, &amp;s-&gt; lock); // unlocks the &amp;s-&gt;lock and waits for signal
+    s-&gt;value--;
+    pthread_mutex_unlock(&amp;s-&gt; lock);
+}
+
+
+void Sem_post(Sem_t *s) {
+    pthread_mutex_lock(&amp;s-&gt;lock);
+    s-&gt;value++;
+
+    pthread_cond_signal(&amp;s-&gt;cond);
+    pthread_mutex_unlock(&amp;s-&gt;lock);
+}
+</code></pre>
+<h3 id="barrier">Barrier</h3>
+<p>A point in code, where all the threads wait for eachother.</p>
+<p>Implementation using conditional vars:</p>
+<pre><code class="language-c">//pthread_mutex_init(&amp;lock, NULL);
+//pthread_cond_init(&amp;condition, NULL);
+void* barrier(void* arg)
+{
+    int i;
+    int myid = (int)arg;
+
+    for(i=0; i&lt;NPRINTS; i++)
+    {
+        if( myid == 0 )
+            shared++;
+
+        // barrirer -&gt; start
+        pthread_mutex_lock(&amp;lock);
+        threads++;
+        if( threads &lt; NTHREADS )
+            while( pthread_cond_wait(&amp;condition, &amp;lock) != 0 );
+        else
+        {
+            threads = 0; // when the last thread arrives, broadast the signal to other threads to continue execution
+            pthread_cond_broadcast(&amp;condition);
+        }
+        pthread_mutex_unlock(&amp;lock);
+        // barrier -&gt; end
+
+        printf(&quot;Nit %d: vrednost: %d\n&quot;, myid, shared);
+    }
+
+    return NULL;
+}
+// pthread_mutex_destroy(&amp;lock);
+// pthread_cond_destroy(&amp;condition);
+</code></pre>
+<pre><code class="language-c">// pthread_barrier_t b;
+// pthread_barrier_init( &amp;b, NULL, NTHREADS );
+
+void* barrier(void* arg)
+{
+    int i;
+    int myid = (int)arg;
+
+    for(i=0; i&lt;NPRINTS; i++)
+    {
+        if( myid == 0 )
+            shared++;
+
+        pthread_barrier_wait( &amp;b );
+        printf(&quot;%d %d\n&quot;, myid, shared );
+    }
+
+    return NULL;
+}
+// pthread_barrier_destroy( &amp;b );
+</code></pre>
+<h2 id="models-of-parallelization">Models of parallelization</h2>
+<ul>
+<li>
+<p><strong>Manager / worker</strong> - Manager: - Dynamically spawns worker on need - Workers should be independent of eachother - Worker: - Processes data passed by the Manager - Saves the result or returns it to the Manager
+  cons: dynamic creation of threads and not using the thread pool (large cost of creating new threads and destroying them)
+  solution: use thread pool</p>
+</li>
+<li>
+<p><strong>Equaly weighted threads</strong></p>
+</li>
+<li>
+<p>Main thread spawns all the threads</p>
+</li>
+<li>All the threads are working concurrently and are weighted equaly</li>
+<li>Each thread may be doing some different</li>
+<li>
+<p>Usually there is a lot of communication and waits between threads, which can lead to performance decreases</p>
+</li>
+<li>
+<p><strong>Pipeline</strong></p>
+</li>
+<li>Thread 0 takes care for the inputs and passes it to threads</li>
+<li>Thread N takes care of the output</li>
+<li>Threads are exchanig work</li>
+<li>Every thread uses resources if needed</li>
+<li>Pipeline speed is determined by the slowest stage</li>
+<li>Each stage can spawn multiple threads if needed</li>
+</ul>
+<h2 id="openmp">OpenMP</h2>
+<h3 id="compiling">Compiling</h3>
+<pre><code class="language-bash">gcc -fopenmp -DOMP_NUM_THREADS=&lt;nthreads&gt; main.c -o main
+</code></pre>
+<h3 id="pragmas">Pragmas</h3>
+<h4 id="pragma-omp-parallel"><code>#pragma omp parallel</code></h4>
+<p>A block of code, which all threads should execute</p>
+<h4 id="pragma-omp-sections-pragma-omp-section"><code>#pragma omp sections</code> &amp; <code>#pragma omp section</code></h4>
+<p>Split code into sections.</p>
+<p>Example:</p>
+<pre><code class="language-c">#pragma omp parallel
+#pragma omp sections
+{
+    #pragma omp section
+    v = func1();
+    # pragma omp section
+    w = func2()
+}
+// by default, barrier is used here
+// if you do not need a barrirer:
+// #pragma omp sections nowait
+</code></pre>
+<h4 id="pragma-omp-parallel-for"><code>#pragma omp parallel for</code></h4>
+<p>For loop should be in a <a href="https://www.openmp.org/spec-html/5.0/openmpsu40.html">canonical</a> form.
+Basically should not include any function calls.</p>
+<h5 id="schedule-addon"><code>schedule</code> addon</h5>
+<ul>
+<li>
+<p><code>schedlue(static, [,N])</code></p>
+</li>
+<li>
+<p>every thread gets N iters in series</p>
+</li>
+<li>
+<p>default</p>
+</li>
+<li>
+<p><code>schedule(dynamic[,N])</code></p>
+</li>
+<li>
+<p>every thread does N iters in series</p>
+</li>
+<li>sum of all N &lt; problem</li>
+<li>
+<p>so when one thread computes N iters, if there are still things to proces, it processes it</p>
+</li>
+<li>
+<p><code>schedule(guided[,N])</code></p>
+</li>
+<li>Same as dynamic but blocks are getting smaller and smaller</li>
+</ul>
+<h3 id="variables">Variables</h3>
+<p>Default: - Most of the variables are shared - Threads share global variables - Variables that are in parallel blocks, are not shared - Variables of the forked programs that are called from parrallel sections, are local for every thread</p>
+<h4 id="openmp-variable-addons">OpenMp variable addons</h4>
+<ul>
+<li><code>shared(vars)</code></li>
+<li>Explicitly set global variables to be shared inside a block</li>
+<li>default, not needed</li>
+<li><code>private(vars)</code></li>
+<li>Not initialized, so you must set it a value</li>
+<li>It is per thread private, and does not affect the variable defined in program or any other thread</li>
+<li><code>firstprivate(vars)</code></li>
+<li>Copies local variable value and does not need to be initialized</li>
+<li>It is per thread private, and does not affect the variable defined in program or any other thread</li>
+<li><code>lastprivate(vars)</code></li>
+<li>Stores the result to the local variable on finish of the block</li>
+<li><code>threadprivate(vars)</code></li>
+<li>Makes vars local per thread</li>
+<li>They are not freed after block execution</li>
+<li>That means if we call that block again, the value of the variable will remain from previous call</li>
+<li><code>reduction(op:var)</code></li>
+<li>Every thread gets a local copy of variable var</li>
+<li>Local copies are initialized specified by op</li>
+<li>When they are done, they are grouped together into one group var</li>
+</ul>
+<pre><code class="language-c">#pragma omp parallell for reduction(+:counter)
+for(i = 0; i &lt; N; i++)
+    counter++;
+</code></pre>
+<table>
+<thead>
+<tr>
+<th>op</th>
+<th>initial value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>+</td>
+<td>0</td>
+</tr>
+<tr>
+<td>*</td>
+<td>1</td>
+</tr>
+<tr>
+<td>&amp;</td>
+<td>1</td>
+</tr>
+<tr>
+<td>|</td>
+<td>0</td>
+</tr>
+<tr>
+<td>^</td>
+<td>0</td>
+</tr>
+<tr>
+<td>&amp;&amp;</td>
+<td>1</td>
+</tr>
+<tr>
+<td>||</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="synchronization-between-threads">Synchronization between threads</h3>
+<ul>
+<li>
+<p><code>critical(name)</code></p>
+</li>
+<li>
+<p>basically locked section like in pthreads</p>
+</li>
+<li>
+<p>If critical section is not enough for you, you can also use <code>omp_lock_t</code> for more flexibilty. But watchout becouse the thread that locks the lock must be the one that also unlocks it!</p>
+</li>
+<li>
+<p><code>atomic</code></p>
+</li>
+<li>
+<p>A faster critical section (only for <code>x &lt;op&gt; = n</code>) -&gt; <code>op = +, -, *, /, &amp;, |, &lt;&lt;, &gt;&gt;</code></p>
+</li>
+<li>
+<p><code>barrier</code></p>
+</li>
+<li>
+<p>threads wait for eachother</p>
+</li>
+<li>
+<p><code>ordered</code></p>
+</li>
+<li>
+<p>code is executed in sequentiall matter</p>
+</li>
+<li>
+<p><code>single</code></p>
+</li>
+<li>
+<p>code is executed by a single thread</p>
+</li>
+<li>
+<p><code>master</code></p>
+</li>
+<li>
+<p>code is executed by the main thread</p>
+</li>
+<li>
+<p><code>collapse(n)</code></p>
+</li>
+<li>
+<p><code>n</code> is the number of nested for loops that are executed concurrently</p>
+</li>
+<li>
+<p><code>flush(vars)</code></p>
+</li>
+<li>When a thread executes a flush directive, it forces any updates that the thread has made to its own cache to be written back to the main memory, so that other threads can see the updated data.</li>
+<li>This is useful when multiple threads are accessing and updating shared data, as it ensures that the changes made by one thread are visible to other threads in a timely manner.</li>
+</ul>
+<h3 id="tasks">Tasks</h3>
+<p>The task construct in OpenMP is a mechanism for expressing parallelism in your code that allows you to specify units of work (called tasks) that can be executed concurrently.
+It provides a way to create parallelism that is more dynamic and flexible than the traditional OpenMP constructs, such as parallel and for.</p>
+<h2 id="openmpi-message-passing-interface">OpenMPI (message passing interface)</h2>
+<p>It is designed to allow multiple computers to work together as a single system
+and to enable the efficient exchange of data between them.</p>
+<h3 id="functions">Functions</h3>
+<ul>
+<li>
+<p><code>int MPI_Init(int *argc, char **argv);</code></p>
+</li>
+<li>
+<p>initializes MPI and sets up connections between processes</p>
+</li>
+<li>
+<p>CLI arguments are passed only to process 0!</p>
+</li>
+<li>
+<p><code>int MPI_Comm_size(MPI_Comm, int *size)</code></p>
+</li>
+<li>
+<p>returns number of nodes/processes in comunication</p>
+</li>
+<li>
+<p><code>int MPI_Comm_rank(MPI_Comm, int *rank)</code></p>
+</li>
+<li>
+<p>returns process id</p>
+</li>
+<li>
+<p><code>MPI_Finalize(void)</code></p>
+</li>
+<li>
+<p>closes connections</p>
+</li>
+<li>It is the last function call to MPI in our program.</li>
+<li>
+<p>cleans up</p>
+</li>
+<li>
+<p><code>MPI_Send(void *message, int count, MPI_Datatype datatype, int destination, int tag, MPI_Comm comm)</code></p>
+</li>
+<li>
+<p>send message to process, using its id(<code>destination</code>)</p>
+</li>
+<li>&lt; 16kB <code>MPI_Bsend()</code></li>
+<li>
+<blockquote>
+<p>16kB <code>MPI_Ssend()</code></p>
+</blockquote>
+</li>
+<li>
+<p><code>MPI_Ssend()</code></p>
+</li>
+<li>
+<p>returns information about message transmission</p>
+</li>
+<li>waits for reciever confirmation of data</li>
+<li>
+<p>Blocking function</p>
+</li>
+<li>
+<p><code>MPI_Bsend()</code></p>
+</li>
+<li>
+<p>The message is buffered.</p>
+</li>
+<li>Function ends when message is written into a buffer</li>
+<li>
+<p>No clue if the message was recieved or not.</p>
+</li>
+<li>
+<p><code>MPI_Isend(&amp;buf, count, datatype, dest, tag, comm, request)</code></p>
+</li>
+<li>
+<p>Nonblocking send fucntion</p>
+</li>
+<li>We can test its success by executing <code>MPI_Test(&amp;request, &amp;done, MPI_STATUS_IGNORE)</code></li>
+<li>
+<p>Faster execution of code</p>
+</li>
+<li>
+<p><code>MPI_Recv(void *message, int count, MPI_Datatype datatype, int source, int tag, MPI_Comm comm, MPI_Status status)</code></p>
+</li>
+<li>
+<p>recv message, from predefined source or use <code>MPI_ANY_SOURCE</code> to listen for all messages</p>
+</li>
+<li>
+<p><code>MPI_Barrier(MPI_Comm comm)</code></p>
+</li>
+<li>
+<p>Classic barrier</p>
+</li>
+<li>
+<p><code>MPI_Bcast(void *buf, int count, MPI_Datatype, int root, MPI_Comm comm)</code></p>
+</li>
+<li>
+<p><code>root</code> broadcasts its message to all other participants</p>
+</li>
+<li><code>root</code> process sets the `*buf, all other processes read from it</li>
+<li>
+<p>All the processes should call this function</p>
+</li>
+<li>
+<p><code>MPI_Reduce(void *sendbuf, void *recvbuf, int count, MPI_Datatype datatype, MPI_Op op, int root, MPI_Comm comm)</code></p>
+</li>
+<li>
+<p>All the sendbufs are joined on the root recvbuf using operation op</p>
+</li>
+<li>
+<p>op can be max, min, sum, product, land, lor,...</p>
+</li>
+<li>
+<p><code>MPI_Scatter(void *sendbuf, int sendcount, MPI_Datatype sendtype, void *recvbuf, int recvcount, MPI_Datatype recvtype, int root, MPI_Comm comm)</code></p>
+</li>
+<li>
+<p>Array / string / buffer gets equaly splitteed to all the processes from the root process, root process also gets its piece</p>
+</li>
+<li>
+<p><code>MPI_Gather(void *sendbuf, int sendcount, MPI_Datatype sendtype, void *recvbuf, int recvcount, MPI_Datatype recvtype, int root, MPI_Comm comm)</code></p>
+</li>
+<li>
+<p>Array / string / buffer gets equaly gathered to the root process</p>
+</li>
+<li>
+<p><code>MPI_Gatherv</code> and <code>MPI_Scatterv</code></p>
+</li>
+<li>Same as Scatter and gather, but you have control over displacenents and send counts for each process</li>
+<li>basically you can control how larg chunk everey process will handle</li>
+</ul>
+<h2 id="cuda-c">CUDA C</h2>
+<p>Cuda program consists:</p>
+<ul>
+<li>Code thet runs on host(CPU)</li>
+<li>Kernel that runs on GPU</li>
+<li>Threads are organized in block, which make up grid</li>
+<li>Every kernel executes single grid</li>
+</ul>
+<p>Code execution:</p>
+<ul>
+<li>Copy data to GPU</li>
+<li>request for computation</li>
+<li>compute</li>
+<li>copu data from GPU memory to main system memory</li>
+</ul>
+<h3 id="streaming-multiprocessorsm">Streaming multiprocessor(SM)</h3>
+<pre><code>|      I cache        |
+|      MT issue       |
+|      C cache        |
+| SP       | SP       |
+| SP       | SP       |
+| ...      | ...      |
+| SP       | SP       |
+| SFU      | SFU      |
+|      registers      |
+|  Shared    Memory   |
+|  Local     Memory   |
+</code></pre>
+<p>Consists of:</p>
+<ul>
+<li><code>SP</code> ~ streaming processors -&gt; 2times the clock speed (fast clock)</li>
+<li><code>SFU</code> ~ special function units</li>
+<li><code>Shared memory</code></li>
+<li><code>cache</code></li>
+</ul>
+<p>Properties:</p>
+<ul>
+<li>A block of thread is executed by single streaming multiprocessor.</li>
+<li>SM can process many blocks concurrently.</li>
+<li>Threads that are in the same block are easily synchronized.</li>
+<li>Threads that are executed on different SM <strong>cannot</strong> be synchronized ((efficently)) -&gt; hence faster computation!</li>
+<li>All the threads in the same block execute the same code</li>
+<li>Every SM has 8 SP, and a warp has 32 threads, so threads are executed in four steps (pipeline)</li>
+<li>Each instruction in ALE/MAD unit takes about 4 ticks(fast clock), So it lines up with warp pipeline execution (each fast tick 8 threads are created and computed)</li>
+</ul>
+<p>Function units:</p>
+<ul>
+<li>8 32bit FP(floating point) ALU/MAD(multiply and add)</li>
+<li>8 integer units for jump instructions</li>
+<li>2 SFUs, trigonometric functions,..</li>
+<li>1 64 bit MAD unit (allows 64 bit operations), that means that computation with 64bit values will be at least 8-12 times slower than 32bit</li>
+</ul>
+<p>Shared memory:</p>
+<ul>
+<li>Really fast memory, but very limited in size.</li>
+<li>It is meant for communication between threads in the same SM.</li>
+<li>Meant for saving some value (example counter sum for all threads)</li>
+<li>All data is lost when the kernel finishes.</li>
+<li>Data from and into shared memory is transfered to and from registers using <code>LOAD/STORE</code>.</li>
+</ul>
+<p>Registers:</p>
+<ul>
+<li>Each SM has a few registers(static), faster than shared memory</li>
+<li>Then each SP has a few dynamically allocated registers</li>
+</ul>
+<p>Local memory:</p>
+<ul>
+<li>private for each thread</li>
+<li>used when there are no registers left</li>
+<li>a bit slower</li>
+</ul>
+<p>Warp (micro architecture):</p>
+<ul>
+<li>consists of 32 parallel threads, that execute the same code</li>
+<li>each SM can execute 32 warps</li>
+</ul>
+<h3 id="global-constant-texture-memory">Global &amp; constant &amp; texture memory:</h3>
+<ul>
+<li>It is slower</li>
+<li>All threads can access it</li>
+<li>CPU can write and read from it.</li>
+<li>Memory stays there when the kernel finishes (You must clean it up after usage).</li>
+<li>constant memory: small, around 64KB, used for instructions</li>
+<li>texture memory: used for storing constatns and textures in graphichal applications</li>
+</ul>
+<h3 id="cuda-kernel">CUDA kernel</h3>
+<ul>
+<li>Does not return anything</li>
+<li>Accepts arguments, but pointers from device memory</li>
+</ul>
+<p>Compiler function labels: - <code>__global__</code> ~ Function is ran on device, and the one calling it is the host - <code>__device__</code> ~ Function is ran on device, and can be called only from within device - <code>__host__</code> ~ Function is ran on the host ( default )</p>
+<h3 id="some-cuda-functions">Some CUDA functions</h3>
+<ul>
+<li><code>cudaMalloc()</code></li>
+<li>Allocate memory on the GPU</li>
+<li><code>cudaFree()</code></li>
+<li>Free memory on the GPU</li>
+<li><code>cudaMemcpy(p1, p2, ssize_t, cudaMemcpyDeviceToHost | cudaMemcpyHostToDevice)</code></li>
+<li>Copy from main memory to gpu memory and vice versa.</li>
+</ul>
+<h2 id="cuda-on-fedora">Cuda on fedora</h2>
+<p>Follow the instructions <a href="https://rpmfusion.org/Howto/CUDA">here</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c8d2eff1.min.js"></script>
+      
+    
+  </body>
+</html>
