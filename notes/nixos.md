@@ -631,3 +631,32 @@ Show flake outputs:
 ```bash
 nix flake show github:edolstra/dwarffs
 ```
+
+
+## Custom patching of binaries 
+
+Making sure which libraries are linked:
+
+```bash
+[nix-shell:~/Documents/faks-git/m2/p3/code]$ ldd hw3_2024_linux
+        linux-vdso.so.1 (0x00007ffff7fc8000)
+        libstdc++.so.6 => not found
+        libm.so.6 => /nix/store/p9ysh5rk109gyjj3cn6jr54znvvlahfl-glibc-2.38-66/lib/libm.so.6 (0x00007ffff7ebf000)
+        libgcc_s.so.1 => /nix/store/00r99fxv6l92wk0k6wd60klhs7fkmmqj-xgcc-12.3.0-libgcc/lib/libgcc_s.so.1 (0x00007ffff7e9e000)
+        libc.so.6 => /nix/store/p9ysh5rk109gyjj3cn6jr54znvvlahfl-glibc-2.38-66/lib/libc.so.6 (0x00007ffff7cb5000)
+        /lib64/ld-linux-x86-64.so.2 => /nix/store/p9ysh5rk109gyjj3cn6jr54znvvlahfl-glibc-2.38-66/lib64/ld-linux-x86-64.so.2 (0x00007ffff7fca000)
+```
+We are missing libstdc++.so.6, so we need to patch the binary to link it correctly.
+
+Lets firstly locate it:
+
+```bash
+find /nix/store -name libstdc++.so.6
+...
+```
+
+After finding the right one, we can patch the binary:
+
+```bash
+patchelf --set-interpreter /nix/store/p9ysh5rk109gyjj3cn6jr54znvvlahfl-glibc-2.38-66/lib64/ld-linux-x86-64.so.2 --set-rpath /nix/store/390lzx2pal52yx3d6yafj6vjyb3dcfz2-gcc-12.3.0-lib/lib ./hw3_2024_linux
+```

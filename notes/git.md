@@ -25,6 +25,8 @@ git checkout -- path/to/folder
 
 You can also add `-v` flag to increase verbosity to get more details about listed branches.
 
+- `git switch -c <branch> <origin/branch>` - switch to remote branch (not on local computer) 
+
 ### Display all commits to the branch in nice way
 
 - `git show-branch -r`
