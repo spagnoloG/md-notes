@@ -159,3 +159,35 @@ Every time you commit a change, the hook will run and check the files you have c
 If any of the checks fail, the commit will be aborted and you will have to fix the errors before you can commit again.
 
 Or if you want idempotence run `pre-commit autoupdate`.
+
+
+## Removing tokens / API keys from git history
+
+I was an idiot and forgot the hugging face token in the poblic repo...
+So here is how to fix it:
+
+Download bfg repo cleaner from [here](https://rtyley.github.io/bfg-repo-cleaner/)
+
+And go into the root of your repo.
+Edit the file called replacements.txt and add the token you want to remove.
+It can be a multiline file.
+
+Then run the following command:
+
+```bash
+java -jar bfg-1.14.0.jar --replace-text replacements.txt --no-blob-protection
+```
+After that some logs of the changed files should appear.
+
+Then run:
+
+```bash
+ git reflog expire --expire=now --all && git gc --prune=now --aggressive
+ ```
+
+And finally push the changes to the remote repo:
+
+```bash
+git push origin --force
+```
+:)
