@@ -24,7 +24,7 @@ ssh-keygen -t ed25519 -f ~/.ssh/keys/id_ed25519_devel_server
 ### Copy to remote
 
 ```bash
-ssh-copy-id -i ~/.ssh/keys/id_ed25520_devel_server devel@devel.hsrv
+ssh-copy-id -i ~/.ssh/keys/id_ed25519_devel_server devel@devel.hsrv
 ```
 
 ### FAIL2BAN
