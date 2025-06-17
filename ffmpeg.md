@@ -33,3 +33,8 @@ Cut from the 10s 30seconds of the video.
 ```bash
 ffmpeg -ss 00:00:10 -i input_video.mp4 -t 30 -c:v libx264 -c:a aac -strict experimental output_video.mp4
 ```
+or in given time range
+
+```bash
+ffmpeg -i FRI-110m-sunny.mp4 -ss 00:01:00 -to 00:03:46 -c:v copy -c:a copy -c:s copy -map 0:v -map 0:s cutout.mp4
+```
