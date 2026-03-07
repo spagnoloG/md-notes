@@ -1,203 +1,206 @@
-# GIT
+# Git
 
-- If you want to revert changes made to your working copy, do this:
-  `git checkout .`
-- if you want to revert changes made to the index (i.e., that you have added), do this. Warning this will reset all of your unpushed commits to master!
-  `git reset`
-- if you want to remove untracked files (e.g., new files, generated files): `git clean -f` and dirs `git clean -fd`
-- if you want only one file to be revetred
-  `git checkout HEAD -- TIS/tis.tex`
-- Add all files in the repo
-  `git add -A`
+## Discard local changes
 
-### Accidentaly deleted a folder in a git repo?
+Discard unstaged changes in one file:
 
 ```bash
-git reset -- path/to/folder
-git checkout -- path/to/folder
+git restore path/to/file
 ```
 
-### List all branches
+Discard unstaged changes in all tracked files:
 
-- local: `git branch`
-- remote: `git branch -r`
-- remote & local: `git branch -a`
-
-You can also add `-v` flag to increase verbosity to get more details about listed branches.
-
-- `git switch -c <branch> <origin/branch>` - switch to remote branch (not on local computer) 
-
-### Display all commits to the branch in nice way
-
-- `git show-branch -r`
-
-### Switch to remote branch that is not on local computer
-
-`git switch <branch_name>`
-
-### I had many reduntant commits on this branch how would I squash them?
-
-- If you have many redundant commits on your local branch and you want to squash them into a single commit, you can use the git rebase command with the interactive mode to rewrite the commit history.
-  Here are the steps to squash redundant commits on your local branch:
-
-First, switch to your local branch by running the following command:
-
-git checkout your_local_branch
-Use the following command to start an interactive rebase:
-
-```
-git rebase -i HEAD~n
+```bash
+git restore .
 ```
 
-Replace n with the number of commits you want to include in the rebase. For example, if you want to squash the last five commits into a single commit, you would use git rebase -i HEAD~5.
+Unstage files without touching the working tree:
 
-This will open a text editor with a list of your recent commits. The word "pick" will appear before each commit. To squash the redundant commits, replace "pick" with "squash" or "s" for the commits that you want to squash into a single commit.
-
-Save and close the file. Git will apply the changes and open another text editor to allow you to edit the commit message for the new squashed commit.
-
-Edit the commit message as needed, then save and close the file.
-
-Git will apply the changes and create a new commit with the squashed changes. If there are any conflicts, Git will pause the rebase process and prompt you to resolve them manually.
-
-After you've resolved all conflicts, run the following command to continue the rebase:
-
-```
-git rebase --continue
+```bash
+git restore --staged path/to/file
+git restore --staged .
 ```
 
-If you encounter any issues during the rebase process, you can use the git rebase --abort command to abort the process and return your local branch to its original state.
-Once the rebase is complete, your local branch will contain a single commit with the changes from the redundant commits squashed into it. You can then push your changes to your remote repository if needed.
+Remove untracked files:
 
-### I have a local branch, but the main git branch was recently updated and I want those changes to be included into my local branch. How would I do that?
-
-Here are the steps to follow to update your local branch using git rebase:
-
-First, switch to your local branch by running the following command:
-
-```
-git checkout your_local_branch
+```bash
+git clean -nd   # preview
+git clean -fd   # delete files and dirs
 ```
 
-Fetch the latest changes from the main Git branch by running:
+## Add changes
 
+Add one file:
+
+```bash
+git add path/to/file
 ```
+
+Add everything:
+
+```bash
+git add -A
+```
+
+Stage selected hunks:
+
+```bash
+git add -p
+```
+
+## Branches
+
+List branches:
+
+```bash
+git branch
+git branch -r
+git branch -a
+```
+
+Create and switch to a new branch:
+
+```bash
+git switch -c my-branch
+```
+
+Create a local branch that tracks a remote branch:
+
+```bash
+git switch --track origin/my-branch
+```
+
+## History
+
+Show a compact graph:
+
+```bash
+git log --oneline --graph --decorate --all
+```
+
+Show one commit:
+
+```bash
+git show <commit>
+```
+
+## Undo the last local commit
+
+Keep changes staged:
+
+```bash
+git reset --soft HEAD~1
+```
+
+Keep changes unstaged:
+
+```bash
+git reset --mixed HEAD~1
+```
+
+## Rebase local branch on latest main
+
+Replace `main` if your default branch is different.
+
+```bash
 git fetch origin
-```
-
-This command will update your local copy of the main Git branch to match the version on the remote repository.
-
-Use the following command to start the rebase process:
-
-```
+git switch my-branch
 git rebase origin/main
 ```
 
-This will take the changes in the main branch and apply them to your local branch by replaying your local changes on top of them.
+If there are conflicts:
 
-Resolve any conflicts that may arise during the rebase process. When there are conflicts, Git will pause the rebase process and show you which files have conflicts. You can then use a merge tool or a text editor to resolve the conflicts manually.
-
-After you've resolved all conflicts, run the following command to continue the rebase:
-
-```
+```bash
+git add <resolved-file>
 git rebase --continue
+git rebase --abort
 ```
 
-This will apply the remaining changes and complete the rebase process.
+## Squash recent commits
 
-If you encounter any issues during the rebase process, you can use the git rebase --abort command to abort the process and return your local branch to its original state.
-
-Once the rebase is complete, your local branch will contain the changes from the main Git branch, and your local commits will be replayed on top of them. You can then push your changes to your remote repository if needed.
-
-## Deleted a commit and want to revive it
-
-### Firstly locate it
+Squash the last `n` commits:
 
 ```bash
-git fsck --full --no-reflogs --unreachable --lost-found | grep commit | cut -d " " -f 3 | xargs -n 1 git log -n 1 --pretty=oneline | grep "<commit-message>"
+git rebase -i HEAD~n
 ```
 
-Then checkout to the that commit hash. Good luck ;)
+In the editor keep the first commit as `pick` and change the rest to `squash` or `fixup`.
 
-## Edit last commit message
+If the branch was already pushed:
 
 ```bash
- git commit --amend
+git push --force-with-lease
+```
+
+## Restore a deleted file or directory
+
+Restore from `HEAD`:
+
+```bash
+git restore path/to/file-or-dir
+```
+
+Restore from another commit:
+
+```bash
+git restore --source <commit> path/to/file-or-dir
+```
+
+## Recover a lost commit
+
+Check the reflog:
+
+```bash
+git reflog
+```
+
+Create a branch from the old commit:
+
+```bash
+git branch recovered <commit>
+git switch recovered
+```
+
+## Edit the last commit
+
+Change the message:
+
+```bash
+git commit --amend
+```
+
+Change files in the last commit:
+
+```bash
+# edit files
+git add -p              # or: git add -A
+git commit --amend
+git push --force-with-lease
 ```
 
 ## Pre-commit hooks
 
-Instead of writing bash scripts you can use this nice tool: https://pre-commit.com/
+Install `pre-commit`:
 
 ```bash
 python3 -m venv .venv
 . .venv/bin/activate
 pip install pre-commit
+pre-commit install
 ```
 
-write a `.pre-commit-config.yaml` file in the root of your repo:
-(here is an example for python)
+The config file is `.pre-commit-config.yaml`. Docs: https://pre-commit.com/
 
-```yaml
-repos:
-  - repo: https://github.com/pycqa/flake8
-    rev: "6.1.0"
-    hooks:
-      - id: flake8
-        args: ["--config=a2/.flake8"] # Specify the path to config file
-        files: ^a2/ # Only run on files in the a2 directory
+## Remove secrets from history
 
-  - repo: https://github.com/psf/black
-    rev: "23.12.0"
-    hooks:
-      - id: black
-        language_version: python3
-        files: ^a2/ # Only run on files in the a2 directory
-```
+Rotate the secret first.
 
-Then run `pre-commit install` to install the git hook into your `.git/hooks/pre-commit` file.
-Every time you commit a change, the hook will run and check the files you have changed.
-If any of the checks fail, the commit will be aborted and you will have to fix the errors before you can commit again.
-
-Or if you want idempotence run `pre-commit autoupdate`.
-
-
-## Removing tokens / API keys from git history
-
-I was an idiot and forgot the hugging face token in the poblic repo...
-So here is how to fix it:
-
-Download bfg repo cleaner from [here](https://rtyley.github.io/bfg-repo-cleaner/)
-
-And go into the root of your repo.
-Edit the file called replacements.txt and add the token you want to remove.
-It can be a multiline file.
-
-Then run the following command:
+Rewrite history with `git-filter-repo`:
 
 ```bash
-java -jar bfg-1.14.0.jar --replace-text replacements.txt --no-blob-protection
-```
-After that some logs of the changed files should appear.
-
-Then run:
-
-```bash
- git reflog expire --expire=now --all && git gc --prune=now --aggressive
- ```
-
-And finally push the changes to the remote repo:
-
-```bash
-git push origin --force
-```
-:)
-
-
-## Change file in the previous commit 
-
-```bash
-# edit the file
-git add -p              # or: git add -A
-git commit --amend
-git push --force-with-lease 
+pip install git-filter-repo
+printf 'old-secret==>REMOVED\n' > replacements.txt
+git filter-repo --replace-text replacements.txt
+git push --force --all
+git push --force --tags
 ```
