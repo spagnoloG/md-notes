@@ -191,3 +191,13 @@ And finally push the changes to the remote repo:
 git push origin --force
 ```
 :)
+
+
+## Change file in the previous commit 
+
+```bash
+# edit the file
+git add -p              # or: git add -A
+git commit --amend
+git push --force-with-lease 
+```
