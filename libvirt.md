@@ -29,8 +29,37 @@ sudo virsh net-autostart default
 ```
 Now you are mostly ready to go.
 
+## General VM commands
 
-## Creating a new virtual machine
+Check for IP address of a VM and ssh to it:
+
+```bash
+sudo virsh net-dhcp-leases default
+ssh <vm-user>@<vm-ip>
+```
+
+Destroy the VM when you are done:
+
+```bash
+sudo virsh destroy <vm-name> 2>/dev/null || true
+sudo virsh undefine <vm-name> --nvram 2>/dev/null || true
+sudo rm -f /var/lib/libvirt/images/<vm-disk>.qcow2
+```
+
+List existing VMs:
+
+```bash
+sudo virsh list --all
+```
+
+Start a VM:
+
+```bash
+sudo virsh start <vm-name>
+```
+
+
+## Creating a new Ubuntu virtual machine
 
 Lets create a ubuntu 22.04 server VM
 
@@ -142,17 +171,91 @@ sudo virt-install \
   --wait=-1
 ```
 
-check for IP address of the VM and ssh to it:
+## Creating a new Debian virtual machine
+
+Same process as with ubuntu,
+but this time we will use [their cloud image](https://wiki.debian.org/Xen/InstallDebianGuestFromCloudImages).
 
 ```bash
-sudo virsh net-dhcp-leases default
-ssh ubuntu@<vm-ip>
+sudo mkdir -p  /var/lib/libvirt/images/
+cd /var/lib/libvirt/images/;  sudo wget sudo wget https://cloud.debian.org/images/cloud/bookworm/latest/debian-12-generic-amd64.qcow2 -O debian-12-generic-amd64.qcow2; cd -
+sudo chmod 644 /var/lib/libvirt/images/debian-12-generic-amd64.qcow2
 ```
 
-Destroy the VM when you are done:
+Resize the qcow2 image to desired size (default is 10G):
+```bash
+sudo qemu-img resize /var/lib/libvirt/images/debian-12-generic-amd64.qcow2 30G
+```
+
+Create temp cloud image directory:
 
 ```bash
-sudo virsh destroy ubuntu-server-22 2>/dev/null || true
-sudo virsh undefine ubuntu-server-22 --nvram 2>/dev/null || true
-sudo rm -f /var/lib/libvirt/images/ubuntu-server-22.qcow2
+mkdir -p ~/vmseed/debian-server
+cd ~/vmseed/debian-server
+```
+
+Generate password hash:
+
+```bash
+openssl passwd -6
+```
+
+Create the `user-data` file with the following content (replace the password hash with the one you generated):
+
+```yaml
+#cloud-config
+hostname: debian-server
+fqdn: debian-server.local
+
+users:
+  - name: debian
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: users, admin
+    shell: /bin/bash
+    lock_passwd: false
+    passwd: "$6$PUT_YOUR_HASH_HERE"
+
+ssh_pwauth: true
+
+package_update: true
+packages:
+  - qemu-guest-agent
+
+runcmd:
+  - systemctl enable qemu-guest-agent
+  - systemctl start qemu-guest-agent
+```
+
+Create the `meta-data` file with the following content:
+
+```yaml
+instance-id: debian-server-01
+local-hostname: debian-server
+```
+
+Build seed iso with cloud image tools and then copy it to `/var/lib/libvirt/images/`:
+
+```bash
+cloud-localds -f iso seed.iso user-data meta-data
+sudo cp ~/vmseed/debian-server/seed.iso /var/lib/libvirt/images/seed-debian-12.iso
+sudo chmod 644 /var/lib/libvirt/images/seed-debian-12.iso
+```
+
+Now create the VM with preffered settings:
+
+```bash
+sudo virt-install \
+  --name debian-server-12 \
+  --memory 4096 \
+  --vcpus 6 \
+  --cpu host \
+  --osinfo detect=on,name=debian12 \
+  --import \
+  --disk path=/var/lib/libvirt/images/debian-12-generic-amd64.qcow2,format=qcow2,bus=virtio \
+  --disk path=/var/lib/libvirt/images/seed-debian-12.iso,device=cdrom,readonly=on \
+  --network network=default,model=virtio \
+  --graphics none \
+  --console pty,target_type=serial \
+  --boot hd,useserial=on \
+  --noautoconsole
 ```

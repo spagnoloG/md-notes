@@ -1,19 +1,27 @@
-# OS FLASHING
+# OS Flashing
 
-## WINDOWS
-
-Firstly locate the connected usb issuing the command:
+Find the USB device first:
 
 ```bash
-lsblk -f
+lsblk
 ```
 
-Then when you located the drive just issue the `dd` command:
-
-```bash
-sudo dd if=Win10_22H2_En_x64.iso of=/dev/sda bs=4M status=progress
-```
+Use the whole disk, not a partition: `/dev/sdX`, not `/dev/sdX1`.
 
 ## Linux
 
-Use simple tool like [etcher](https://www.balena.io/etcher/).
+Write the ISO with `dd`:
+
+```bash
+sudo dd if=/path/to/linux.iso of=/dev/sdX bs=4M status=progress conv=fsync
+sync
+```
+
+## Windows
+
+Use `woeusb`:
+
+```bash
+sudo apt install -y woeusb
+sudo woeusb --device /path/to/windows.iso /dev/sdX
+```

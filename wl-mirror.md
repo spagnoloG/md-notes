@@ -2,7 +2,15 @@
 
 ## To list all outputs
 
-`swaymsg -t get_outputs`
+```bash
+swaymsg -t get_outputs
+```
+
+or
+
+```bash
+niri msg outputs
+```
 
 # Then just execute:
 

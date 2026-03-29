@@ -17,11 +17,26 @@ It should work
 
 `sudo fdisk /dev/sda` -> to start the tool
 
+
 ### Lvm
 
 How to resize it:
 `https://www.linuxtechi.com/extend-lvm-partitions/`
 
-### Best page to check if you land here:
+#### Best page to check if you land here:
 
 [red_hat](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/6/html/storage_administration_guide/part-file-systems)
+
+### Format usb-drive ntfs format
+
+
+```bash
+lsblk -o NAME,SIZE,FSTYPE,MOUNTPOINT,MODEL
+
+sudo umount /dev/sdX1
+
+sudo parted /dev/sdX --script mklabel gpt
+sudo parted /dev/sdX --script mkpart primary ntfs 1MiB 100%
+
+sudo mkfs.ntfs -f -L USB /dev/sdX1
+```
