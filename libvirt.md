@@ -259,3 +259,146 @@ sudo virt-install \
   --boot hd,useserial=on \
   --noautoconsole
 ```
+
+## Creating a new Alma Linux virtual machine
+
+Similar as other os-es, just has the diffrent cloud init.
+Check for [newer images])(https://wiki.almalinux.org/cloud/Generic-cloud.html).
+
+```bash
+sudo mkdir -p /var/lib/libvirt/images
+cd /var/lib/libvirt/images
+sudo wget https://repo.almalinux.org/almalinux/9/cloud/x86_64/images/AlmaLinux-9-GenericCloud-latest.x86_64.qcow2 -O almalinux-9-genericcloud.qcow2
+sudo chmod 644 almalinux-9-genericcloud.qcow2
+sudo qemu-img create -f qcow2 -F qcow2 \
+  -b /var/lib/libvirt/images/almalinux-9-genericcloud.qcow2 \
+  /var/lib/libvirt/images/almalinux-server.qcow2 30G
+sudo chmod 644 /var/lib/libvirt/images/almalinux-server.qcow2
+mkdir -p ~/vmseed/almalinux-server
+cd ~/vmseed/almalinux-server
+openssl passwd -6
+```
+
+`usar-data` file:
+
+
+```yaml
+#cloud-config
+ssh_pwauth: true
+password: "$6$PUT_YOUR_HASH_HERE"
+chpasswd:
+  expire: false
+
+hostname: almalinux-server
+
+packages:
+  - qemu-guest-agent
+
+runcmd:
+  - systemctl enable qemu-guest-agent
+  - systemctl start qemu-guest-agent
+```
+
+.. defult username is `almalinux`.
+
+`meta-data` file:
+
+```yaml
+instance-id: almalinux-server-01
+local-hostname: almalinux-server
+```
+
+and then install it:
+
+```bash
+sudo virt-install \
+  --connect qemu:///system \
+  --name almalinux-server \
+  --memory 4096 \
+  --vcpus 6 \
+  --cpu host-passthrough \
+  --machine q35 \
+  --import \
+  --osinfo name=almalinux9 \
+  --disk path=/var/lib/libvirt/images/almalinux-server.qcow2,format=qcow2,bus=virtio \
+  --network network=default,model=virtio \
+  --graphics none \
+  --cloud-init user-data=$HOME/vmseed/almalinux-server/user-data,meta-data=$HOME/vmseed/almalinux-server/meta-data \
+  --noautoconsole
+```
+
+
+## Creating a new Alpine virtual machine
+
+Again a bit different, here is [source](https://alpinelinux.org/cloud/).
+
+```bash
+sudo mkdir -p /var/lib/libvirt/images
+cd /var/lib/libvirt/images
+sudo wget https://dl-cdn.alpinelinux.org/alpine/v3.23/releases/cloud/generic_alpine-3.23.3-x86_64-bios-cloudinit-r0.qcow2 \
+  -O alpine-3.23.3-cloudinit.qcow2
+sudo chmod 644 /var/lib/libvirt/images/alpine-3.23.3-cloudinit.qcow2
+sudo qemu-img create -f qcow2 -F qcow2 \
+  -b /var/lib/libvirt/images/alpine-3.23.3-cloudinit.qcow2 \
+  /var/lib/libvirt/images/alpine-server.qcow2 20G
+sudo chmod 644 /var/lib/libvirt/images/alpine-server.qcow2
+```
+
+A bit different cloud file:
+
+
+```bash
+mkdir -p ~/vmseed/alpine-server
+cd ~/vmseed/alpine-server
+```
+
+`user-data` file:
+
+```yaml
+#cloud-config
+hostname: alpine-server
+ssh_pwauth: true
+chpasswd:
+  list: |
+    alpine:PASS
+  expire: false
+
+
+packages:
+  - qemu-guest-agent
+  - openssh
+  - sudo
+
+runcmd:
+  - rc-update add qemu-guest-agent default
+  - rc-service qemu-guest-agent start || true
+  - rc-update add sshd default
+  - rc-service sshd start || true
+  - echo "cloud-init finished" > /root/cloud-init.done
+```
+
+`meta-data` file:
+
+```yaml
+instance-id: alpine-server-01
+local-hostname: alpine-server
+```
+
+And then install like:
+
+```bash
+sudo virt-install \
+  --connect qemu:///system \
+  --name alpine-server \
+  --memory 2048 \
+  --vcpus 2 \
+  --cpu host-passthrough \
+  --import \
+  --disk path=/var/lib/libvirt/images/alpine-server.qcow2,format=qcow2,bus=virtio \
+  --network network=default,model=virtio \
+  --graphics none \
+  --cloud-init user-data=$HOME/vmseed/alpine-server/user-data,meta-data=$HOME/vmseed/alpine-server/meta-data \
+  --noautoconsole \
+  --osinfo detect=on,require=off
+```
+
