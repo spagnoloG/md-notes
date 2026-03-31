@@ -263,7 +263,7 @@ sudo virt-install \
 ## Creating a new Alma Linux virtual machine
 
 Similar as other os-es, just has the diffrent cloud init.
-Check for [newer images])(https://wiki.almalinux.org/cloud/Generic-cloud.html).
+Check for [newer images](https://wiki.almalinux.org/cloud/Generic-cloud.html).
 
 ```bash
 sudo mkdir -p /var/lib/libvirt/images
@@ -402,3 +402,151 @@ sudo virt-install \
   --osinfo detect=on,require=off
 ```
 
+## Creating a new CentOS virtual machine
+
+Same procedure as for all above, just now from another [source](https://www.centos.org/download/)
+
+Again download and setup the files:
+
+```bash
+sudo mkdir -p /var/lib/libvirt/images
+cd /var/lib/libvirt/images
+sudo wget https://cloud.centos.org/centos/10-stream/x86_64/images/CentOS-Stream-GenericCloud-10-latest.x86_64.qcow2 \
+  -O centos-stream-10-genericcloud.qcow2
+sudo chmod 644 /var/lib/libvirt/images/centos-stream-10-genericcloud.qcow2
+sudo qemu-img create -f qcow2 -F qcow2 \
+  -b /var/lib/libvirt/images/centos-stream-10-genericcloud.qcow2 \
+  /var/lib/libvirt/images/centos-server.qcow2 30G
+sudo chmod 644 /var/lib/libvirt/images/centos-server.qcow2
+mkdir -p ~/vmseed/centos-server
+cd ~/vmseed/centos-server
+openssl passwd -6
+```
+
+`user-data` file:
+
+```yaml
+#cloud-config
+hostname: centos-server
+
+users:
+  - name: centos
+    lock_passwd: false
+    passwd: "$6$PUT_YOUR_HASH_HERE"
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: wheel
+    shell: /bin/bash
+
+ssh_pwauth: true
+
+packages:
+  - qemu-guest-agent
+
+runcmd:
+  - systemctl enable qemu-guest-agent
+  - systemctl start qemu-guest-agent
+  - echo "cloud-init finished" > /root/cloud-init.done
+```
+
+`meta-data` file:
+
+```yaml
+instance-id: centos-server-01
+local-hostname: centos-server
+```
+
+And the vm cration:
+
+```bash
+sudo virt-install \
+  --connect qemu:///system \
+  --name centos-server \
+  --memory 4096 \
+  --vcpus 6 \
+  --cpu host-passthrough \
+  --machine q35 \
+  --import \
+  --osinfo detect=on,name=centos-stream10 \
+  --disk path=/var/lib/libvirt/images/centos-server.qcow2,format=qcow2,bus=virtio \
+  --network network=default,model=virtio \
+  --graphics none \
+  --cloud-init user-data=$HOME/vmseed/centos-server/user-data,meta-data=$HOME/vmseed/centos-server/meta-data \
+  --noautoconsole
+```
+
+
+## Creating a new RockyLinux virtual machine
+
+Again download source from [official site](https://dl.rockylinux.org/pub/rocky/9/images/x86_64)
+
+```bash
+sudo mkdir -p /var/lib/libvirt/images
+cd /var/lib/libvirt/images
+sudo wget https://dl.rockylinux.org/pub/rocky/9/images/x86_64/Rocky-9-GenericCloud.latest.x86_64.qcow2 \
+  -O rocky-9-genericcloud.qcow2
+sudo chmod 644 /var/lib/libvirt/images/rocky-9-genericcloud.qcow2
+sudo qemu-img create -f qcow2 -F qcow2 \
+  -b /var/lib/libvirt/images/rocky-9-genericcloud.qcow2 \
+  /var/lib/libvirt/images/rocky-server.qcow2 30G
+sudo chmod 644 /var/lib/libvirt/images/rocky-server.qcow2
+mkdir -p ~/vmseed/rocky-server
+cd ~/vmseed/rocky-server
+openssl passwd -6
+```
+Create seed files:
+
+`user-data`:
+
+```yaml
+#cloud-config
+hostname: rocky-server
+
+users:
+  - name: rocky
+    plain_text_passwd: "YOURPASS"
+    lock_passwd: false
+    sudo: ALL=(ALL) NOPASSWD:ALL
+    groups: wheel
+    shell: /bin/bash
+
+ssh_pwauth: true
+
+runcmd:
+  - [ sh, -c, "echo cloud-init-worked > /root/cloud-init.done" ]
+```
+
+`meta-data`:
+
+```yaml
+instance-id: rocky-server-01
+local-hostname: rocky-server
+```
+
+
+Generate iso image:
+
+```bash
+cd ~/vmseed/rocky-server
+genisoimage -output seed.iso -volid cidata -joliet -rock user-data meta-data
+sudo cp ~/vmseed/rocky-server/seed.iso /var/lib/libvirt/images/rocky-server-seed.iso
+sudo chmod 644 /var/lib/libvirt/images/rocky-server-seed.iso
+```
+
+And then install it:
+
+```bash
+sudo virt-install \
+  --connect qemu:///system \
+  --name rocky-server \
+  --memory 4096 \
+  --vcpus 6 \
+  --cpu host-passthrough \
+  --machine q35 \
+  --import \
+  --os-variant rocky9 \
+  --disk path=/var/lib/libvirt/images/rocky-server.qcow2,format=qcow2,bus=virtio \
+  --disk path=/var/lib/libvirt/images/rocky-server-seed.iso,device=cdrom \
+  --network network=default,model=virtio \
+  --graphics vnc \
+  --noautoconsole
+```
