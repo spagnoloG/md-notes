@@ -178,6 +178,16 @@ git commit --amend
 git push --force-with-lease
 ```
 
+
+## Diff good to know
+
+```bash
+git diff --cached          # staged changes
+git diff --name-only       # changed files
+git diff HEAD~1 HEAD       # last commit
+git diff HEAD~2 HEAD~1     # second last commit
+```
+
 ## Pre-commit hooks
 
 Install `pre-commit`:
@@ -203,4 +213,13 @@ printf 'old-secret==>REMOVED\n' > replacements.txt
 git filter-repo --replace-text replacements.txt
 git push --force --all
 git push --force --tags
+```
+
+## Do not track the file locally
+
+Remove it from the worktree:
+
+```bash
+git update-index --skip-worktree file
+git update-index --no-skip-worktree file # add it back to the index
 ```

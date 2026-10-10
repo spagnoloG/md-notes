@@ -1,31 +1,86 @@
-# Qemu
+# Raspberry Pi OS ARM64 in QEMU
 
-### Emulating raspberry pi 4
+**Arch Linux Cortex-A72  4 CPUs · 4 GB RAM · 32 GB disk**
 
-- firstly generate two images
-  `qemu-img create -f qcow2 arm.img 16G` ~ Image for os
-  `qemu-img create -f qcow2 varstore.img 64M` ~ EFI varaible store
-- then download EFI file (A UEFI image for QEMU’s virt machine type, I use an EDK II derived snapshot image from Linaro)
-  `http://snapshots.linaro.org/components/kernel/leg-virt-tianocore-edk2-upstream/latest/QEMU-AARCH64/RELEASE_GCC5/QEMU_EFI.img.gz`
+Uses QEMU `virt` and a **prebuilt Debian kernel**. 
 
-- install
-  `qemu-system-aarch64 \                                                    
--cpu cortex-a72 -smp 4 -M virt -m 4096 -nographic \
--drive if=pflash,format=raw,file=QEMU_EFI.img \
--drive if=pflash,file=varstore.img \
--drive if=virtio,file=arm.img\
--drive if=virtio, format=raw, file=file.iso`
-- run
-  `qemu-system-aarch64 \                                                    
--cpu cortex-a72 -smp 4 -M virt -m 4096 -nographic \
--drive if=pflash,format=raw,file=QEMU_EFI.img \
--drive if=pflash,file=varstore.img \
--drive if=virtio,file=arm.img\`
+Scripts: [qemu-rpi/](qemu-rpi/). VM files: `~/VMs/raspberry-pi-os`.
 
-### VIRT MANAGER
+## 1. Install tools
 
-https://www.xmodulo.com/convert-ova-to-qcow2-linux.html
+```bash
+sudo pacman -Syu --needed \
+  qemu-system-aarch64 qemu-img qemu-ui-gtk qemu-hw-display-virtio-gpu-pci \
+  openssl kmod libarchive cpio gzip \
+  curl xz parted e2fsprogs util-linux python
+```
 
-#### Enable copy and paste from vm to host
+## 2. Download and prepare
 
-[Issue](https://unix.stackexchange.com/a/671298)
+Downloads the official **64-bit Trixie desktop image (2026-10-06)** and Debian's **6.12.111 ARM64 kernel**, then packages its boot drivers into an initramfs.
+
+```bash
+bash "$HOME/Documents/md-notes/qemu-rpi/download.sh"
+bash "$HOME/Documents/md-notes/qemu-rpi/prepare-kernel.sh"
+```
+
+Stop if either command fails. If `rpi-os.raw` already exists, skip `download.sh`. The original image is kept.
+
+## 3. Set password and prepare disk
+
+Username: **`pi`**. Enter your chosen password when prompted.
+
+```bash
+umask 077
+printf 'pi:%s\n' "$(openssl passwd -6)" > "$HOME/VMs/raspberry-pi-os/userconf.txt"
+sudo bash "$HOME/Documents/md-notes/qemu-rpi/configure-image.sh" \
+  "$HOME/VMs/raspberry-pi-os"
+```
+
+If using PolicyKit, replace `sudo bash` with `pkexec /usr/bin/bash`. Keep QEMU stopped during disk preparation.
+
+## 4. Run 
+
+```bash
+bash "$HOME/Documents/md-notes/qemu-rpi/run.sh"
+```
+
+A desktop window opens; log in as `pi`. Allow several minutes for first boot. Use the same command for later runs.
+
+SSH from another host terminal:
+
+```bash
+ssh -p 2222 pi@127.0.0.1
+```
+
+Inside the guest, `uname -m` should show **`aarch64`**. Shut down with `sudo poweroff`.
+
+##  clipboard
+
+On the **host**:
+
+```bash
+sudo pacman -Syu --needed qemu-ui-spice-core qemu-chardev-spice virt-viewer
+```
+
+Inside the **guest**:
+
+```bash
+sudo apt update
+sudo apt install spice-vdagent
+sudo raspi-config
+```
+
+Choose **Advanced Options ->  Wayland -> W1 X11**, then shut down. Trixie's SPICE agent uses an X11 session.
+
+Start on the **host**:
+
+```bash
+DISPLAY_MODE=spice bash "$HOME/Documents/md-notes/qemu-rpi/run.sh"
+```
+
+In another host terminal:
+
+```bash
+remote-viewer spice://127.0.0.1:5930
+```

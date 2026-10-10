@@ -100,7 +100,7 @@ autoinstall:
     layout: us
 
   identity:
-    hostname: ubuntu-server
+    hostname: ubuntu-demo
     username: ubuntu 
     password: "$6$PUT_YOUR_HASH_HERE"
 

@@ -90,6 +90,12 @@ List all active connections:
 nmcli con show --active
 ```
 
+Turn off wifi `power_saving` mode:
+
+```bash
+sudo iw dev wlp0s20f3 set power_save off
+```
+
 ## Bettercap
 
 What is it?
